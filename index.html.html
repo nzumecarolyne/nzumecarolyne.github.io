@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>In Loving Memory – Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+    <!-- ====== NAVIGATION ====== -->
+    <nav class="navbar" id="mainNav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand"><span class="brand-gold">✦</span> In Loving Memory</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="about.html" class="nav-link">Life Story</a></li>
+                <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+                <li><a href="tributes.html" class="nav-link">Tributes</a></li>
+                <li><a href="candles.html" class="nav-link">Candles</a></li>
+                <li><a href="service.html" class="nav-link">Service</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ====== HERO ====== -->
+    <header class="hero" id="hero">
+        <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1519757043093-285fcb07a4e4?w=1600&q=80');"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-inner">
+                <span class="hero-gold-line"></span>
+                <p class="hero-subtitle">In Loving Memory of</p>
+                <h1 class="hero-title">Carolyne Nzume</h1>
+                <p class="hero-dates">1965 – 2026</p>
+                <p class="hero-quote">"A life beautifully lived, a heart deeply loved."</p>
+                <div class="hero-actions">
+                    <a href="#music-section" class="btn-gold btn-music" id="heroMusicBtn"><i class="fas fa-play"></i> Play Memorial Music</a>
+                    <a href="about.html" class="btn-outline">Read Her Story</a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span class="scroll-text">Scroll</span>
+            <span class="scroll-line"></span>
+        </div>
+    </header>
+
+    <!-- ====== MUSIC PLAYER (fixed) ====== -->
+    <section id="music-section" class="music-player-bar">
+        <div class="music-container">
+            <div class="music-info">
+                <i class="fas fa-music music-icon"></i>
+                <span class="music-title">Memorial Hymn</span>
+                <span class="music-artist">— Eternal Peace</span>
+            </div>
+            <div class="music-controls">
+                <button class="music-btn" id="musicPlayBtn"><i class="fas fa-play" id="musicPlayIcon"></i></button>
+                <input type="range" class="music-volume" id="musicVolume" min="0" max="1" step="0.1" value="0.5" />
+                <span class="volume-icon"><i class="fas fa-volume-up"></i></span>
+            </div>
+        </div>
+        <audio id="bgMusic" loop preload="auto">
+            <source src="music/memorial-hymn.mp3" type="audio/mpeg" />
+        </audio>
+    </section>
+
+    <!-- ====== MAIN CONTENT ====== -->
+    <main>
+        <!-- Glimpse -->
+        <section class="section home-glimpse">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Remembering</span>
+                    <h2 class="section-title">A Glimpse of Her Life</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="glimpse-grid">
+                    <div class="glimpse-card fade-up">
+                        <div class="glimpse-icon"><i class="fas fa-book-open"></i></div>
+                        <h3>Her Story</h3>
+                        <p>Carolyne Nzume was a woman of grace, strength, and unwavering faith. She touched the lives of all who knew her.</p>
+                        <a href="about.html" class="link-gold">Read more →</a>
+                    </div>
+                    <div class="glimpse-card fade-up">
+                        <div class="glimpse-icon"><i class="fas fa-images"></i></div>
+                        <h3>Photo Gallery</h3>
+                        <p>Explore a collection of cherished memories — moments that tell the story of a beautiful life.</p>
+                        <a href="gallery.html" class="link-gold">View gallery →</a>
+                    </div>
+                    <div class="glimpse-card fade-up">
+                        <div class="glimpse-icon"><i class="fas fa-heart"></i></div>
+                        <h3>Light a Candle</h3>
+                        <p>Join us in honoring her memory by lighting a virtual candle. Each flame represents a prayer.</p>
+                        <a href="candles.html" class="link-gold">Light a candle →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tribute Preview -->
+        <section class="section home-tribute-preview" style="background: #0f0f0f;">
+            <div class="container">
+                <div class="section-header light">
+                    <span class="section-tag gold">Community</span>
+                    <h2 class="section-title">Words of Love</h2>
+                    <div class="section-divider gold"></div>
+                </div>
+                <div class="tribute-preview-grid" id="tributePreview">
+                    <!-- populated by Firebase -->
+                </div>
+                <div class="text-center" style="margin-top: 2.5rem;">
+                    <a href="tributes.html" class="btn-gold">Share Your Tribute</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Preview -->
+        <section class="section home-service">
+            <div class="container">
+                <div class="service-preview">
+                    <div class="service-preview-text fade-up">
+                        <span class="section-tag">Service</span>
+                        <h2 class="section-title">Celebration of Life</h2>
+                        <p>We invite you to join us in celebrating the life of Carolyne Nzume. The service will be held at:</p>
+                        <div class="service-detail"><i class="fas fa-calendar-alt gold"></i><span>Saturday, 15 August 2026 · 10:00 AM</span></div>
+                        <div class="service-detail"><i class="fas fa-map-pin gold"></i><span>St. Mary's Cathedral, Nairobi</span></div>
+                        <a href="service.html" class="btn-outline" style="margin-top: 1.5rem;">View full details →</a>
+                    </div>
+                    <div class="service-preview-map fade-up">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.800343078635!2d36.82164071475411!3d-1.2869194990649578!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10d4c8e6d2b7%3A0x8f5f8d8f8d8f8d8f!2sSt.%20Mary&#39;s%20Cathedral!5e0!3m2!1sen!2ske!4v1620000000000!5e0!3m2!1sen!2ske" width="100%" height="220" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy" title="Map"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ====== FOOTER ====== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="brand-gold">✦</span> In Loving Memory
+                    <p class="footer-sub">Carolyne Nzume · 1965 – 2026</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">Life Story</a>
+                    <a href="gallery.html">Gallery</a>
+                    <a href="tributes.html">Tributes</a>
+                    <a href="candles.html">Candles</a>
+                    <a href="service.html">Service</a>
+                </div>
+                <div class="footer-copy">&copy; 2026 · Built with <i class="fas fa-heart" style="color: #c9a84c;"></i> in loving memory</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase & Scripts -->
+    <script type="module" src="js/firebase.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/tributes.js"></script>
+</body>
+</html>

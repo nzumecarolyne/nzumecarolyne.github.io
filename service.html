@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Service – In Loving Memory</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        /* ====== RESET & BASE ====== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --gold: #c9a84c;
+            --gold-light: #e8d5a3;
+            --gold-dark: #b8922e;
+            --black: #0a0a0a;
+            --dark: #141414;
+            --dark-card: #1a1a1a;
+            --white: #f5f5f5;
+            --gray: #aaaaaa;
+            --gray-light: #cccccc;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+        }
+        body { font-family: var(--font-sans); background-color: var(--black); color: var(--white); overflow-x: hidden; }
+        a { color: var(--gold); text-decoration: none; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+        .section { padding: 4rem 0; }
+        .gold { color: var(--gold); }
+
+        /* ====== NAVIGATION ====== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--white);
+            transition: opacity 0.3s ease;
+        }
+        .nav-brand:hover { opacity: 0.8; }
+
+        .nav-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+            display: block;
+            flex-shrink: 0;
+        }
+
+        .brand-text { color: var(--white); }
+        .brand-gold { color: var(--gold); }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 1.8rem;
+        }
+        .nav-link {
+            color: var(--white);
+            font-weight: 400;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 0.4rem 0;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after,
+        .nav-link.active::after { width: 100%; }
+        .nav-link.active { color: var(--gold); }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+        .hamburger-line {
+            width: 28px;
+            height: 2px;
+            background: var(--white);
+            transition: all 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle { display: flex; }
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                gap: 0.5rem;
+                background: var(--dark);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                padding: 1.5rem 2rem;
+                border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+            }
+            .nav-menu.open { display: flex; }
+            .nav-logo { width: 32px; height: 32px; }
+            .brand-text { font-size: 1rem; }
+            .nav-brand { gap: 8px; }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container { padding: 0.6rem 1rem; }
+            .nav-logo { width: 28px; height: 28px; }
+            .brand-text { font-size: 0.85rem; }
+        }
+
+/* ====== MAP IMAGE HOVER ZOOM ====== */
+.map-section a img {
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.map-section a:hover img {
+    transform: scale(1.05);
+}
+
+.map-section a:hover > div:last-child {
+    background: rgba(201, 168, 76, 0.08);
+}
+
+        /* ====== MUSIC PLAYER ====== */
+        .music-player-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(201, 168, 76, 0.2);
+            padding: 0.7rem 1.5rem;
+            z-index: 999;
+        }
+        .music-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        .music-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+        .music-icon { color: var(--gold); font-size: 1.2rem; }
+        .music-title { font-weight: 500; color: var(--white); }
+        .music-artist { color: var(--gray); font-size: 0.8rem; }
+        .music-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .music-btn {
+            background: transparent;
+            border: none;
+            color: var(--white);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .music-btn:hover { color: var(--gold); background: rgba(201, 168, 76, 0.1); }
+        .music-volume {
+            width: 80px;
+            accent-color: var(--gold);
+            cursor: pointer;
+        }
+        .volume-icon { color: var(--gray); font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            .music-container { flex-direction: column; align-items: stretch; gap: 0.5rem; }
+            .music-controls { justify-content: center; }
+            .music-info { justify-content: center; }
+        }
+
+        /* ====== PAGE HEADER ====== */
+        .page-header-section {
+            padding-top: 7rem;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(180deg, rgba(10,10,10,1) 0%, rgba(20,20,20,1) 100%);
+            overflow: hidden;
+        }
+
+        .page-header-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at center, rgba(201,168,76,0.03) 0%, transparent 70%);
+            animation: pulseGlow 8s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(3deg); }
+        }
+
+        .page-header-section .ornament {
+            font-size: 1.5rem;
+            letter-spacing: 15px;
+            color: var(--gold);
+            opacity: 0.15;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .page-header h1 {
+            font-family: var(--font-serif);
+            font-size: 3.8rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--white) 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .page-header .subtitle {
+            color: var(--gray);
+            font-size: 1.1rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .page-header .divider-line {
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+            margin: 1.2rem auto 0;
+            position: relative;
+        }
+
+        /* ====== SERVICE CONTENT ====== */
+        .service-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1rem 0;
+        }
+
+        /* ====== SERVICE OVERVIEW ====== */
+        .service-overview {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2.5rem;
+            background: rgba(255,255,255,0.02);
+            border-radius: 20px;
+            border: 1px solid rgba(201, 168, 76, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-overview::before {
+            content: '🕊️';
+            position: absolute;
+            top: -20px;
+            right: -10px;
+            font-size: 6rem;
+            opacity: 0.03;
+            transform: rotate(15deg);
+        }
+
+        .service-overview p {
+            color: var(--gray-light);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .service-overview p strong {
+            color: var(--gold);
+        }
+
+        /* ====== PROGRAM - PREVIOUS FLOW LAYOUT + STYLISH EFFECTS ====== */
+        .program-section {
+            margin-bottom: 3rem;
+        }
+
+        .program-section .section-label {
+            text-align: center;
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .program-section .section-label .label-icon {
+            display: block;
+            font-size: 2rem;
+            margin-bottom: 0.3rem;
+            opacity: 0.3;
+        }
+
+        .program-section .section-label::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 2px;
+            background: var(--gold);
+            margin: 0.5rem auto 0;
+            opacity: 0.3;
+        }
+
+        /* ====== FLOW LAYOUT WITH STYLISH EFFECTS ====== */
+        .program-flow {
+            display: flex;
+            flex-direction: column;
+            max-width: 900px;
+            margin: 0 auto;
+            gap: 0;
+            position: relative;
+        }
+
+        .program-flow::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, rgba(201, 168, 76, 0.1), rgba(201, 168, 76, 0.3), rgba(201, 168, 76, 0.1));
+            transform: translateX(-50%);
+        }
+
+        .program-flow-item {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 1.2rem 0;
+            position: relative;
+            width: 100%;
+        }
+
+        .program-flow-item:nth-child(odd) {
+            flex-direction: row;
+        }
+
+        .program-flow-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .program-flow-item .flow-content {
+            width: 45%;
+            padding: 1.5rem 1.8rem;
+            background: var(--dark-card);
+            border-radius: 20px;
+            border: 1px solid rgba(201, 168, 76, 0.06);
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .program-flow-item .flow-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, var(--gold), var(--gold-light));
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .program-flow-item .flow-content:hover {
+            transform: translateY(-4px);
+            border-color: rgba(201, 168, 76, 0.15);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .program-flow-item .flow-content:hover::before {
+            opacity: 1;
+        }
+
+        .program-flow-item .flow-content .flow-number {
+            position: absolute;
+            top: 0.5rem;
+            right: 1rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: rgba(201, 168, 76, 0.04);
+            font-family: var(--font-serif);
+            pointer-events: none;
+            line-height: 1;
+        }
+
+        .program-flow-item .flow-content .flow-day {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--gold);
+            font-weight: 700;
+            display: block;
+            margin-bottom: 0.2rem;
+            background: rgba(201, 168, 76, 0.08);
+            padding: 0.15rem 0.8rem;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .program-flow-item .flow-content .flow-day.saturday {
+            background: rgba(201, 168, 76, 0.12);
+            color: var(--gold-light);
+        }
+
+        .program-flow-item .flow-content .flow-day.burial-day {
+            background: rgba(255, 107, 53, 0.1);
+            color: #ff6b35;
+        }
+
+        .program-flow-item .flow-content .flow-date {
+            font-family: var(--font-serif);
+            font-size: 0.95rem;
+            color: var(--white);
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.3rem;
+            margin-top: 0.3rem;
+        }
+
+        .program-flow-item .flow-content .flow-time {
+            font-size: 0.75rem;
+            color: var(--gray);
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .program-flow-item .flow-content .flow-title {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            color: var(--gold-light);
+        }
+
+        .program-flow-item .flow-content .flow-desc {
+            font-size: 0.85rem;
+            color: var(--gray);
+            line-height: 1.6;
+            margin-top: 0.2rem;
+        }
+
+        .program-flow-item .flow-content .flow-location {
+            font-size: 0.8rem;
+            color: var(--gray-light);
+            margin-top: 0.3rem;
+        }
+
+        .program-flow-item .flow-content .flow-location i {
+            color: var(--gold);
+            font-size: 0.7rem;
+            margin-right: 0.3rem;
+        }
+
+        .program-flow-item .flow-content .family-badge {
+            display: inline-block;
+            background: rgba(255, 107, 53, 0.1);
+            color: #ff6b35;
+            padding: 0.15rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.55rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(255, 107, 53, 0.1);
+            margin-left: 0.5rem;
+        }
+
+        /* ====== FLOW CONNECTOR DOT ====== */
+        .program-flow-item .flow-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--gold);
+            border: 3px solid var(--black);
+            box-shadow: 0 0 20px rgba(201, 168, 76, 0.15);
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s;
+        }
+
+        .program-flow-item .flow-dot:hover {
+            transform: scale(1.3);
+            box-shadow: 0 0 30px rgba(201, 168, 76, 0.3);
+        }
+
+        .program-flow-item .flow-dot.family-dot {
+            background: #ff6b35;
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.2);
+        }
+
+        /* ====== RESPONSIVE FLOW ====== */
+        @media (max-width: 768px) {
+            .program-flow::before {
+                left: 20px;
+            }
+
+            .program-flow-item {
+                flex-direction: row !important;
+                padding: 0.8rem 0;
+                gap: 1rem;
+            }
+
+            .program-flow-item .flow-content {
+                width: calc(100% - 50px);
+                padding: 1.2rem;
+            }
+
+            .program-flow-item .flow-content .flow-number {
+                font-size: 2rem;
+                top: 0.3rem;
+                right: 0.8rem;
+            }
+
+            .program-flow-item .flow-dot {
+                width: 12px;
+                height: 12px;
+                flex-shrink: 0;
+            }
+
+            .program-flow-item .flow-content .flow-title {
+                font-size: 1rem;
+            }
+
+            .program-flow-item .flow-content .flow-desc {
+                font-size: 0.8rem;
+            }
+
+            .program-flow-item .flow-content .flow-date {
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .program-flow-item .flow-content {
+                padding: 1rem;
+                width: calc(100% - 40px);
+                border-radius: 16px;
+            }
+            .program-flow-item .flow-content .flow-title {
+                font-size: 0.95rem;
+            }
+            .program-flow-item .flow-content .flow-date {
+                font-size: 0.8rem;
+            }
+            .program-flow-item .flow-content .flow-number {
+                font-size: 1.5rem;
+                top: 0.2rem;
+                right: 0.5rem;
+            }
+            .program-flow-item .flow-dot {
+                width: 10px;
+                height: 10px;
+            }
+            .program-flow::before {
+                left: 15px;
+            }
+            .program-flow-item .flow-content .family-badge {
+                font-size: 0.45rem;
+                padding: 0.1rem 0.4rem;
+            }
+            .program-flow-item .flow-content .flow-day {
+                font-size: 0.55rem;
+                padding: 0.1rem 0.6rem;
+            }
+        }
+
+        /* ====== SERVICE DETAILS GRID ====== */
+        .service-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .service-info-card {
+            background: var(--dark-card);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(201, 168, 76, 0.06);
+            transition: all 0.4s ease;
+        }
+
+        .service-info-card:hover {
+            border-color: rgba(201, 168, 76, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-info-card .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.06);
+        }
+
+        .service-info-card .card-header i {
+            font-size: 1.3rem;
+            color: var(--gold);
+        }
+
+        .service-info-card .card-header h3 {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            color: var(--white);
+        }
+
+        .service-info-card ul {
+            list-style: none;
+        }
+
+        .service-info-card ul li {
+            padding: 0.7rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            display: flex;
+            gap: 0.8rem;
+            align-items: flex-start;
+        }
+
+        .service-info-card ul li:last-child {
+            border-bottom: none;
+        }
+
+        .service-info-card ul li .label {
+            color: var(--gray);
+            font-size: 0.85rem;
+            min-width: 70px;
+            flex-shrink: 0;
+            font-weight: 500;
+        }
+
+        .service-info-card ul li .value {
+            color: var(--white);
+            font-size: 0.9rem;
+        }
+
+        .service-info-card ul li .value .highlight {
+            color: var(--gold-light);
+        }
+
+        /* ====== DOWNLOAD SECTION ====== */
+        .download-section {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 2.5rem;
+            background: rgba(255,255,255,0.02);
+            border-radius: 20px;
+            border: 1px solid rgba(201, 168, 76, 0.05);
+        }
+
+        .download-section p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.9rem 2.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: var(--black);
+            box-shadow: 0 4px 20px rgba(201, 168, 76, 0.2);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(201, 168, 76, 0.4);
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+        }
+
+        .download-btn i {
+            font-size: 1.2rem;
+        }
+
+        /* ====== MAP SECTION - UPDATED WITH CORRECT COORDINATES ====== */
+        .map-section {
+            margin: 2rem 0;
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--dark-card);
+            border: 1px solid rgba(201, 168, 76, 0.06);
+        }
+
+        .map-section .map-header {
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.06);
+        }
+
+        .map-section .map-header i {
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+
+        .map-section .map-header h4 {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            color: var(--white);
+        }
+
+        .map-section iframe {
+            width: 100%;
+            display: block;
+            border: none;
+            height: 300px;
+        }
+
+        .map-section .map-footer {
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(201, 168, 76, 0.05);
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .map-section .map-footer .map-links {
+            display: flex;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .map-section .map-footer .map-links a {
+            color: var(--gray);
+            font-size: 0.8rem;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .map-section .map-footer .map-links a:hover {
+            color: var(--gold);
+        }
+
+        .map-section .map-footer .map-credit {
+            color: var(--gray);
+            font-size: 0.7rem;
+        }
+
+        .map-section .map-footer .map-credit i {
+            color: var(--gold);
+            margin-right: 0.2rem;
+        }
+
+        /* ====== LIVESTREAM SECTION ====== */
+        .livestream-section {
+            text-align: center;
+            padding: 2.5rem;
+            background: rgba(255,255,255,0.02);
+            border-radius: 16px;
+            border: 1px solid rgba(201, 168, 76, 0.06);
+            margin: 2rem 0;
+        }
+
+        .livestream-section .livestream-icon {
+            font-size: 2.5rem;
+            color: var(--gold);
+            opacity: 0.3;
+            margin-bottom: 0.5rem;
+        }
+
+        .livestream-section h3 {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            color: var(--white);
+            margin-bottom: 0.3rem;
+        }
+
+        .livestream-section p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .livestream-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .livestream-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.8rem 2.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .livestream-btn.zoom-btn {
+            background: #2d8cff;
+            color: var(--white);
+        }
+
+        .livestream-btn.zoom-btn:hover {
+            background: #1a7ae8;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(45, 140, 255, 0.3);
+        }
+
+        .livestream-btn.youtube-btn {
+            background: #ff0000;
+            color: var(--white);
+        }
+
+        .livestream-btn.youtube-btn:hover {
+            background: #cc0000;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.3);
+        }
+
+        .livestream-btn i {
+            font-size: 1.1rem;
+        }
+
+        /* ====== QUOTE SECTION ====== */
+        .quote-section {
+            background: rgba(201, 168, 76, 0.03);
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: center;
+            margin: 2.5rem 0;
+            border: 1px solid rgba(201, 168, 76, 0.08);
+        }
+
+        .quote-section .quote-icon {
+            font-size: 2rem;
+            color: var(--gold);
+            opacity: 0.15;
+            margin-bottom: 0.5rem;
+        }
+
+        .quote-section .quote-text {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-style: italic;
+            color: var(--gold-light);
+            line-height: 1.6;
+        }
+
+        .quote-section .quote-author {
+            color: var(--gray);
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        /* ====== BOTTOM SECTION ====== */
+        .bottom-memorial-section {
+            text-align: center;
+            padding: 2.5rem 1rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(201, 168, 76, 0.08);
+            border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+        }
+
+        .bottom-memorial-section .flower-decoration {
+            font-size: 1.5rem;
+            color: var(--gold);
+            opacity: 0.3;
+            letter-spacing: 12px;
+            margin-bottom: 0.8rem;
+        }
+
+        .bottom-memorial-section .memorial-message {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            color: var(--gold-light);
+            margin-bottom: 0.3rem;
+            line-height: 1.4;
+        }
+
+        .bottom-memorial-section .memorial-sub-message {
+            color: var(--gray);
+            font-size: 1rem;
+            margin-bottom: 1.8rem;
+            font-style: italic;
+        }
+
+        .bottom-memorial-section .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .bottom-memorial-section .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .bottom-memorial-section .action-btn.tribute-btn {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        .bottom-memorial-section .action-btn.tribute-btn:hover {
+            background: var(--gold-light);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(201, 168, 76, 0.3);
+        }
+
+        .bottom-memorial-section .action-btn.candle-btn {
+            background: transparent;
+            color: var(--white);
+            border: 1.5px solid var(--gold);
+        }
+
+        .bottom-memorial-section .action-btn.candle-btn:hover {
+            background: var(--gold);
+            color: var(--black);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(201, 168, 76, 0.2);
+        }
+
+        .bottom-memorial-section .action-btn i {
+            font-size: 1rem;
+        }
+
+        /* ====== FOOTER ====== */
+        .footer {
+            background: var(--dark);
+            padding: 2.5rem 0;
+            border-top: 1px solid rgba(201, 168, 76, 0.1);
+            margin-top: 2rem;
+        }
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .footer-brand {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .footer-brand .footer-logo {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+        }
+        .footer-sub {
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: 0.2rem;
+        }
+        .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .footer-links a { color: var(--gray); font-size: 0.9rem; }
+        .footer-links a:hover { color: var(--gold); }
+        .footer-copy { font-size: 0.8rem; color: var(--gray); text-align: center; width: 100%; margin-top: 1.5rem; }
+
+        @media (max-width: 768px) {
+            .page-header h1 { font-size: 2.8rem; }
+            .service-overview p { font-size: 1rem; }
+            .service-overview { padding: 1.5rem; }
+            .service-info-grid { grid-template-columns: 1fr; max-width: 600px; margin: 2rem auto; }
+            .service-info-card { padding: 1.5rem; }
+            .service-info-card .card-header h3 { font-size: 1.2rem; }
+            .quote-section .quote-text { font-size: 1.4rem; }
+            .livestream-section h3 { font-size: 1.3rem; }
+            .livestream-btn { padding: 0.6rem 1.5rem; font-size: 0.85rem; }
+            .bottom-memorial-section .memorial-message { font-size: 1.6rem; }
+            .bottom-memorial-section .action-btn { padding: 0.7rem 1.5rem; font-size: 0.85rem; }
+            .footer-content { flex-direction: column; text-align: center; }
+            .footer-links { justify-content: center; }
+            .map-section iframe { height: 200px; }
+            .map-section .map-footer { flex-direction: column; align-items: flex-start; }
+            .program-section .section-label { font-size: 1.5rem; }
+            .page-header-section .ornament { font-size: 1.2rem; letter-spacing: 10px; }
+            .program-flow-item .flow-content .flow-number { display: none; }
+        }
+
+        @media (max-width: 480px) {
+            .page-header h1 { font-size: 2.2rem; }
+            .page-header .subtitle { font-size: 0.85rem; }
+            .service-overview { padding: 1rem; }
+            .service-info-card { padding: 1rem; }
+            .service-info-card .card-header h3 { font-size: 1.1rem; }
+            .service-info-card ul li .label { min-width: 60px; font-size: 0.75rem; }
+            .service-info-card ul li .value { font-size: 0.8rem; }
+            .service-info-card ul li { flex-direction: column; gap: 0.2rem; padding: 0.5rem 0; }
+            .download-btn { padding: 0.7rem 1.5rem; font-size: 0.85rem; width: 100%; justify-content: center; }
+            .livestream-buttons { flex-direction: column; align-items: center; }
+            .livestream-btn { width: 100%; justify-content: center; }
+            .bottom-memorial-section .memorial-message { font-size: 1.3rem; }
+            .bottom-memorial-section .action-btn { padding: 0.6rem 1.2rem; font-size: 0.8rem; width: 100%; justify-content: center; }
+            .bottom-memorial-section .action-buttons { flex-direction: column; align-items: center; }
+            .bottom-memorial-section .flower-decoration { font-size: 1.2rem; letter-spacing: 8px; }
+            .footer-brand { font-size: 1rem; }
+            .footer-brand .footer-logo { width: 28px; height: 28px; }
+            .quote-section { padding: 1.5rem; }
+            .quote-section .quote-text { font-size: 1.2rem; }
+            .map-section .map-footer .map-links { gap: 0.8rem; }
+            .map-section .map-footer .map-links a { font-size: 0.7rem; }
+            .map-section iframe { height: 180px; }
+            .program-section .section-label { font-size: 1.3rem; }
+            .livestream-section { padding: 1.5rem; }
+            .program-flow-item .flow-content { padding: 0.8rem; }
+            .program-flow-item .flow-content .flow-desc { font-size: 0.75rem; }
+            .program-flow-item .flow-content .flow-title { font-size: 0.9rem; }
+            .page-header-section .ornament { font-size: 1rem; letter-spacing: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ====== NAVIGATION ====== -->
+    <nav class="navbar" id="mainNav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <img src="images/60827b0fa88b45ff8794f38ddfd583ca.png" alt="In Loving Memory" class="nav-logo" />
+                <span class="brand-text">In Loving Memory</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">Life Story</a></li>
+                <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+                <li><a href="tributes.html" class="nav-link">Tributes</a></li>
+                <li><a href="candles.html" class="nav-link">Candles</a></li>
+                <li><a href="service.html" class="nav-link active">Funeral Service</a></li>
+            </ul>
+        </div>
+    </nav>
+
+        <!-- ====== MUSIC PLAYER ====== -->
+    <section id="music-section" class="music-player-bar">
+        <div class="music-container">
+            <div class="music-info">
+                <i class="fas fa-music music-icon" id="musicStatusIcon"></i>
+                <span class="music-title">Memorial Hymn</span>
+                <span class="music-artist">— Eternal Peace</span>
+                <span class="music-status" id="musicStatus">● Playing</span>
+            </div>
+            <div class="music-controls">
+                <button class="music-btn" id="musicPlayBtn" onclick="toggleMusic()">
+                    <i class="fas fa-pause" id="musicPlayIcon"></i>
+                </button>
+                <input type="range" class="music-volume" id="musicVolume" min="0" max="1" step="0.01" value="0.5" oninput="changeVolume(this.value)" />
+                <span class="volume-icon"><i class="fas fa-volume-up"></i></span>
+            </div>
+        </div>
+         <audio id="bgMusic" loop preload="auto">
+                <source src="music/Best Christian Hymns Compilation  Old & Traditional Church Songs.mp3" type="audio/mpeg" />
+            </audio>
+    </section>
+
+    <!-- ====== MAIN CONTENT ====== -->
+    <main>
+        <!-- Page Header -->
+        <section class="section page-header-section">
+            <div class="container">
+                <div class="page-header">
+                    <div class="ornament">✦ ✦ ✦</div>
+                    <h1>Celebration of Life</h1>
+                    <p class="subtitle">Carolyne Nzume · 1961 – 2026</p>
+                    <div class="divider-line"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Content -->
+        <section class="section" style="padding-top: 2rem;">
+            <div class="container">
+                <div class="service-content">
+
+                    <!-- ====== SERVICE OVERVIEW ====== -->
+                    <div class="service-overview">
+                        <p>
+                            We invite you to join us in celebrating the life of <strong>Carolyne Nzume</strong>.
+                            Below are the details of the funeral services and memorial events.
+                        </p>
+                    </div>
+
+                    <!-- ====== PROGRAM SECTION ====== -->
+                    <div class="program-section">
+                        <div class="section-label">
+                            <span class="label-icon">🕊️</span>
+                            Order of Service
+                        </div>
+
+                        <div class="program-flow">
+
+                            <!-- Friday - Wake Service -->
+                            <div class="program-flow-item">
+                                <div class="flow-content">
+                                    <span class="flow-number">01</span>
+                                    <span class="flow-day">Friday</span>
+                                    <span class="flow-date">21st August 2026</span>
+                                    <span class="flow-time">⏰ 6:00 PM</span>
+                                    <div class="flow-title">Wake Service &amp; Animation</div>
+                                    <div class="flow-desc">A time of remembrance, sharing memories, and celebrating her life through music and fellowship.</div>
+                                    <div class="flow-location"><i class="fas fa-map-pin"></i> Family Residence, Mile 4 Limbe</div>
+                                </div>
+                                <div class="flow-dot"></div>
+                            </div>
+
+                            <!-- Saturday - Removal -->
+                            <div class="program-flow-item">
+                                <div class="flow-content">
+                                    <span class="flow-number">02</span>
+                                    <span class="flow-day saturday">Saturday</span>
+                                    <span class="flow-date">22nd August 2026</span>
+                                    <span class="flow-time">⏰ 8:00 AM</span>
+                                    <div class="flow-title">Removal of Mortal Remains</div>
+                                    <div class="flow-desc">Removal of mortal remains from Bota Mortuary to the family residence.</div>
+                                    <div class="flow-location"><i class="fas fa-map-pin"></i> Bota Mortuary → Family Residence</div>
+                                </div>
+                                <div class="flow-dot"></div>
+                            </div>
+
+                            <!-- Saturday - Laying in State -->
+                            <div class="program-flow-item">
+                                <div class="flow-content">
+                                    <span class="flow-number">03</span>
+                                    <span class="flow-day saturday">Saturday</span>
+                                    <span class="flow-date">22nd August 2026</span>
+                                    <span class="flow-time">⏰ 9:00 AM</span>
+                                    <div class="flow-title">Laying in State &amp; Viewing</div>
+                                    <div class="flow-desc">An opportunity for family and friends to pay their final respects and view the body.</div>
+                                    <div class="flow-location"><i class="fas fa-map-pin"></i> Family Residence, Mile 4 Limbe</div>
+                                </div>
+                                <div class="flow-dot"></div>
+                            </div>
+
+                            <!-- Saturday - Funeral Service -->
+                            <div class="program-flow-item">
+                                <div class="flow-content">
+                                    <span class="flow-number">04</span>
+                                    <span class="flow-day saturday">Saturday</span>
+                                    <span class="flow-date">22nd August 2026</span>
+                                    <span class="flow-time">⏰ 12:00 PM</span>
+                                    <div class="flow-title">Funeral Service</div>
+                                    <div class="flow-desc">A celebration of her life, featuring hymns, eulogies, and a message of hope and comfort.</div>
+                                    <div class="flow-location"><i class="fas fa-map-pin"></i> PC Bonadikombo, Limbe</div>
+                                </div>
+                                <div class="flow-dot"></div>
+                            </div>
+
+                            <!-- Saturday - Burial -->
+                            <div class="program-flow-item">
+                                <div class="flow-content">
+                                    <span class="flow-number">05</span>
+                                    <span class="flow-day burial-day">Saturday</span>
+                                    <span class="flow-date">22nd August 2026</span>
+                                    <span class="flow-time">⏰ 3:00 PM</span>
+                                    <div class="flow-title">Burial <span class="family-badge">Family Only</span></div>
+                                    <div class="flow-desc">Private burial service for family members only.</div>
+                                    <div class="flow-location"><i class="fas fa-map-pin"></i> Family Cemetery</div>
+                                </div>
+                                <div class="flow-dot family-dot"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- ====== SERVICE INFO GRID ====== -->
+                    <div class="service-info-grid">
+
+                        <div class="service-info-card">
+                            <div class="card-header">
+                                <i class="fas fa-church"></i>
+                                <h3>Service Details</h3>
+                            </div>
+                            <ul>
+                                <li>
+                                    <span class="label">Date:</span>
+                                    <span class="value">Saturday, 22nd August 2026</span>
+                                </li>
+                                <li>
+                                    <span class="label">Wake:</span>
+                                    <span class="value">Friday, 21st · 6:00 PM</span>
+                                </li>
+                                <li>
+                                    <span class="label">Removal:</span>
+                                    <span class="value">Saturday, 22nd · 8:00 AM</span>
+                                </li>
+                                <li>
+                                    <span class="label">Viewing:</span>
+                                    <span class="value">Saturday, 22nd · 9:00 AM</span>
+                                </li>
+                                <li>
+                                    <span class="label">Funeral:</span>
+                                    <span class="value">Saturday, 22nd · 12:00 PM</span>
+                                </li>
+                                <li>
+                                    <span class="label">Burial:</span>
+                                    <span class="value">Saturday, 22nd · 3:00 PM <span style="color: #ff6b35; font-size:0.7rem; font-weight:600;">(Family Only)</span></span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="service-info-card">
+                            <div class="card-header">
+                                <i class="fas fa-map-marked-alt"></i>
+                                <h3>Locations</h3>
+                            </div>
+                            <ul>
+                                <li>
+                                    <span class="label">Wake:</span>
+                                    <span class="value">Family Residence, Mile 4 Limbe</span>
+                                </li>
+                                <li>
+                                    <span class="label">Removal:</span>
+                                    <span class="value">Bota Mortuary → Family Residence</span>
+                                </li>
+                                <li>
+                                    <span class="label">Funeral:</span>
+                                    <span class="value"><span class="highlight">PC Bonadikombo</span>, Limbe</span>
+                                </li>
+                                <li>
+                                    <span class="label">Burial:</span>
+                                    <span class="value">Family Cemetery</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <!-- ====== DOWNLOAD SECTION ====== -->
+                    <div class="download-section">
+                        <p><i class="fas fa-file-pdf" style="color: var(--gold); margin-right: 0.5rem;"></i> Download the complete funeral program for your reference.</p>
+                        <a href="#" class="download-btn">
+                            <i class="fas fa-file-pdf"></i> Download Funeral Program (PDF)
+                        </a>
+                    </div>
+
+   <!-- ====== MAP SECTION - WITH YOUR MAP IMAGE ====== -->
+<div class="map-section">
+    <div class="map-header">
+        <i class="fas fa-map-pin"></i>
+        <h4>Funeral Service Location</h4>
+    </div>
+    <a href="https://www.google.com/maps/place/4.056519,9.226257" target="_blank" style="display:block; position:relative; width:100%; height:300px; overflow:hidden; text-decoration:none; cursor:pointer;">
+        <!-- YOUR MAP IMAGE - Replace the src with your actual image path -->
+        <img 
+            src="images/qqqqqqqq.png" 
+            alt="Nzume Family Residence, Limbe" 
+            style="width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.4s ease;"
+            loading="lazy"
+        />
+        <!-- Overlay with gold gradient at bottom -->
+        <div style="position:absolute; bottom:0; left:0; right:0; padding:1.5rem 1.5rem 1rem; background:linear-gradient(transparent, rgba(0,0,0,0.7)); pointer-events:none;">
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+                <i class="fas fa-map-pin" style="color:var(--gold); font-size:1rem;"></i>
+                <span style="color:white; font-weight:500; font-family:var(--font-serif); font-size:1rem;">Nzume Family Residence, Limbe</span>
+            </div>
+            <span style="color:rgba(255,255,255,0.5); font-size:0.7rem; display:block; margin-top:0.1rem;">
+                <i class="fas fa-external-link-alt" style="font-size:0.6rem; margin-right:0.3rem;"></i> Click to open in Google Maps
+            </span>
+        </div>
+        <!-- Hover zoom effect -->
+        <div style="position:absolute; top:0; left:0; right:0; bottom:0; background:rgba(201,168,76,0.05); transition:background 0.4s; pointer-events:none;"></div>
+    </a>
+    <div class="map-footer">
+        <div class="map-links">
+            <a href="https://www.google.com/maps/dir/?api=1&destination=4.056519,9.226257" target="_blank"><i class="fas fa-directions"></i> Directions</a>
+            <a href="https://www.google.com/maps/place/4.056519,9.226257" target="_blank"><i class="fas fa-external-link-alt"></i> Open in Maps</a>
+        </div>
+        <span class="map-credit"><i class="fas fa-map-pin"></i> Nzume Family Residence, Limbe (4.056519, 9.226257)</span>
+    </div>
+</div>
+
+                    <!-- ====== QUOTE SECTION ====== -->
+                    <div class="quote-section">
+                        <div class="quote-icon">❝</div>
+                        <p class="quote-text">"I have fought the good fight, I have finished the race, I have kept the faith."</p>
+                        <p class="quote-author">— 2 Timothy 4:7</p>
+                    </div>
+
+                    <!-- ====== LIVESTREAM SECTION ====== -->
+                    <div class="livestream-section">
+                        <div class="livestream-icon"><i class="fas fa-video"></i></div>
+                        <h3>Join Us Online</h3>
+                        <p>Unable to attend in person? Join the service via livestream.</p>
+                        <div class="livestream-buttons">
+                            <a href="#" class="livestream-btn zoom-btn">
+                                <i class="fas fa-video"></i> Zoom Link
+                            </a>
+                            <a href="#" class="livestream-btn youtube-btn">
+                                <i class="fab fa-youtube"></i> YouTube Livestream
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- ====== BOTTOM SECTION ====== -->
+                    <div class="bottom-memorial-section">
+                        <div class="flower-decoration">
+                            🌹 🌷 🌹 🌷 🌹
+                        </div>
+
+                        <p class="memorial-message">
+                            "A life beautifully lived, a heart deeply loved."
+                        </p>
+
+                        <p class="memorial-sub-message">
+                            Carolyne's legacy of love, faith, and kindness continues to inspire all who knew her.
+                        </p>
+
+                        <div class="action-buttons">
+                            <a href="tributes.html" class="action-btn tribute-btn">
+                                <i class="fas fa-pen"></i> Share a Tribute
+                            </a>
+                            <a href="candles.html" class="action-btn candle-btn">
+                                <i class="fas fa-fire"></i> Light a Candle
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ====== FOOTER ====== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="images/60827b0fa88b45ff8794f38ddfd583ca.png" alt="In Loving Memory" class="footer-logo" />
+                    <div>
+                        <span class="brand-gold">✦</span> In Loving Memory
+                        <p class="footer-sub">Carolyne Nzume · 1961 – 2026</p>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">Life Story</a>
+                    <a href="gallery.html">Gallery</a>
+                    <a href="tributes.html">Tributes</a>
+                    <a href="candles.html">Candles</a>
+                    <a href="service.html">Service</a>
+                </div>
+                <div class="footer-copy">&copy; 2026 · Built with <i class="fas fa-heart" style="color: #c9a84c;"></i> in loving memory</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ====== MUSIC CONTROLS ====== -->
+    <script>
+        function toggleMusic() {
+            var audio = document.getElementById('bgMusic');
+            var icon = document.getElementById('musicPlayIcon');
+            var status = document.getElementById('musicStatus');
+            
+            if (audio.paused) {
+                audio.play();
+                icon.className = 'fas fa-pause';
+                status.textContent = '● Playing';
+                status.className = 'music-status playing';
+                localStorage.setItem('musicState', 'playing');
+            } else {
+                audio.pause();
+                icon.className = 'fas fa-play';
+                status.textContent = '● Paused';
+                status.className = 'music-status';
+                localStorage.setItem('musicState', 'paused');
+            }
+        }
+
+        function changeVolume(val) {
+            var audio = document.getElementById('bgMusic');
+            audio.volume = parseFloat(val);
+            localStorage.setItem('musicVolume', val);
+            
+            var icon = document.querySelector('.volume-icon i');
+            if (val == 0) {
+                icon.className = 'fas fa-volume-mute';
+            } else if (val < 0.5) {
+                icon.className = 'fas fa-volume-down';
+            } else {
+                icon.className = 'fas fa-volume-up';
+            }
+        }
+
+        function scrollToMusic() {
+            document.getElementById('music-section').scrollIntoView({ behavior: 'smooth' });
+            var audio = document.getElementById('bgMusic');
+            if (audio.paused) {
+                toggleMusic();
+            }
+        }
+    </script>
+</body>
+</html>
+
+    <!-- ====== SCRIPTS ====== -->
+    <script src="js/music.js"></script>
+    <!-- Other scripts -->
+
+    <!-- ====== SCRIPTS ====== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // ====== NAVIGATION ======
+            const navToggle = document.getElementById('navToggle');
+            const navMenu = document.getElementById('navMenu');
+
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', function() {
+                    navMenu.classList.toggle('open');
+                });
+
+                navMenu.querySelectorAll('.nav-link').forEach(function(link) {
+                    link.addEventListener('click', function() {
+                        navMenu.classList.remove('open');
+                    });
+                });
+            }
+
+            // ====== MUSIC PLAYER ======
+            const audio = document.getElementById('bgMusic');
+            const playBtn = document.getElementById('musicPlayBtn');
+            const playIcon = document.getElementById('musicPlayIcon');
+            const volumeSlider = document.getElementById('musicVolume');
+
+            if (playBtn) {
+                playBtn.addEventListener('click', function() {
+                    if (audio.paused) {
+                        audio.play().then(function() {
+                            playIcon.className = 'fas fa-pause';
+                        }).catch(function() {});
+                    } else {
+                        audio.pause();
+                        playIcon.className = 'fas fa-play';
+                    }
+                });
+            }
+            if (volumeSlider) {
+                volumeSlider.addEventListener('input', function() {
+                    audio.volume = parseFloat(this.value);
+                });
+            }
+            audio.volume = 0.5;
+            audio.play().then(function() {
+                playIcon.className = 'fas fa-pause';
+            }).catch(function() {});
+
+            console.log('🕊️ Service page loaded successfully');
+        });
+    </script>
+
+</body>
+</html>

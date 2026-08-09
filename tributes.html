@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tributes – In Loving Memory</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        .page-header-section {
+            padding-top: 7rem;
+            text-align: center;
+        }
+        .page-header h1 {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        .page-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        .tribute-form-wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--dark);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(201, 168, 76, 0.1);
+        }
+
+        /* ====== NAVIGATION WITH LOGO ====== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--white);
+            transition: opacity 0.3s ease;
+        }
+        .nav-brand:hover { opacity: 0.8; }
+
+        .nav-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+            display: block;
+            flex-shrink: 0;
+        }
+
+        .brand-text { color: var(--white); }
+        .brand-gold { color: var(--gold); }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 1.8rem;
+        }
+        .nav-link {
+            color: var(--white);
+            font-weight: 400;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 0.4rem 0;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after,
+        .nav-link.active::after { width: 100%; }
+        .nav-link.active { color: var(--gold); }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+        .hamburger-line {
+            width: 28px;
+            height: 2px;
+            background: var(--white);
+            transition: all 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle { display: flex; }
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                gap: 0.5rem;
+                background: var(--dark);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                padding: 1.5rem 2rem;
+                border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+            }
+            .nav-menu.open { display: flex; }
+            .nav-logo { width: 32px; height: 32px; }
+            .brand-text { font-size: 1rem; }
+            .nav-brand { gap: 8px; }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container { padding: 0.6rem 1rem; }
+            .nav-logo { width: 28px; height: 28px; }
+            .brand-text { font-size: 0.85rem; }
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-weight: 500;
+            color: var(--white);
+        }
+        .form-group label .required {
+            color: var(--gold);
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 6px;
+            color: var(--white);
+            font-family: var(--font-sans);
+            transition: border 0.3s;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .tribute-list-section {
+            background: #0f0f0f;
+        }
+        .tribute-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .tribute-item {
+            background: rgba(255, 255, 255, 0.04);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--gold);
+            transition: transform 0.3s;
+        }
+        .tribute-item:hover {
+            transform: translateX(5px);
+        }
+        .tribute-item strong {
+            color: var(--gold);
+            font-size: 1.1rem;
+        }
+        .tribute-item .tribute-location {
+            color: var(--gray);
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-left: 0.5rem;
+        }
+        .tribute-item .tribute-location i {
+            color: var(--gold);
+        }
+        .tribute-item .tribute-message {
+            margin: 0.5rem 0;
+            line-height: 1.6;
+        }
+        .tribute-item .tribute-time {
+            color: var(--gray);
+            font-size: 0.8rem;
+            display: block;
+            margin-top: 0.5rem;
+        }
+        .tribute-item .tribute-badge {
+            display: inline-block;
+            background: rgba(201, 168, 76, 0.15);
+            color: var(--gold);
+            font-size: 0.65rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 10px;
+            margin-right: 0.5rem;
+        }
+        .tribute-item .firebase-badge {
+            background: rgba(255, 107, 53, 0.15);
+            color: #ff6b35;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+        .pagination button {
+            background: transparent;
+            border: 1px solid rgba(201, 168, 76, 0.2);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            min-width: 40px;
+        }
+        .pagination button:hover:not(:disabled) {
+            background: var(--gold);
+            color: var(--black);
+            border-color: var(--gold);
+        }
+        .pagination button.active {
+            background: var(--gold);
+            color: var(--black);
+            border-color: var(--gold);
+        }
+        .pagination button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        .pagination .page-info {
+            color: var(--gray);
+            font-size: 0.9rem;
+            padding: 0 0.5rem;
+        }
+
+        .sync-status {
+            text-align: center;
+            padding: 0.7rem;
+            font-size: 0.85rem;
+            color: var(--gray);
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(201, 168, 76, 0.05);
+        }
+        .sync-status .status-item {
+            display: inline-block;
+            margin: 0 0.8rem;
+        }
+        .sync-status .status-item i {
+            margin-right: 0.3rem;
+        }
+        .sync-status .status-item .count {
+            font-weight: 700;
+            color: var(--white);
+        }
+        .sync-status .synced {
+            color: #4caf50;
+        }
+        .sync-status .syncing {
+            color: var(--gold);
+        }
+        .sync-status .offline {
+            color: #ff6b6b;
+        }
+        .sync-status .local-status {
+            color: #64b5f6;
+        }
+        .sync-status .cloud-status {
+            color: #ffb74d;
+        }
+        .sync-status .divider {
+            color: var(--gray);
+            opacity: 0.3;
+        }
+        .sync-status .refresh-btn {
+            background: transparent;
+            border: 1px solid rgba(201, 168, 76, 0.3);
+            color: var(--gray);
+            padding: 0.2rem 0.8rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            transition: all 0.3s;
+            margin-left: 0.5rem;
+        }
+        .sync-status .refresh-btn:hover {
+            background: var(--gold);
+            color: var(--black);
+            border-color: var(--gold);
+        }
+        .sync-status .sync-btn {
+            background: transparent;
+            border: 1px solid rgba(100, 181, 246, 0.3);
+            color: #64b5f6;
+            padding: 0.2rem 0.8rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            transition: all 0.3s;
+            margin-left: 0.5rem;
+        }
+        .sync-status .sync-btn:hover {
+            background: #64b5f6;
+            color: var(--black);
+            border-color: #64b5f6;
+        }
+
+        .music-player-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(201, 168, 76, 0.2);
+            padding: 0.7rem 1.5rem;
+            z-index: 999;
+        }
+        .music-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        .music-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+        .music-icon {
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+        .music-title { font-weight: 500; color: var(--white); }
+        .music-artist { color: var(--gray); font-size: 0.8rem; }
+        .music-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .music-btn {
+            background: transparent;
+            border: none;
+            color: var(--white);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .music-btn:hover {
+            color: var(--gold);
+            background: rgba(201, 168, 76, 0.1);
+        }
+        .music-volume {
+            width: 80px;
+            accent-color: var(--gold);
+            cursor: pointer;
+        }
+        .volume-icon { color: var(--gray); font-size: 0.9rem; }
+
+        .btn-gold {
+            background: var(--gold);
+            color: var(--black);
+            padding: 0.8rem 2.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        .btn-gold:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(201, 168, 76, 0.4);
+        }
+
+                /* ====== FOOTER ====== */
+        .footer {
+            background: var(--dark);
+            padding: 2.5rem 0;
+            border-top: 1px solid rgba(201, 168, 76, 0.1);
+            margin-top: 2rem;
+        }
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .footer-brand {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .footer-brand .footer-logo {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+        }
+        .footer-sub {
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: 0.2rem;
+        }
+        .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .footer-links a { color: var(--gray); font-size: 0.9rem; }
+        .footer-links a:hover { color: var(--gold); }
+        .footer-copy { font-size: 0.8rem; color: var(--gray); text-align: center; width: 100%; margin-top: 1.5rem; }
+
+        @media (max-width: 768px) {
+            .footer-content { flex-direction: column; text-align: center; }
+            .footer-links { justify-content: center; }
+        }
+
+        @media (max-width: 480px) {
+            .footer-brand { font-size: 1rem; }
+            .footer-brand .footer-logo { width: 28px; height: 28px; }
+        }
+
+        @media (max-width: 768px) {
+            .tribute-form-wrapper {
+                padding: 1.5rem;
+            }
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            .tribute-item {
+                padding: 1rem;
+            }
+            .music-container {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.5rem;
+            }
+            .music-controls { justify-content: center; }
+            .music-info { justify-content: center; }
+            .sync-status .status-item {
+                display: block;
+                margin: 0.2rem 0;
+            }
+            .sync-status .divider {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+        <!-- ====== NAVIGATION ====== -->
+    <nav class="navbar" id="mainNav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <img src="images/60827b0fa88b45ff8794f38ddfd583ca.png" alt="In Loving Memory" class="nav-logo" />
+                <span class="brand-text">In Loving Memory</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">Life Story</a></li>
+                <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+                <li><a href="tributes.html" class="nav-link">Tributes</a></li>
+                <li><a href="candles.html" class="nav-link">Candles</a></li>
+                <li><a href="service.html" class="nav-link">Funeral Service</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    
+
+    <main>
+        <section class="section page-header-section">
+            <div class="container">
+                <div class="page-header">
+                    <h1>Share a Tribute</h1>
+                    <p>Leave a message of love and remembrance</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section tribute-form-section">
+            <div class="container">
+                <div class="tribute-form-wrapper">
+                    <form id="tributeForm">
+                        <div class="form-group">
+                            <label for="tributeName">Your Name <span class="required">*</span></label>
+                            <input type="text" id="tributeName" placeholder="e.g. Jane Doe" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="tributeLocation">Your Location</label>
+                            <input type="text" id="tributeLocation" placeholder="e.g. Limbe, Cameroon" />
+                        </div>
+                        <div class="form-group">
+                            <label for="tributeMessage">Your Message <span class="required">*</span></label>
+                            <textarea id="tributeMessage" rows="4" placeholder="Share your memory..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-gold" style="width:100%; justify-content:center;">
+                            <i class="fas fa-pen"></i> Submit Tribute
+                        </button>
+                    </form>
+                    <div id="formStatus" style="margin-top: 1rem; text-align:center; font-size:0.9rem;"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section tribute-list-section">
+            <div class="container">
+                <div class="section-header light">
+                    <span class="section-tag gold">Messages</span>
+                    <h2 class="section-title">All Tributes</h2>
+                    <div class="section-divider gold"></div>
+                </div>
+
+                <div class="sync-status" id="syncStatus">
+                    <span class="status-item local-status">
+                        <i class="fas fa-database"></i> Local: <span class="count" id="localCount">0</span>
+                    </span>
+                    <span class="divider">|</span>
+                    <span class="status-item cloud-status">
+                        <i class="fas fa-cloud"></i> Cloud: <span class="count" id="cloudCount">0</span>
+                    </span>
+                    <span class="divider">|</span>
+                    <span class="status-item" id="connectionStatus">
+                        <i class="fas fa-spinner fa-spin"></i> Connecting...
+                    </span>
+                    <button class="refresh-btn" id="refreshBtn" title="Reload manual tributes from code">
+                        <i class="fas fa-sync"></i> Reload
+                    </button>
+                    <button class="sync-btn" id="syncBtn" title="Force sync with cloud - removes deleted tributes">
+                        <i class="fas fa-cloud-upload-alt"></i> Sync
+                    </button>
+                </div>
+
+                <div id="tributeList" class="tribute-list"></div>
+
+                <div class="pagination" id="paginationControls">
+                    <button id="prevPage" disabled><i class="fas fa-chevron-left"></i></button>
+                    <span class="page-info" id="pageInfo">Page 1 of 1</span>
+                    <button id="nextPage" disabled><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+             <!-- ====== MUSIC PLAYER ====== -->
+<section id="music-section" class="music-player-bar">
+    <div class="music-container">
+        <div class="music-info">
+            <i class="fas fa-music music-icon" id="musicStatusIcon"></i>
+            <span class="music-title">Memorial Hymn</span>
+            <span class="music-artist">— Eternal Peace</span>
+            <span class="music-status" id="musicStatus">● Playing</span>
+        </div>
+        <div class="music-controls">
+            <button class="music-btn" id="musicPlayBtn">
+                <i class="fas fa-play" id="musicPlayIcon"></i>
+            </button>
+            <input type="range" class="music-volume" id="musicVolume" min="0" max="1" step="0.01" value="0.5" />
+            <span class="volume-icon"><i class="fas fa-volume-up"></i></span>
+        </div>
+    </div>
+    <audio id="bgMusic" loop preload="auto">
+                <source src="music/Best Christian Hymns Compilation  Old & Traditional Church Songs.mp3" type="audio/mpeg" />
+            </audio>
+</section>
+
+       <!-- ====== FOOTER ====== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="images/60827b0fa88b45ff8794f38ddfd583ca.png" alt="In Loving Memory" class="footer-logo" />
+                    <div>
+                        <span class="brand-gold">✦</span> In Loving Memory
+                        <p class="footer-sub">Carolyne Nzume · 1961 – 2026</p>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">Life Story</a>
+                    <a href="gallery.html">Gallery</a>
+                    <a href="tributes.html">Tributes</a>
+                    <a href="candles.html">Candles</a>
+                    <a href="service.html">Funeral Service</a>
+                </div>
+                <div class="footer-copy">&copy; 2026 · Built with <i class="fas fa-heart" style="color: #c9a84c;"></i> in loving memory</div>
+            </div>
+        </div>
+    </footer>
+
+
+    
+        <!-- ====== MUSIC CONTROLS ====== -->
+    <script>
+        function toggleMusic() {
+            var audio = document.getElementById('bgMusic');
+            var icon = document.getElementById('musicPlayIcon');
+            var status = document.getElementById('musicStatus');
+            
+            if (audio.paused) {
+                audio.play();
+                icon.className = 'fas fa-pause';
+                status.textContent = '● Playing';
+                status.className = 'music-status playing';
+                localStorage.setItem('musicState', 'playing');
+            } else {
+                audio.pause();
+                icon.className = 'fas fa-play';
+                status.textContent = '● Paused';
+                status.className = 'music-status';
+                localStorage.setItem('musicState', 'paused');
+            }
+        }
+
+        function changeVolume(val) {
+            var audio = document.getElementById('bgMusic');
+            audio.volume = parseFloat(val);
+            localStorage.setItem('musicVolume', val);
+            
+            var icon = document.querySelector('.volume-icon i');
+            if (val == 0) {
+                icon.className = 'fas fa-volume-mute';
+            } else if (val < 0.5) {
+                icon.className = 'fas fa-volume-down';
+            } else {
+                icon.className = 'fas fa-volume-up';
+            }
+        }
+
+        function scrollToMusic() {
+            document.getElementById('music-section').scrollIntoView({ behavior: 'smooth' });
+            var audio = document.getElementById('bgMusic');
+            if (audio.paused) {
+                toggleMusic();
+            }
+        }
+    </script>
+</body>
+</html>
+
+    
+
+
+    <!-- ====== SCRIPTS ====== -->
+    <script src="js/music.js"></script>
+    <!-- Other scripts -->
+
+    <script type="module" src="js/firebase.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+                       // ====== NAVIGATION ======
+            const navToggle = document.getElementById('navToggle');
+            const navMenu = document.getElementById('navMenu');
+
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', function() {
+                    navMenu.classList.toggle('open');
+                });
+
+                navMenu.querySelectorAll('.nav-link').forEach(function(link) {
+                    link.addEventListener('click', function() {
+                        navMenu.classList.remove('open');
+                    });
+                });
+            }
+
+            // ====== MUSIC PLAYER ======
+            const audio = document.getElementById('bgMusic');
+            const playBtn = document.getElementById('musicPlayBtn');
+            const playIcon = document.getElementById('musicPlayIcon');
+            const volumeSlider = document.getElementById('musicVolume');
+
+            if (playBtn) {
+                playBtn.addEventListener('click', function() {
+                    if (audio.paused) {
+                        audio.play().then(function() {
+                            playIcon.className = 'fas fa-pause';
+                        }).catch(function() {});
+                    } else {
+                        audio.pause();
+                        playIcon.className = 'fas fa-play';
+                    }
+                });
+            }
+            if (volumeSlider) {
+                volumeSlider.addEventListener('input', function() {
+                    audio.volume = parseFloat(this.value);
+                });
+            }
+            audio.volume = 0.5;
+            audio.play().then(function() {
+                playIcon.className = 'fas fa-pause';
+            }).catch(function() {});
+
+            // ============================================================
+            //  📝 YOUR MANUAL TRIBUTES
+            // ============================================================
+
+            const DATA_VERSION = '4.0';
+
+            const defaultTributes = [
+               
+            {
+                    name: "Your Beloved Husband, Kenneth",
+                    location: "Limbe, Cameroon",
+                    message: "Lyne,I love you. My love for you is everlasting. ",
+                    timestamp: "2026-08-01T09:30:00",
+                    source: 'manual'
+                },
+                {
+                    name: "Your Mom",
+                    location: "Kumba, Cameroon",
+                    message: "My darling daughter, your departure is a great blow in my life. I thought you will be the one to bury me as you did your father. Little did I know that what I desired will not be granted by the Lord. You were a mother to your children, sisters and brother, as well as your husband, but death has decided to separate us and take you away from us. Look at my age, how long am l going to live to take care of them? l leave everything in the hands of the Lord. He the supreme judge. I thank God that you have gone home to your maker. Rest in perfect peace mummy.",
+                    timestamp: "2026-08-01T10:30:00",
+                    source: 'manual'
+                },
+                {
+                    name: "Daughter, Yvette & the Tambe Family",
+                    location: "Kumba, Cameroon",
+                    message: "My super woman. The strongest woman I know yet the most gentle, caring, selfless, empathetic and generous. A woman of faith who defeated cancer, who sailed through turbulent seasons of various illnesses but still with a positive attitude. You were my friend, confidant, adviser, fashionista, life coach and many more. Always ready to listen and give advice with your soft voice without judging. A mother of nations par excellence. You will be greatly missed. We love you.",
+                    timestamp: "2026-08-01T09:15:00",
+                    source: 'manual'
+                },
+                {
+                    name: "Son, Terence Nzume & Family",
+                    location: "Doha, Qatar",
+                    message: "Mommy, everything I am today is a testament to your love, sacrifices, and unwavering support. You carried our family with quiet strength, giving endlessly without ever asking for anything in return. Your gentle heart, deep faith, and constant reminder to take our prayer life seriously will remain with us forever. We still hear your reassuring words, “I be Jesus Christ he follow back,” a beautiful reflection of your unwavering trust in God. We thank God that you lived to see even your grandchildren. Little Myla remembers your warmth and affection. Though our hearts are broken, we find comfort knowing you are resting with the Lord. We will honor your legacy by loving and caring for Dad, just as you would have wanted. Rest well mommy, until we meet again.",
+                    timestamp: "2026-07-31T18:45:00",
+                    source: 'manual'
+                },
+                {
+                    name: "Daughter, Annie & the Tangang Family",
+                    location: "USA",
+                    message: "Mummy, saying goodbye feels impossible. Even now, as we prepare to lay you to rest, your presence fills every corner of my heart. I rejoice knowing you’ve gone to be with your loving big brother, Jesus. I will forever remember your love, gentleness, kindness, strength, and peace. Thank you for every sacrifice, lesson, piece of advice, and moment of warmth you gave me. Though you are no longer here, your spirit and love will guide me always. Rest peacefully; your legacy of love lives on in us all. I love you with all my heart.",
+                    timestamp: "2026-07-31T14:20:00",
+                    source: 'manual'
+                },
+                {
+                    name: "Son, Micheal Che",
+                    location: "Bamenda, Cameroon",
+                    message: "Mummy I am penning this tribute with a heavy heart. Your sudden death came as a shock to me as we were least prepared for this. Your love, kindness, strength, and gentle heart will forever guide me. Thank you for every sacrifice, every hug, and every lesson you gave. Your memory will be my comfort, and your love will be my light. Rest peacefully, Mom—you will be loved, missed, and remembered forever.",
+                    timestamp: "2026-07-30T11:00:00",
+                    source: 'manual'
+                },
+                {
+                    name: "Son, Leonard Mendi",
+                    location: "London, United Kingdom",
+                    message: "It’s with a heavy heart that I pen down this tribute to a woman who made the world brighter, softer, and infinitely more beautiful just by being in it. Mum, you gave us everything. You poured your whole soul into loving us, and that love has shaped who I am today. Though our hearts are heavy with your absence, we find peace knowing that a love so beautiful never truly ends. I wish you would have seen me walk down the aisle, but I know you will be there with me throughout that beautiful journey. Go well mum, I love you.",
+                    timestamp: "2026-07-30T08:30:00",
+                    source: 'manual'
+                },
+                {
+                    name: "Your Son, Nzume Jr",
+                    location: "Doha, Qatar",
+                    message: "My sweetest of hearts, I'm writing this with a heavy heart. You were always such a gentle and graceful mother, someone who truly understood me and supported me with joy, even when I doubted myself. You embodied love and brought so much goodness into my life. There are no words to fully express what you mean to me or how deeply I miss you. I always felt protected by your endless prayers, and your boundless love and virtues shaped who I am today. We trust in God's plan, believing He knows best, and I find comfort in knowing you are now at eternal rest with Him. You will live on forever in my heart, memories, thoughts, and accomplishments. I love you so much, Mommy.",
+                    timestamp: "2026-07-29T16:10:00",
+                    source: 'manual'
+                },
+                {
+                    name: "Son, Boldwin Motove",
+                    location: "Manama, Bahrain",
+                    message: "A special bond that lasts a lifetime, through laughter, smiles and tears. Your time, care and love have made me the person I am today. I am truly grateful to have you in my life.  There are simply not enough words to say how much I love you",
+                    timestamp: "2026-07-29T12:45:00",
+                    source: 'manual'
+                },
+                {
+                    name: "Daughter, Estherine Nzume",
+                    location: "Douala, Cameroon",
+                    message: "My Angel, The gentle voice that steadied my storms. You were an embodiment of peace, positivity, softness and light. There are no words for your exceptionality. Your values and lessons have moulded every aspect of my life and made me who I am. This one hit harder than anything I’ve ever felt, I don’t think I can ever fill this void. My only consolation is that I believe Jesus has called his « follow back » to rest with him eternally and you are finally with the Lord. You always prayed fervently and encouraged us to be steadfast. You will live on in my heart, my achievements, my reflection, and our memories. I love you forever.",
+                    timestamp: "2026-07-28T20:00:00",
+                    source: 'manual'
+                },
+                {
+                    name: "Siblings (Violet, Vivian, Bume, Ceci and Victor)",
+                    location: "France, USA, Douala, Limbe",
+                    message: "Dear Ma Nzums, It is with deep sorrow that we write this tribute, never imagining we would be saying goodbye so soon. You always said, you were 'Jesus ei follow back', and today, you have truly followed Him, leaving us with memories we will cherish forever. As our eldest sister, you were our guide, our encourager, and our example. You lived a life of love, kindness, humility, and unwavering faith. You carried our burdens, celebrated our joys, and always believed there was *something good in every person* and every situation. Your strength gave us courage, and your gentle spirit made everyone feel loved. The emptiness your passing has left, can never be filled, but we are grateful to God for the gift of your beautiful life. We pray He comforts Ken, Mum, your children, our family, and all who loved you. Rest peacefully, our beloved sister. Reunited with Dad and Sister Catherine, you are finally home with the Lord. Until we meet again, your love and your legacy will live in our hearts forever. With all our love,",
+                    timestamp: "2026-07-28T15:30:00",
+                    source: 'manual'
+                },
+                {
+                    name: "Mommy Anna Nzume",
+                    location: "London, United Kingdom",
+                    message: "Today, we honor the life of a woman who was truly amazing and the kindest and most loving person in the world. I can honestly say she was my best friend and my junior sister. To try and do justice right here in these few words is impossible. She dedicated her life to family and making sure we were supported in everything, and at all times, this took her all around the globe, notably Europe USA China Dubai and Africa. I fondly called her 'pepe.' 'My Boh'. She was slow to judge and quick to forgive. Nothing seemed to rattle her feathers as she always said 'Ane Ha' meaning any how there will be a solution. I loved her more than words could possibly say and she will live on in my heart forever more. Farewell is the hardest word to say but rest peacefully I will love you forever ❤.",
+                    timestamp: "2026-07-27T10:00:00",
+                    source: 'manual'
+                },
+                {
+                    name: "Manyi (on behalf of Nephews, Nieces and In-laws)",
+                    location: "USA, Dubai, Cameroon",
+                    message: "Our beloved Aunt, 'Mummy' to many, was a mother to us all. Your passing leaves a void no one can fill. Gentle, kind, and humble, you welcomed everyone with love, compassion, and without judgment. Your listening ear, warm heart, and boundless affection made you deeply cherished. Even in life's darkest moments, your unwavering faith in Christ remained your greatest strength. Proudly calling yourself 'Jesus e Follow Back', you inspired hope and peace wherever you went. Though we grieve your loss, we find comfort knowing you rest with the Lord. Rest peacefully, Mummy Caro. You are forever loved and never forgotten.",
+                    timestamp: "2026-07-27T07:30:00",
+                    source: 'manual'
+                },
+                {
+                    name: "With all our love from Sidonie, Yaya, Yinka, Jane, Opey, and grandchildren in the UK",
+                    location: "London, United Kingdom",
+                    message: "Jesus Christ E Follow Back, Mummy, Big Mami! We are grateful for your life and for joy and laughter we shared with you. Distance never made a difference—you were always close and in our lives. Thank you for your selfless love, wise advice, patience, gentle spirit, kindness and deep appreciation for life. We are comforted knowing you are reunited with your Big Brother, Jesus, and our Heavenly Father. We miss you but hold to the hope that we will meet again, n'est-ce pas?! We will spoke, spack, speck... ",
+                    timestamp: "2026-07-27T07:15:00",
+                    source: 'manual'
+                }
+                ,
+                {
+                    name: "Tambi Sons and Daughters",
+                    location: "Buea, Cameroon",
+                    message: "Dear Aunty Caro, rest peacefully. Your love, light and gentle strength is what surrounds us. You were a true mentor. Family events will never be the same without your bright smile and laughter, but your memory stays with us always. You will be greatly missed. We love you. ",
+                    timestamp: "2026-07-27T07:18:23",
+                    source: 'manual'
+                }
+                ,
+                
+                {
+                    name: "Namondo & Siblings",
+                    location: "Buea, Cameroon",
+                    message: "Mummy, You brought so much warmth and grace into the family. You loved daddy with this deep, steady devotion which inspires us all. You had this smile and kind soft words u tell everyone when we feel down. You will always say, 'Nam, don't worry everything will be fine'.Mummy, though you are gone which is really hard to accept; we will always love you and know you are in our hearts forever. ",
+                    timestamp: "2026-07-27T07:19:11",
+                    source: 'manual'
+                },
+                
+                {
+                    name: "Family friend, Dr. John Palle",
+                    location: "Buea, Cameroon",
+                    message: "Kenneth Nzume and Caroline Lobe; John Palle and Dorothy Ekuri. These children paired up in this order about half a century ago. It all started behind their parents' backs. They were then in secondary school, then high school and then university. Their parents became suspicious, then aware, and then, much, much later....blessed them. Weddings were conducted. Caro was the mother of the group, gathering and protecting us like a hen does to her chicks. She had a pet name for each of us. Mine was Banso and mine for her was Lyne. Lyne found small knitches for us where we did our own things and showed love to each other....Sacred Heart college house, minicite' room in Yaounde. When Kenneth went abroad to study, the three stayed behind and waited; Lyne waited. As he returned our lives went from school to homes. Lyne seamlessly blended her civil service work and her duties as a wife and mother. She instilled Christian believes and practices in a military man's home. Love, kindness, affection and understand of and for each other were the pillars of her home, gathering her family in a knitch filled with love and faith. Lyne was my sister, my mother, my confidant. She was the only woman who understood me, even in my faults. When others scolded me, and even Kenneth was asking me to 'climb table for six lashes', Lyne would step in calmly and say to me 'Banso I understand you'. I was the oldest in the group. Believing I would go first, I indicated to her where I would like to be buried. But God decided otherwise...my eyes are blinded with tears. Please Lord grant her peace in your Kingdom. Lyne, we are coming.",
+                    timestamp: "2026-07-27T07:19:40",
+                    source: 'manual'
+                }
+            ];
+
+            // ====== STATE ======
+            let allTributes = [];
+            let currentPage = 1;
+            const itemsPerPage = 5;
+            let firebaseKeyMap = {};
+            let initialLoadDone = false;
+
+            // ====== DOM REFS ======
+            const tributeList = document.getElementById('tributeList');
+            const prevBtn = document.getElementById('prevPage');
+            const nextBtn = document.getElementById('nextPage');
+            const pageInfo = document.getElementById('pageInfo');
+            const localCountEl = document.getElementById('localCount');
+            const cloudCountEl = document.getElementById('cloudCount');
+            const connectionStatus = document.getElementById('connectionStatus');
+            const form = document.getElementById('tributeForm');
+            const formStatus = document.getElementById('formStatus');
+            const refreshBtn = document.getElementById('refreshBtn');
+            const syncBtn = document.getElementById('syncBtn');
+
+            // ====== HELPERS ======
+            function escapeHtml(text) {
+                if (!text) return '';
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            function formatDate(timestamp) {
+                try {
+                    const date = new Date(timestamp);
+                    return date.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                } catch {
+                    return 'Just now';
+                }
+            }
+
+            function getTributeKey(tribute) {
+                return tribute.name + '|' + tribute.message + '|' + tribute.timestamp;
+            }
+
+            function updateStatusBar() {
+                const localCount = allTributes.filter(t => t.source === 'manual' || !t.source).length;
+                const cloudCount = allTributes.filter(t => t.source === 'firebase').length;
+                if (localCountEl) localCountEl.textContent = localCount;
+                if (cloudCountEl) cloudCountEl.textContent = cloudCount;
+            }
+
+            function setConnectionStatus(status, message) {
+                if (!connectionStatus) return;
+                if (status === 'connected') {
+                    connectionStatus.innerHTML = '<i class="fas fa-check-circle synced"></i> ' + (message || 'Cloud connected');
+                } else if (status === 'connecting') {
+                    connectionStatus.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ' + (message || 'Connecting...');
+                } else if (status === 'offline') {
+                    connectionStatus.innerHTML = '<i class="fas fa-exclamation-triangle offline"></i> ' + (message || 'Offline mode');
+                }
+            }
+
+            // ====== RENDER ======
+            function renderTributes(page) {
+                const startIndex = (page - 1) * itemsPerPage;
+                const endIndex = startIndex + itemsPerPage;
+                const pageItems = allTributes.slice(startIndex, endIndex);
+
+                if (pageItems.length === 0 && allTributes.length === 0) {
+                    tributeList.innerHTML = `
+                        <div style="text-align:center; padding:3rem; color: var(--gray);">
+                            <i class="fas fa-heart" style="font-size:2rem; color: var(--gold); margin-bottom:1rem; display:block;"></i>
+                            <p>No tributes yet. Be the first to share a message.</p>
+                        </div>
+                    `;
+                    updatePagination();
+                    updateStatusBar();
+                    return;
+                }
+
+                if (pageItems.length === 0) {
+                    const totalPages = Math.ceil(allTributes.length / itemsPerPage);
+                    if (currentPage > totalPages) {
+                        currentPage = totalPages;
+                        renderTributes(currentPage);
+                        return;
+                    }
+                }
+
+                let html = '';
+                pageItems.forEach(function(tribute) {
+                    const name = tribute.name || 'Anonymous';
+                    const location = tribute.location || '';
+                    const message = tribute.message || '';
+                    const dateStr = formatDate(tribute.timestamp);
+                    const source = tribute.source || 'manual';
+
+                    const badge = source === 'firebase' ? 
+                        '<span class="tribute-badge firebase-badge">☁️ Cloud</span>' : 
+                        '<span class="tribute-badge">📁 Local</span>';
+
+                    html += `
+                        <div class="tribute-item">
+                            ${badge}
+                            <strong>${escapeHtml(name)}</strong>
+                            ${location ? `<span class="tribute-location"><i class="fas fa-map-pin"></i> ${escapeHtml(location)}</span>` : ''}
+                            <p class="tribute-message">${escapeHtml(message)}</p>
+                            <span class="tribute-time">${dateStr}</span>
+                        </div>
+                    `;
+                });
+
+                tributeList.innerHTML = html;
+                updatePagination();
+                updateStatusBar();
+            }
+
+            function updatePagination() {
+                const totalPages = Math.ceil(allTributes.length / itemsPerPage) || 1;
+                pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+                prevBtn.disabled = currentPage <= 1;
+                nextBtn.disabled = currentPage >= totalPages;
+            }
+
+            function goToPage(page) {
+                const totalPages = Math.ceil(allTributes.length / itemsPerPage) || 1;
+                if (page < 1 || page > totalPages || page === currentPage) return;
+                currentPage = page;
+                renderTributes(currentPage);
+            }
+
+            prevBtn.addEventListener('click', function() { goToPage(currentPage - 1); });
+            nextBtn.addEventListener('click', function() { goToPage(currentPage + 1); });
+
+            // ====== LOCAL STORAGE ======
+            function saveToLocalStorage() {
+                try {
+                    localStorage.setItem('memorial_tributes', JSON.stringify(allTributes));
+                    localStorage.setItem('memorial_tributes_version', DATA_VERSION);
+                } catch (e) {
+                    console.log('Error saving to localStorage:', e);
+                }
+            }
+
+            function loadFromLocalStorage() {
+                try {
+                    const savedVersion = localStorage.getItem('memorial_tributes_version');
+                    if (savedVersion !== DATA_VERSION) {
+                        console.log('🔄 Version changed, reloading defaults...');
+                        localStorage.removeItem('memorial_tributes');
+                        return false;
+                    }
+
+                    const saved = localStorage.getItem('memorial_tributes');
+                    if (saved) {
+                        const parsed = JSON.parse(saved);
+                        if (Array.isArray(parsed) && parsed.length > 0) {
+                            allTributes = parsed;
+                            console.log('📂 Loaded ' + allTributes.length + ' tributes from localStorage');
+                            return true;
+                        }
+                    }
+                } catch (e) {
+                    console.log('Error loading from localStorage:', e);
+                }
+                return false;
+            }
+
+            function loadDefaults(keepCloud) {
+                let cloudTributes = [];
+                if (keepCloud) {
+                    cloudTributes = allTributes.filter(t => t.source === 'firebase');
+                }
+                
+                const manualTributes = JSON.parse(JSON.stringify(defaultTributes));
+                
+                if (keepCloud) {
+                    allTributes = [...manualTributes, ...cloudTributes];
+                } else {
+                    allTributes = manualTributes;
+                }
+                
+                saveToLocalStorage();
+                console.log('📝 Loaded ' + manualTributes.length + ' manual tributes' + 
+                           (keepCloud ? ' + ' + cloudTributes.length + ' cloud tributes' : ''));
+            }
+
+            // ====== FIREBASE FUNCTIONS ======
+            function loadFromFirebase() {
+                if (typeof window.db === 'undefined' || !window.onChildAdded) {
+                    setConnectionStatus('offline', '⚠️ Cloud not available');
+                    return;
+                }
+
+                try {
+                    const tributeRef = window.ref(window.db, 'tributes');
+
+                    // Get all existing tributes first
+                    window.get(tributeRef).then(function(snapshot) {
+                        const data = snapshot.val();
+                        if (data) {
+                            // Add all cloud tributes with their keys
+                            Object.keys(data).forEach(function(key) {
+                                const item = data[key];
+                                if (item && item.message) {
+                                    // Check if this tribute already exists in our list
+                                    const exists = allTributes.some(function(t) {
+                                        return t.message === item.message && 
+                                               t.name === item.name && 
+                                               t.source === 'firebase';
+                                    });
+                                    if (!exists) {
+                                        item.source = 'firebase';
+                                        item._firebaseKey = key;
+                                        allTributes.push(item);
+                                        firebaseKeyMap[getTributeKey(item)] = key;
+                                    } else {
+                                        // Update the key mapping
+                                        const existing = allTributes.find(function(t) {
+                                            return t.message === item.message && 
+                                                   t.name === item.name && 
+                                                   t.source === 'firebase';
+                                        });
+                                        if (existing) {
+                                            existing._firebaseKey = key;
+                                            firebaseKeyMap[getTributeKey(existing)] = key;
+                                        }
+                                    }
+                                }
+                            });
+                            saveToLocalStorage();
+                            renderTributes(currentPage);
+                            console.log('☁️ Loaded cloud tributes');
+                        }
+                        setConnectionStatus('connected', '✓ Cloud connected');
+                    }).catch(function(err) {
+                        console.log('Firebase get error:', err);
+                        setConnectionStatus('offline', '⚠️ Could not connect');
+                    });
+
+                    // Listen for new tributes
+                    window.onChildAdded(tributeRef, function(snapshot) {
+                        const data = snapshot.val();
+                        const key = snapshot.key;
+                        
+                        if (data && data.message) {
+                            const exists = allTributes.some(function(t) {
+                                return t.message === data.message && 
+                                       t.name === data.name && 
+                                       t.source === 'firebase';
+                            });
+                            if (!exists) {
+                                data.source = 'firebase';
+                                data._firebaseKey = key;
+                                allTributes.unshift(data);
+                                firebaseKeyMap[getTributeKey(data)] = key;
+                                saveToLocalStorage();
+                                if (currentPage === 1) {
+                                    renderTributes(currentPage);
+                                }
+                                console.log('🔥 Firebase tribute added: ' + data.name);
+                                setConnectionStatus('connected', '✓ Cloud connected');
+                            }
+                        }
+                    });
+
+                    // Listen for removed tributes
+                    window.onChildRemoved(tributeRef, function(snapshot) {
+                        const key = snapshot.key;
+                        console.log('🗑️ Firebase tribute removed: ' + key);
+                        
+                        // Find and remove the tribute with this key
+                        const removedIndex = allTributes.findIndex(function(t) {
+                            return t._firebaseKey === key && t.source === 'firebase';
+                        });
+                        
+                        if (removedIndex !== -1) {
+                            const removed = allTributes[removedIndex];
+                            allTributes.splice(removedIndex, 1);
+                            // Remove from key map
+                            const tributeKey = getTributeKey(removed);
+                            delete firebaseKeyMap[tributeKey];
+                            saveToLocalStorage();
+                            renderTributes(currentPage);
+                            console.log('✅ Removed deleted tribute: ' + removed.name);
+                        } else {
+                            // Try to find by matching content
+                            const index = allTributes.findIndex(function(t) {
+                                return t.source === 'firebase' && t._firebaseKey === undefined;
+                            });
+                            if (index !== -1) {
+                                allTributes.splice(index, 1);
+                                saveToLocalStorage();
+                                renderTributes(currentPage);
+                                console.log('✅ Removed orphaned tribute');
+                            }
+                        }
+                    });
+
+                    console.log('🔥 Firebase listener active');
+                    setConnectionStatus('connected', '✓ Cloud connected');
+                } catch (err) {
+                    console.log('Firebase error:', err);
+                    setConnectionStatus('offline', '⚠️ Cloud disconnected');
+                }
+            }
+
+            // ====== FORCE SYNC ======
+            function forceSync() {
+                console.log('🔄 Forcing sync with cloud...');
+                setConnectionStatus('connecting', 'Syncing with cloud...');
+                
+                // Remove all cloud tributes from current list (keep only manual)
+                allTributes = allTributes.filter(t => t.source !== 'firebase');
+                firebaseKeyMap = {};
+                saveToLocalStorage();
+                
+                // Reload from Firebase
+                loadFromFirebase();
+            }
+
+            // ====== FORCE RELOAD ======
+            function forceReload() {
+                console.log('🔄 Reloading manual tributes...');
+                // Keep cloud tributes, reload manual ones
+                const cloudTributes = allTributes.filter(t => t.source === 'firebase');
+                const manualTributes = JSON.parse(JSON.stringify(defaultTributes));
+                allTributes = [...manualTributes, ...cloudTributes];
+                saveToLocalStorage();
+                renderTributes(1);
+                setConnectionStatus('connected', '✓ Reloaded successfully');
+            }
+
+            // ====== BUTTONS ======
+            if (refreshBtn) {
+                refreshBtn.addEventListener('click', forceReload);
+            }
+            if (syncBtn) {
+                syncBtn.addEventListener('click', forceSync);
+            }
+
+            // ====== FORM ======
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    const nameInput = document.getElementById('tributeName');
+                    const locationInput = document.getElementById('tributeLocation');
+                    const messageInput = document.getElementById('tributeMessage');
+
+                    const name = nameInput.value.trim() || 'Anonymous';
+                    const location = locationInput.value.trim() || '';
+                    const message = messageInput.value.trim();
+
+                    if (!message) {
+                        formStatus.innerHTML = '<span style="color: #ff6b6b;">Please write a message.</span>';
+                        return;
+                    }
+
+                    const newTribute = {
+                        name: name,
+                        location: location,
+                        message: message,
+                        timestamp: new Date().toISOString(),
+                        source: 'manual'
+                    };
+
+                    allTributes.unshift(newTribute);
+                    saveToLocalStorage();
+
+                    // Save to Firebase
+                    if (typeof window.db !== 'undefined' && window.push) {
+                        try {
+                            const tributeRef = window.ref(window.db, 'tributes');
+                            window.push(tributeRef, newTribute);
+                            console.log('☁️ Saved to Firebase: ' + name);
+                            setConnectionStatus('connected', '✓ Cloud connected');
+                        } catch (err) {
+                            console.log('Firebase save error:', err);
+                            setConnectionStatus('offline', '⚠️ Cloud disconnected');
+                        }
+                    }
+
+                    currentPage = 1;
+                    renderTributes(currentPage);
+
+                    form.reset();
+                    formStatus.innerHTML = '<span style="color: var(--gold);">✅ Thank you! Your tribute has been saved.</span>';
+
+                    setTimeout(function() {
+                        formStatus.innerHTML = '';
+                    }, 5000);
+                });
+            }
+
+            // ====== INIT ======
+            if (!loadFromLocalStorage()) {
+                loadDefaults(false);
+            }
+
+            renderTributes(1);
+
+            // Check for Firebase
+            let attempts = 0;
+            const maxAttempts = 15;
+            const checkFirebase = setInterval(function() {
+                attempts++;
+                if (typeof window.db !== 'undefined') {
+                    clearInterval(checkFirebase);
+                    console.log('🔥 Firebase detected, loading tributes...');
+                    loadFromFirebase();
+                } else if (attempts >= maxAttempts) {
+                    clearInterval(checkFirebase);
+                    console.log('⚠️ Firebase not detected, using localStorage only');
+                    setConnectionStatus('offline', '⚠️ Cloud not available');
+                }
+            }, 500);
+
+            console.log('✅ Tributes page ready with ' + allTributes.length + ' tributes');
+        });
+    </script>
+
+</body>
+</html>

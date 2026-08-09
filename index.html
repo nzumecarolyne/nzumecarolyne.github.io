@@ -1,0 +1,2075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>In Loving Memory – Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        /* ====== RESET & BASE ====== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --gold: #c9a84c;
+            --gold-light: #e8d5a3;
+            --black: #0a0a0a;
+            --dark: #141414;
+            --white: #f5f5f5;
+            --gray: #aaaaaa;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+        }
+        body { font-family: var(--font-sans); background-color: var(--black); color: var(--white); overflow-x: hidden; }
+        a { color: var(--gold); text-decoration: none; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+        .section { padding: 4rem 0; }
+        .gold { color: var(--gold); }
+
+        /* ====== NAVIGATION ====== */
+                /* ====== NAVIGATION WITH LOGO ====== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--white);
+            transition: opacity 0.3s ease;
+        }
+        .nav-brand:hover { opacity: 0.8; }
+
+        .nav-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+            display: block;
+            flex-shrink: 0;
+        }
+
+        .brand-text { color: var(--white); }
+        .brand-gold { color: var(--gold); }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 1.8rem;
+        }
+        .nav-link {
+            color: var(--white);
+            font-weight: 400;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 0.4rem 0;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after,
+        .nav-link.active::after { width: 100%; }
+        .nav-link.active { color: var(--gold); }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+        .hamburger-line {
+            width: 28px;
+            height: 2px;
+            background: var(--white);
+            transition: all 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle { display: flex; }
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                gap: 0.5rem;
+                background: var(--dark);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                padding: 1.5rem 2rem;
+                border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+            }
+            .nav-menu.open { display: flex; }
+            .nav-logo { width: 32px; height: 32px; }
+            .brand-text { font-size: 1rem; }
+            .nav-brand { gap: 8px; }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container { padding: 0.6rem 1rem; }
+            .nav-logo { width: 28px; height: 28px; }
+            .brand-text { font-size: 0.85rem; }
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .nav-brand { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 700; color: var(--white); }
+        .brand-gold { color: var(--gold); margin-right: 4px; }
+        .nav-menu { display: flex; list-style: none; gap: 1.8rem; }
+        .nav-link {
+            color: var(--white);
+            font-weight: 400;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 0.4rem 0;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+        .nav-link.active { color: var(--gold); }
+        .nav-toggle { display: none; flex-direction: column; gap: 5px; background: transparent; border: none; cursor: pointer; padding: 5px; }
+        .hamburger-line { width: 28px; height: 2px; background: var(--white); transition: all 0.3s; }
+
+                      /* ====== HERO WITH SLIDESHOW - FIXED ====== */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        /* Optional subtle zoom - barely noticeable */
+        .hero-slide.active.zooming {
+            animation: subtleZoom 10s ease-in-out forwards;
+        }
+
+        @keyframes subtleZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            padding: 2rem;
+            width: 100%;
+        }
+
+        .hero-inner {
+            animation: fadeUp 1.2s ease forwards;
+        }
+
+        .hero-gold-line {
+            display: block;
+            width: 80px;
+            height: 2px;
+            background: var(--gold);
+            margin: 0 auto 1.5rem;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            color: var(--gold-light);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-title {
+            font-family: var(--font-serif);
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+            color: var(--white);
+            text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .hero-dates {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .hero-quote {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--gold-light);
+            margin-bottom: 2rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: var(--black);
+            padding: 0.8rem 2.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        .btn-gold:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(201, 168, 76, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            padding: 0.8rem 2.2rem;
+            border-radius: 50px;
+            font-weight: 500;
+            border: 1.5px solid var(--gold);
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            text-decoration: none;
+        }
+        .btn-outline:hover {
+            background: var(--gold);
+            color: var(--black);
+            transform: translateY(-2px);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--gray);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+            margin-top: 8px;
+            animation: scrollDown 2s infinite;
+        }
+        @keyframes scrollDown {
+            0% { opacity: 0; transform: scaleY(0); }
+            50% { opacity: 1; transform: scaleY(1); }
+            100% { opacity: 0; transform: scaleY(0); }
+        }
+
+        @keyframes fadeUp {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ====== MOBILE RESPONSIVE ====== */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 650px;
+                height: 100vh;
+                padding-top: 60px;
+            }
+            .hero-content {
+                padding: 1.5rem 1rem;
+            }
+            .hero-title {
+                font-size: 2.8rem;
+                line-height: 1.2;
+            }
+            .hero-subtitle {
+                font-size: 1rem;
+                letter-spacing: 3px;
+            }
+            .hero-dates {
+                font-size: 1rem;
+                margin-bottom: 0.8rem;
+            }
+            .hero-quote {
+                font-size: 1.1rem;
+                margin-bottom: 1.5rem;
+            }
+            .hero-gold-line {
+                width: 60px;
+                margin-bottom: 1rem;
+            }
+            .hero-actions {
+                gap: 1rem;
+            }
+            .btn-gold, .btn-outline {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.85rem;
+            }
+            .scroll-indicator {
+                bottom: 1.5rem;
+                font-size: 0.6rem;
+            }
+            .scroll-line {
+                height: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                min-height: 600px;
+                padding-top: 50px;
+            }
+            .hero-content {
+                padding: 1rem 0.8rem;
+            }
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            .hero-subtitle {
+                font-size: 0.85rem;
+                letter-spacing: 2px;
+            }
+            .hero-quote {
+                font-size: 0.95rem;
+                margin-bottom: 1.2rem;
+            }
+            .hero-dates {
+                font-size: 0.9rem;
+            }
+            .hero-gold-line {
+                width: 50px;
+            }
+            .btn-gold, .btn-outline {
+                padding: 0.5rem 1.2rem;
+                font-size: 0.8rem;
+                width: 100%;
+                justify-content: center;
+            }
+            .hero-actions {
+                flex-direction: column;
+                gap: 0.6rem;
+                width: 100%;
+                max-width: 280px;
+                margin: 0 auto;
+            }
+            .scroll-indicator {
+                bottom: 1rem;
+                font-size: 0.5rem;
+            }
+            .scroll-line {
+                height: 25px;
+            }
+        }
+
+                      /* ====== HERO SLIDES - HIGH OPACITY ====== */
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 1; /* Full opacity */
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        /* Make overlay lighter so images show through more */
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.25); /* Changed from 0.5 to 0.25 */
+            z-index: 1;
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: var(--black);
+            padding: 0.8rem 2.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        .btn-gold:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(201, 168, 76, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            padding: 0.8rem 2.2rem;
+            border-radius: 50px;
+            font-weight: 500;
+            border: 1.5px solid var(--gold);
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            text-decoration: none;
+        }
+        .btn-outline:hover {
+            background: var(--gold);
+            color: var(--black);
+            transform: translateY(-2px);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--gray);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+            margin-top: 8px;
+            animation: scrollDown 2s infinite;
+        }
+        @keyframes scrollDown {
+            0% { opacity: 0; transform: scaleY(0); }
+            50% { opacity: 1; transform: scaleY(1); }
+            100% { opacity: 0; transform: scaleY(0); }
+        }
+
+        @keyframes fadeUp {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ====== MOBILE RESPONSIVE ====== */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 650px;
+                height: 100vh;
+                padding-top: 60px;
+            }
+            .hero-content {
+                padding: 1.5rem 1rem;
+            }
+            .hero-title {
+                font-size: 2.8rem;
+                line-height: 1.2;
+            }
+            .hero-subtitle {
+                font-size: 1rem;
+                letter-spacing: 3px;
+            }
+            .hero-dates {
+                font-size: 1rem;
+                margin-bottom: 0.8rem;
+            }
+            .hero-quote {
+                font-size: 1.1rem;
+                margin-bottom: 1.5rem;
+            }
+            .hero-gold-line {
+                width: 60px;
+                margin-bottom: 1rem;
+            }
+            .hero-actions {
+                gap: 1rem;
+            }
+            .btn-gold, .btn-outline {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.85rem;
+            }
+            .scroll-indicator {
+                bottom: 1.5rem;
+                font-size: 0.6rem;
+            }
+            .scroll-line {
+                height: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                min-height: 600px;
+                padding-top: 50px;
+            }
+            .hero-content {
+                padding: 1rem 0.8rem;
+            }
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            .hero-subtitle {
+                font-size: 0.85rem;
+                letter-spacing: 2px;
+            }
+            .hero-quote {
+                font-size: 0.95rem;
+                margin-bottom: 1.2rem;
+            }
+            .hero-dates {
+                font-size: 0.9rem;
+            }
+            .hero-gold-line {
+                width: 50px;
+            }
+            .btn-gold, .btn-outline {
+                padding: 0.5rem 1.2rem;
+                font-size: 0.8rem;
+                width: 100%;
+                justify-content: center;
+            }
+            .hero-actions {
+                flex-direction: column;
+                gap: 0.6rem;
+                width: 100%;
+                max-width: 280px;
+                margin: 0 auto;
+            }
+            .scroll-indicator {
+                bottom: 1rem;
+                font-size: 0.5rem;
+            }
+            .scroll-line {
+                height: 25px;
+            }
+        }
+        /* ====== PROFESSIONAL BUTTONS ====== */
+        .hero-actions {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #c9a84c 0%, #b8922e 100%);
+            color: var(--black);
+            padding: 0.9rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(201, 168, 76, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-gold::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .btn-gold:hover::before {
+            left: 100%;
+        }
+
+        .btn-gold:hover {
+            background: linear-gradient(135deg, #e8d5a3 0%, #c9a84c 100%);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 35px rgba(201, 168, 76, 0.4);
+        }
+
+        .btn-gold:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .btn-gold i {
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-gold:hover i {
+            transform: translateX(3px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            padding: 0.9rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            border: 1.5px solid var(--gold);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            font-size: 0.95rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(4px);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .btn-outline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: var(--gold);
+            transition: width 0.4s ease;
+            z-index: -1;
+        }
+
+        .btn-outline:hover::before {
+            width: 100%;
+        }
+
+        .btn-outline:hover {
+            color: var(--black);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 35px rgba(201, 168, 76, 0.25);
+            border-color: var(--gold);
+        }
+
+        .btn-outline:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .btn-outline i {
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-outline:hover i {
+            transform: translateX(3px);
+        }
+
+        /* ====== RESPONSIVE BUTTONS ====== */
+        @media (max-width: 768px) {
+            .btn-gold, .btn-outline {
+                padding: 0.7rem 1.8rem;
+                font-size: 0.85rem;
+            }
+            .hero-actions {
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .btn-gold, .btn-outline {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.8rem;
+                width: 100%;
+                justify-content: center;
+            }
+            .hero-actions {
+                flex-direction: column;
+                gap: 0.6rem;
+                width: 100%;
+                max-width: 280px;
+                margin: 0 auto;
+            }
+        }
+
+        /* ====== SCROLL INDICATOR ====== */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 4.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--gray);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+            margin-top: 8px;
+            animation: scrollDown 2s infinite;
+        }
+        @keyframes scrollDown {
+            0% { opacity: 0; transform: scaleY(0); }
+            50% { opacity: 1; transform: scaleY(1); }
+            100% { opacity: 0; transform: scaleY(0); }
+        }
+
+        /* ====== HORIZONTAL CANDLES BAR ====== */
+        .hero-candles {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            padding: 0.8rem 2.5rem;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            border: 1px solid rgba(201, 168, 76, 0.2);
+            width: auto;
+            max-width: 90%;
+            flex-wrap: wrap;
+        }
+        .hero-candle {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.1rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+            padding: 0.3rem 0.5rem;
+            min-width: 60px;
+        }
+        .hero-candle:hover { transform: scale(1.1); }
+        .hero-candle .candle-body {
+            font-size: 2rem;
+            color: #e8d5a3;
+            filter: drop-shadow(0 0 10px rgba(201, 168, 76, 0.3));
+            line-height: 1;
+        }
+        .hero-candle .flame {
+            font-size: 1.2rem;
+            color: #ff6b00;
+            animation: flicker 1.5s infinite alternate;
+            margin-bottom: -0.3rem;
+            display: block;
+            text-shadow: 0 0 20px rgba(255, 107, 0, 0.5);
+        }
+        .hero-candle .flame2 { animation-delay: 0.5s; }
+        .hero-candle .flame3 { animation-delay: 1s; }
+        @keyframes flicker {
+            0% { opacity: 0.6; transform: scale(0.9) rotate(-3deg); }
+            50% { opacity: 1; transform: scale(1.1) rotate(2deg); }
+            100% { opacity: 0.8; transform: scale(1) rotate(-1deg); }
+        }
+        .hero-candle .candle-label {
+            font-size: 0.5rem;
+            color: var(--gray);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            text-align: center;
+            line-height: 1.2;
+        }
+        .hero-candle-divider {
+            width: 1px;
+            height: 35px;
+            background: linear-gradient(to bottom, transparent, rgba(201, 168, 76, 0.3), transparent);
+        }
+        .hero-candle-count {
+            text-align: center;
+            padding: 0 0.5rem;
+            border-left: 1px solid rgba(201, 168, 76, 0.1);
+            padding-left: 1rem;
+        }
+        .hero-candle-count .number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--gold);
+            display: block;
+            font-family: var(--font-serif);
+        }
+        .hero-candle-count .label {
+            font-size: 0.5rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .hero-candle-btn {
+            background: var(--gold);
+            color: var(--black);
+            border: none;
+            padding: 0.4rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            white-space: nowrap;
+        }
+        .hero-candle-btn:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(201, 168, 76, 0.3);
+        }
+
+        /* ====== MUSIC PLAYER ====== */
+        .music-player-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(201, 168, 76, 0.2);
+            padding: 0.7rem 1.5rem;
+            z-index: 999;
+        }
+        .music-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        .music-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+        .music-icon {
+            color: var(--gold);
+            font-size: 1.2rem;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 0.5; transform: scale(0.95); }
+            50% { opacity: 1; transform: scale(1.05); }
+            100% { opacity: 0.5; transform: scale(0.95); }
+        }
+        .music-title { font-weight: 500; color: var(--white); }
+        .music-artist { color: var(--gray); font-size: 0.8rem; }
+        .music-status {
+            font-size: 0.65rem;
+            color: var(--gray);
+            letter-spacing: 0.5px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.05);
+        }
+        .music-status.playing {
+            color: var(--gold);
+            background: rgba(201, 168, 76, 0.1);
+        }
+        .music-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .music-btn {
+            background: transparent;
+            border: none;
+            color: var(--white);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .music-btn:hover {
+            color: var(--gold);
+            background: rgba(201, 168, 76, 0.1);
+        }
+        .music-btn.playing { color: var(--gold); }
+        .music-volume {
+            width: 80px;
+            accent-color: var(--gold);
+            cursor: pointer;
+        }
+        .volume-icon { color: var(--gray); font-size: 0.9rem; }
+
+        /* ====== HOME GLIMPSE ====== */
+        .glimpse-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .glimpse-card {
+            background: var(--dark);
+            padding: 2rem 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(201, 168, 76, 0.1);
+        }
+        .glimpse-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+        }
+        .glimpse-icon { font-size: 2.5rem; color: var(--gold); margin-bottom: 1rem; }
+        .glimpse-card h3 { font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .link-gold { color: var(--gold); font-weight: 500; display: inline-block; margin-top: 1rem; }
+        .link-gold:hover { color: var(--gold-light); }
+
+        /* ====== TRIBUTE PREVIEW ====== */
+        .home-tribute-preview { background: #0f0f0f; }
+        .section-header { text-align: center; margin-bottom: 3rem; }
+        .section-header.light * { color: var(--white); }
+        .section-tag {
+            display: inline-block;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+        }
+        .section-tag.gold { color: var(--gold); }
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 2.8rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+        .section-divider {
+            width: 60px;
+            height: 2px;
+            background: var(--gold);
+            margin: 0.8rem auto 0;
+        }
+        .section-divider.gold { background: var(--gold); }
+        .tribute-preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        .tribute-preview-item {
+            background: rgba(255,255,255,0.04);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--gold);
+        }
+        .tribute-preview-text { font-style: italic; font-size: 1rem; margin-bottom: 0.5rem; }
+        .tribute-preview-name { color: var(--gray); font-size: 0.85rem; }
+
+        /* ====== SERVICE PREVIEW ====== */
+        .service-preview {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .service-detail { display: flex; gap: 12px; margin: 0.8rem 0; align-items: center; }
+        .service-detail i { width: 20px; }
+        .text-center { text-align: center; }
+
+                /* ====== FOOTER ====== */
+        .footer {
+            background: var(--dark);
+            padding: 2.5rem 0;
+            border-top: 1px solid rgba(201, 168, 76, 0.1);
+            margin-top: 2rem;
+        }
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .footer-brand {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .footer-brand .footer-logo {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+        }
+        .footer-sub {
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: 0.2rem;
+        }
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            color: var(--gray);
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+        .footer-copy {
+            font-size: 0.8rem;
+            color: var(--gray);
+            text-align: center;
+            width: 100%;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-brand {
+                font-size: 1rem;
+            }
+            .footer-brand .footer-logo {
+                width: 28px;
+                height: 28px;
+            }
+        }
+
+        /* ====== MAP SECTION ====== */
+        .map-section {
+            margin: 2rem 0;
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--dark-card);
+            border: 1px solid rgba(201, 168, 76, 0.06);
+        }
+
+        .map-section .map-header {
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.06);
+        }
+
+        .map-section .map-header i {
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+
+        .map-section .map-header h4 {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            color: var(--white);
+        }
+
+        .map-section .map-footer {
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(201, 168, 76, 0.05);
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .map-section .map-footer .map-links {
+            display: flex;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .map-section .map-footer .map-links a {
+            color: var(--gray);
+            font-size: 0.8rem;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .map-section .map-footer .map-links a:hover {
+            color: var(--gold);
+        }
+
+        .map-section .map-footer .map-credit {
+            color: var(--gray);
+            font-size: 0.7rem;
+        }
+
+        .map-section .map-footer .map-credit i {
+            color: var(--gold);
+            margin-right: 0.2rem;
+        }
+
+        /* ====== HERO ====== */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            transform: scale(1.05);
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            padding: 2rem;
+            width: 100%;
+        }
+
+        .hero-inner {
+            animation: fadeUp 1.2s ease forwards;
+        }
+
+        .hero-gold-line {
+            display: block;
+            width: 80px;
+            height: 2px;
+            background: var(--gold);
+            margin: 0 auto 1.5rem;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            color: var(--gold-light);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-title {
+            font-family: var(--font-serif);
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+            color: var(--white);
+            text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .hero-dates {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .hero-quote {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--gold-light);
+            margin-bottom: 2rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: var(--black);
+            padding: 0.8rem 2.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        .btn-gold:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(201, 168, 76, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            padding: 0.8rem 2.2rem;
+            border-radius: 50px;
+            font-weight: 500;
+            border: 1.5px solid var(--gold);
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            text-decoration: none;
+        }
+        .btn-outline:hover {
+            background: var(--gold);
+            color: var(--black);
+            transform: translateY(-2px);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--gray);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+            margin-top: 8px;
+            animation: scrollDown 2s infinite;
+        }
+        @keyframes scrollDown {
+            0% { opacity: 0; transform: scaleY(0); }
+            50% { opacity: 1; transform: scaleY(1); }
+            100% { opacity: 0; transform: scaleY(0); }
+        }
+
+        @keyframes fadeUp {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ====== MOBILE RESPONSIVE ====== */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 650px;
+                height: 100vh;
+                padding-top: 60px;
+            }
+            .hero-content {
+                padding: 1.5rem 1rem;
+            }
+            .hero-title {
+                font-size: 2.8rem;
+                line-height: 1.2;
+            }
+            .hero-subtitle {
+                font-size: 1rem;
+                letter-spacing: 3px;
+            }
+            .hero-dates {
+                font-size: 1rem;
+                margin-bottom: 0.8rem;
+            }
+            .hero-quote {
+                font-size: 1.1rem;
+                margin-bottom: 1.5rem;
+            }
+            .hero-gold-line {
+                width: 60px;
+                margin-bottom: 1rem;
+            }
+            .hero-actions {
+                gap: 1rem;
+            }
+            .btn-gold, .btn-outline {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.85rem;
+            }
+            .scroll-indicator {
+                bottom: 1.5rem;
+                font-size: 0.6rem;
+            }
+            .scroll-line {
+                height: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                min-height: 600px;
+                padding-top: 50px;
+            }
+            .hero-content {
+                padding: 1rem 0.8rem;
+            }
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            .hero-subtitle {
+                font-size: 0.85rem;
+                letter-spacing: 2px;
+            }
+            .hero-quote {
+                font-size: 0.95rem;
+                margin-bottom: 1.2rem;
+            }
+            .hero-dates {
+                font-size: 0.9rem;
+            }
+            .hero-gold-line {
+                width: 50px;
+            }
+            .btn-gold, .btn-outline {
+                padding: 0.5rem 1.2rem;
+                font-size: 0.8rem;
+                width: 100%;
+                justify-content: center;
+            }
+            .hero-actions {
+                flex-direction: column;
+                gap: 0.6rem;
+                width: 100%;
+                max-width: 280px;
+                margin: 0 auto;
+            }
+            .scroll-indicator {
+                bottom: 1rem;
+                font-size: 0.5rem;
+            }
+            .scroll-line {
+                height: 25px;
+            }
+        }
+
+        /* ====== RESPONSIVE ====== */
+        @media (max-width: 768px) {
+            .nav-toggle { display: flex; }
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                gap: 0.5rem;
+                background: var(--dark);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                padding: 1.5rem 2rem;
+                border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+            }
+            .nav-menu.open { display: flex; }
+            .hero-content-wrapper { padding: 1rem; gap: 1rem; }
+            .hero-candles { gap: 1rem; padding: 0.6rem 1.2rem; border-radius: 30px; max-width: 100%; }
+            .hero-title { font-size: 2.8rem; }
+            .hero-candle .candle-body { font-size: 1.6rem; }
+            .hero-candle .flame { font-size: 1rem; }
+            .hero-candle .candle-label { font-size: 0.4rem; }
+            .hero-candle-divider { height: 25px; }
+            .hero-candle-count .number { font-size: 1.4rem; }
+            .hero-actions { gap: 1rem; }
+            .scroll-indicator { bottom: 3.5rem; }
+            .music-container { flex-direction: column; align-items: stretch; gap: 0.5rem; }
+            .music-controls { justify-content: center; }
+            .music-info { justify-content: center; }
+            .service-preview { grid-template-columns: 1fr; gap: 2rem; }
+        }
+        @media (max-width: 480px) {
+            .hero-title { font-size: 2.2rem; }
+            .hero-subtitle { font-size: 0.9rem; letter-spacing: 2px; }
+            .hero-quote { font-size: 1rem; }
+            .hero-candles { gap: 0.6rem; padding: 0.4rem 0.8rem; border-radius: 20px; }
+            .hero-candle { min-width: 40px; }
+            .hero-candle .candle-body { font-size: 1.2rem; }
+            .hero-candle .flame { font-size: 0.8rem; }
+            .hero-candle .candle-label { font-size: 0.35rem; }
+            .hero-candle-divider { height: 20px; }
+            .hero-candle-count .number { font-size: 1.2rem; }
+            .hero-candle-btn { font-size: 0.5rem; padding: 0.3rem 0.8rem; }
+            .music-volume { width: 60px; }
+        }
+    </style>
+</head>
+<body>
+
+       <!-- ====== NAVIGATION ====== -->
+    <nav class="navbar" id="mainNav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <img src="images/60827b0fa88b45ff8794f38ddfd583ca.png" alt="In Loving Memory" class="nav-logo" />
+                <span class="brand-text">In Loving Memory</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">Life Story</a></li>
+                <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+                <li><a href="tributes.html" class="nav-link">Tributes</a></li>
+                <li><a href="candles.html" class="nav-link">Candles</a></li>
+                <li><a href="service.html" class="nav-link">Funeral Service</a></li>
+            </ul>
+        </div>
+    </nav>
+
+        <!-- ====== HERO ====== -->
+    <header class="hero" id="hero">
+        <div class="hero-slideshow" id="heroSlideshow">
+            <div class="hero-slide" style="background-image: url('images/IMG-20260804-WA0078 - Copy.jpg');"></div>
+            <div class="hero-slide" style="background-image: url('images/IMG-20260804-WA0096 - Copy.jpg');"></div>
+            <div class="hero-slide" style="background-image: url('images/IMG-20260804-WA0289 - Copy.jpg');"></div>
+        </div>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <div class="hero-inner">
+                <span class="hero-gold-line"></span>
+                <p class="hero-subtitle">In Loving Memory of</p>
+                <h1 class="hero-title">Carolyne Nzume</h1>
+                <p class="hero-dates">1961 – 2026</p>
+                <p class="hero-quote">"A life beautifully lived, a heart deeply loved."</p>
+                <div class="hero-actions">
+                
+                    <a href="about.html" class="btn-gold"><i class="fas fa-book-open"></i> Read Her Story</a>
+                    <a href="tributes.html" class="btn-outline"><i class="fas fa-pen"></i> Share a Tribute</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <span class="scroll-text">Scroll</span>
+            <span class="scroll-line"></span>
+        </div>
+    </header>
+
+            <!-- ====== HORIZONTAL CANDLES BAR ====== -->
+            <div class="hero-candles" id="heroCandles">
+                <!-- Candle 1 -->
+                <div class="hero-candle">
+                    <span class="flame">🔥</span>
+                    <span class="candle-body">🕯️</span>
+                    <span class="candle-label">Light a Candle</span>
+                </div>
+
+                <div class="hero-candle-divider"></div>
+
+                <!-- Candle 2 -->
+                <div class="hero-candle">
+                    <span class="flame flame2">🔥</span>
+                    <span class="candle-body">🕯️</span>
+                    <span class="candle-label">In Loving Memory</span>
+                </div>
+
+                <div class="hero-candle-divider"></div>
+
+                <!-- Candle 3 -->
+                <div class="hero-candle">
+                    <span class="flame flame3">🔥</span>
+                    <span class="candle-body">🕯️</span>
+                    <span class="candle-label">Pray for Her Soul</span>
+                </div>
+
+                <div class="hero-candle-divider"></div>
+
+                <!-- Candle Count -->
+                <div class="hero-candle-count">
+                    <span class="number" id="heroCandleCount">0</span>
+                    <span class="label">Candles Lit</span>
+                </div>
+
+                <!-- Light Button -->
+                <a href="candles.html" class="hero-candle-btn">
+                    <i class="fas fa-fire"></i> Light One
+                </a>
+            </div>
+        </div>
+
+       
+    </header>
+
+    
+
+              <!-- ====== MUSIC PLAYER ====== -->
+    <section id="music-section" class="music-player-bar">
+        <div class="music-container">
+            <div class="music-info">
+                <i class="fas fa-music music-icon" id="musicStatusIcon"></i>
+                <span class="music-title">Memorial Hymn</span>
+                <span class="music-artist">— Eternal Peace</span>
+                <span class="music-status" id="musicStatus">● Playing</span>
+            </div>
+            <div class="music-controls">
+                <button class="music-btn" id="musicPlayBtn" onclick="toggleMusic()">
+                    <i class="fas fa-pause" id="musicPlayIcon"></i>
+                </button>
+                <input type="range" class="music-volume" id="musicVolume" min="0" max="1" step="0.01" value="0.5" oninput="changeVolume(this.value)" />
+                <span class="volume-icon"><i class="fas fa-volume-up"></i></span>
+            </div>
+        </div>
+         <audio id="bgMusic" loop preload="auto">
+                <source src="music/Best Christian Hymns Compilation  Old & Traditional Church Songs.mp3" type="audio/mpeg" />
+            </audio>
+    </section>
+
+    <!-- ====== MAIN CONTENT ====== -->
+    <main>
+        <!-- Glimpse -->
+        <section class="section home-glimpse">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Remembering</span>
+                    <h2 class="section-title">A Glimpse of Her Life</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="glimpse-grid">
+                    <div class="glimpse-card">
+                        <div class="glimpse-icon"><i class="fas fa-book-open"></i></div>
+                        <h3>Her Story</h3>
+                        <p>Carolyne Nzume was a woman of grace, strength, and unwavering faith.</p>
+                        <a href="about.html" class="link-gold">Read more →</a>
+                    </div>
+                    <div class="glimpse-card">
+                        <div class="glimpse-icon"><i class="fas fa-images"></i></div>
+                        <h3>Photo Gallery</h3>
+                        <p>Explore a collection of cherished memories — moments that tell the story of a beautiful life.</p>
+                        <a href="gallery.html" class="link-gold">View gallery →</a>
+                    </div>
+                    <div class="glimpse-card">
+                        <div class="glimpse-icon"><i class="fas fa-heart"></i></div>
+                        <h3>Light a Candle</h3>
+                        <p>Join us in honoring her memory by lighting a virtual candle. Each flame represents a prayer.</p>
+                        <a href="candles.html" class="link-gold">Light a candle →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tribute Preview -->
+        <section class="section home-tribute-preview">
+            <div class="container">
+                <div class="section-header light">
+                    <span class="section-tag gold">Community</span>
+                    <h2 class="section-title">Words of Love</h2>
+                    <div class="section-divider gold"></div>
+                </div>
+                <div class="tribute-preview-grid" id="tributePreview">
+                    <div class="tribute-preview-item">
+                        <p class="tribute-preview-text">"She was the light of our family. Forever missed."</p>
+                        <span class="tribute-preview-name">— Family</span>
+                    </div>
+                    <div class="tribute-preview-item">
+                        <p class="tribute-preview-text">"A woman of great faith and kindness. Rest in peace."</p>
+                        <span class="tribute-preview-name">— Friend</span>
+                    </div>
+                    <div class="tribute-preview-item">
+                        <p class="tribute-preview-text">"Her smile could brighten any room. We love you, Carolyne."</p>
+                        <span class="tribute-preview-name">— Community</span>
+                    </div>
+                </div>
+                <div class="text-center" style="margin-top: 2.5rem;">
+                    <a href="tributes.html" class="btn-gold">Share Your Tribute</a>
+                </div>
+            </div>
+        </section>
+
+ <!-- Service Preview -->
+        <section class="section home-service">
+            <div class="container">
+                <div class="service-preview">
+                    <div class="service-preview-text">
+                        <span class="section-tag">Funeral Service</span>
+                        <h2 class="section-title">Celebration of Life</h2>
+                        <p>We invite you to join us in celebrating the life of Carolyne Nzume. The service will be held at:</p>
+                        <div class="service-detail"><i class="fas fa-calendar-alt gold"></i><span>Saturday, 22nd August 2026 · 12:00 PM</span></div>
+                        <div class="service-detail"><i class="fas fa-map-pin gold"></i><span>PC Bonadikombo, Limbe</span></div>
+                        <a href="service.html" class="btn-outline" style="margin-top: 1.5rem; display: inline-block;">View full details →</a>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+         <!-- ====== MAP SECTION - WITH YOUR MAP IMAGE ====== -->
+<div class="map-section">
+    <div class="map-header">
+        <i class="fas fa-map-pin"></i>
+        <h4>Funeral Service Location</h4>
+    </div>
+    <a href="https://www.google.com/maps/place/4.056519,9.226257" target="_blank" style="display:block; position:relative; width:100%; height:300px; overflow:hidden; text-decoration:none; cursor:pointer;">
+        <!-- YOUR MAP IMAGE - Replace the src with your actual image path -->
+        <img 
+            src="images/qqqqqqqq.png" 
+            alt="Nzume Family Residence, Limbe" 
+            style="width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.4s ease;"
+            loading="lazy"
+        />
+        <!-- Overlay with gold gradient at bottom -->
+        <div style="position:absolute; bottom:0; left:0; right:0; padding:1.5rem 1.5rem 1rem; background:linear-gradient(transparent, rgba(0,0,0,0.7)); pointer-events:none;">
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+                <i class="fas fa-map-pin" style="color:var(--gold); font-size:1rem;"></i>
+                <span style="color:white; font-weight:500; font-family:var(--font-serif); font-size:1rem;">Nzume Family Residence, Limbe</span>
+            </div>
+            <span style="color:rgba(255,255,255,0.5); font-size:0.7rem; display:block; margin-top:0.1rem;">
+                <i class="fas fa-external-link-alt" style="font-size:0.6rem; margin-right:0.3rem;"></i> Click to open in Google Maps
+            </span>
+        </div>
+        <!-- Hover zoom effect -->
+        <div style="position:absolute; top:0; left:0; right:0; bottom:0; background:rgba(201,168,76,0.05); transition:background 0.4s; pointer-events:none;"></div>
+    </a>
+    <div class="map-footer">
+        <div class="map-links">
+            <a href="https://www.google.com/maps/dir/?api=1&destination=4.056519,9.226257" target="_blank"><i class="fas fa-directions"></i> Directions</a>
+            <a href="https://www.google.com/maps/place/4.056519,9.226257" target="_blank"><i class="fas fa-external-link-alt"></i> Open in Maps</a>
+        </div>
+        <span class="map-credit"><i class="fas fa-map-pin"></i> Nzume Family Residence, Limbe (4.056519, 9.226257)</span>
+    </div>
+</div>
+    </main>
+
+    <!-- ====== FOOTER ====== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="images/60827b0fa88b45ff8794f38ddfd583ca.png" alt="In Loving Memory" class="footer-logo" />
+                    <div>
+                        <span class="brand-gold">✦</span> In Loving Memory
+                        <p class="footer-sub">Carolyne Nzume · 1961 – 2026</p>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">Life Story</a>
+                    <a href="gallery.html">Gallery</a>
+                    <a href="tributes.html">Tributes</a>
+                    <a href="candles.html">Candles</a>
+                    <a href="service.html">Funeral Service</a>
+                </div>
+                <div class="footer-copy">&copy; 2026 · Built with <i class="fas fa-heart" style="color: #c9a84c;"></i> in loving memory</div>
+            </div>
+        </div>
+    </footer>
+
+    
+
+    
+       <!-- ====== SCRIPTS ====== -->
+    <script src="js/music.js"></script>    <!-- Your existing music script -->
+    
+        <!-- ====== SIMPLE MUSIC CONTROLS ====== -->
+    <script>
+        // Simple functions for music controls
+        function toggleMusic() {
+            var audio = document.getElementById('bgMusic');
+            var icon = document.getElementById('musicPlayIcon');
+            var status = document.getElementById('musicStatus');
+            
+            if (audio.paused) {
+                audio.play();
+                icon.className = 'fas fa-pause';
+                status.textContent = '● Playing';
+                status.className = 'music-status playing';
+                localStorage.setItem('musicState', 'playing');
+            } else {
+                audio.pause();
+                icon.className = 'fas fa-play';
+                status.textContent = '● Paused';
+                status.className = 'music-status';
+                localStorage.setItem('musicState', 'paused');
+            }
+        }
+
+        function changeVolume(val) {
+            var audio = document.getElementById('bgMusic');
+            audio.volume = parseFloat(val);
+            localStorage.setItem('musicVolume', val);
+            
+            var icon = document.querySelector('.volume-icon i');
+            if (val == 0) {
+                icon.className = 'fas fa-volume-mute';
+            } else if (val < 0.5) {
+                icon.className = 'fas fa-volume-down';
+            } else {
+                icon.className = 'fas fa-volume-up';
+            }
+        }
+
+        function scrollToMusic() {
+            document.getElementById('music-section').scrollIntoView({ behavior: 'smooth' });
+            var audio = document.getElementById('bgMusic');
+            if (audio.paused) {
+                toggleMusic();
+            }
+        }
+
+        // ====== RESTORE MUSIC STATE ON PAGE LOAD ======
+        document.addEventListener('DOMContentLoaded', function() {
+            var audio = document.getElementById('bgMusic');
+            var icon = document.getElementById('musicPlayIcon');
+            var status = document.getElementById('musicStatus');
+            
+            // Restore volume
+            var savedVolume = localStorage.getItem('musicVolume');
+            if (savedVolume !== null) {
+                audio.volume = parseFloat(savedVolume);
+                document.getElementById('musicVolume').value = savedVolume;
+            }
+            
+            // Restore time
+            var savedTime = localStorage.getItem('musicTime');
+            if (savedTime) {
+                audio.currentTime = parseFloat(savedTime);
+            }
+            
+            // Restore play state
+            var savedState = localStorage.getItem('musicState');
+            if (savedState === 'playing') {
+                audio.play().catch(function() {});
+                icon.className = 'fas fa-pause';
+                status.textContent = '● Playing';
+                status.className = 'music-status playing';
+            } else {
+                icon.className = 'fas fa-play';
+                status.textContent = '● Paused';
+                status.className = 'music-status';
+            }
+            
+            // Save time periodically
+            setInterval(function() {
+                if (!audio.paused) {
+                    localStorage.setItem('musicTime', audio.currentTime);
+                }
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
+
+
+    <!-- ====== SCRIPTS ====== -->
+    <script>
+        // ====== NAVIGATION TOGGLE ======
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.getElementById('navToggle');
+            const navMenu = document.getElementById('navMenu');
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', function() {
+                    navMenu.classList.toggle('open');
+                });
+                navMenu.querySelectorAll('.nav-link').forEach(function(link) {
+                    link.addEventListener('click', function() {
+                        navMenu.classList.remove('open');
+                    });
+                });
+            }
+
+                       // ====== HERO SLIDESHOW - 4 SECOND TRANSITIONS ======
+            
+            
+                       const slides = document.querySelectorAll('.hero-slide');
+            if (slides.length > 0) {
+                let currentIndex = 0;
+                let slideInterval;
+
+                function showSlide(index) {
+                    // Remove active class from all slides
+                    slides.forEach(function(slide) {
+                        slide.classList.remove('active', 'zooming');
+                    });
+
+                    // Add active class to new slide
+                    if (slides[index]) {
+                        slides[index].classList.add('active');
+                        // Add zooming class after a small delay
+                        setTimeout(function() {
+                            slides[index].classList.add('zooming');
+                        }, 500);
+                    }
+                }
+
+                function nextSlide() {
+                    currentIndex = (currentIndex + 1) % slides.length;
+                    showSlide(currentIndex);
+                }
+
+                function startSlideshow() {
+                    if (slideInterval) clearInterval(slideInterval);
+                    slideInterval = setInterval(nextSlide, 4000); // 4 seconds
+                }
+
+                function stopSlideshow() {
+                    if (slideInterval) {
+                        clearInterval(slideInterval);
+                        slideInterval = null;
+                    }
+                }
+
+                // Show first slide
+                showSlide(0);
+                setTimeout(startSlideshow, 1500);
+
+                const hero = document.getElementById('hero');
+                if (hero) {
+                    hero.addEventListener('mouseenter', stopSlideshow);
+                    hero.addEventListener('mouseleave', startSlideshow);
+                }
+            }
+            
+
+            // ====== MUSIC PLAYER ======
+            const audio = document.getElementById('bgMusic');
+            const playBtn = document.getElementById('musicPlayBtn');
+            const playIcon = document.getElementById('musicPlayIcon');
+            const volumeSlider = document.getElementById('musicVolume');
+            const musicStatus = document.getElementById('musicStatus');
+            const heroMusicBtn = document.getElementById('heroMusicBtn');
+
+            function updateUI() {
+                const isPlaying = !audio.paused;
+                if (isPlaying) {
+                    playIcon.className = 'fas fa-pause';
+                    playBtn.classList.add('playing');
+                    if (musicStatus) {
+                        musicStatus.textContent = '● Playing';
+                        musicStatus.className = 'music-status playing';
+                    }
+                } else {
+                    playIcon.className = 'fas fa-play';
+                    playBtn.classList.remove('playing');
+                    if (musicStatus) {
+                        musicStatus.textContent = '● Paused';
+                        musicStatus.className = 'music-status';
+                    }
+                }
+            }
+
+            function togglePlay() {
+                if (audio.paused) {
+                    audio.play().then(updateUI).catch(function() {});
+                } else {
+                    audio.pause();
+                    updateUI();
+                }
+            }
+
+            // Play button
+            if (playBtn) {
+                playBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    togglePlay();
+                });
+            }
+
+            // Volume
+            if (volumeSlider) {
+                volumeSlider.addEventListener('input', function() {
+                    audio.volume = parseFloat(this.value);
+                });
+            }
+
+            // Hero music button - scroll to player
+            if (heroMusicBtn) {
+                heroMusicBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.getElementById('music-section').scrollIntoView({ behavior: 'smooth' });
+                    if (audio.paused) {
+                        togglePlay();
+                    }
+                });
+            }
+
+            // Auto-play
+            audio.volume = 0.5;
+            audio.play().then(updateUI).catch(function() {
+                updateUI();
+                console.log('Auto-play blocked. Click play to start.');
+            });
+
+            audio.addEventListener('play', updateUI);
+            audio.addEventListener('pause', updateUI);
+
+            // ====== CANDLE COUNT FROM FIREBASE ======
+            // Simple counter for demo - increments when "Light One" is clicked
+            let candleCount = 0;
+            const candleCountEl = document.getElementById('heroCandleCount');
+            const lightBtn = document.querySelector('.hero-candle-btn');
+
+            if (lightBtn) {
+                lightBtn.addEventListener('click', function(e) {
+                    // Don't prevent default - let it navigate to candles.html
+                    // But we'll increment the count for demo
+                    candleCount++;
+                    if (candleCountEl) {
+                        candleCountEl.textContent = candleCount;
+                    }
+                    localStorage.setItem('candleCount', candleCount);
+                });
+            }
+
+            // Load saved count
+            const savedCount = localStorage.getItem('candleCount');
+            if (savedCount !== null) {
+                candleCount = parseInt(savedCount);
+                if (candleCountEl) {
+                    candleCountEl.textContent = candleCount;
+                }
+            }
+
+            console.log('🎵 Music player initialized');
+        });
+    </script>
+
+</body>
+</html>

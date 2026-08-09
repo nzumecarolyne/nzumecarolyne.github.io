@@ -1,0 +1,2186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery – In Loving Memory</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        /* ====== RESET & BASE ====== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --gold: #c9a84c;
+            --gold-light: #e8d5a3;
+            --black: #0a0a0a;
+            --dark: #141414;
+            --white: #f5f5f5;
+            --gray: #aaaaaa;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+        }
+        body { font-family: var(--font-sans); background-color: var(--black); color: var(--white); overflow-x: hidden; }
+        a { color: var(--gold); text-decoration: none; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+        .section { padding: 4rem 0; }
+        .gold { color: var(--gold); }
+
+               /* ====== NAVIGATION WITH LOGO IMAGE ====== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* ====== BRAND WITH IMAGE ====== */
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--white);
+            transition: opacity 0.3s ease;
+        }
+        .nav-brand:hover {
+            opacity: 0.8;
+        }
+
+        .nav-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+            display: block;
+            flex-shrink: 0;
+        }
+
+        .brand-text {
+            color: var(--white);
+        }
+
+        .brand-gold {
+            color: var(--gold);
+        }
+
+        /* ====== NAVIGATION LINKS ====== */
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 1.8rem;
+        }
+        .nav-link {
+            color: var(--white);
+            font-weight: 400;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 0.4rem 0;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        .nav-link.active {
+            color: var(--gold);
+        }
+
+        /* ====== HAMBURGER MENU ====== */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+        .hamburger-line {
+            width: 28px;
+            height: 2px;
+            background: var(--white);
+            transition: all 0.3s;
+        }
+
+        /* ====== RESPONSIVE ====== */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: flex;
+            }
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                gap: 0.5rem;
+                background: var(--dark);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                padding: 1.5rem 2rem;
+                border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+            }
+            .nav-menu.open {
+                display: flex;
+            }
+            .nav-logo {
+                width: 32px;
+                height: 32px;
+            }
+            .brand-text {
+                font-size: 1rem;
+            }
+            .nav-brand {
+                gap: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0.6rem 1rem;
+            }
+            .nav-logo {
+                width: 28px;
+                height: 28px;
+            }
+            .brand-text {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* ====== PAGE HEADER ====== */
+        .page-header-section {
+            padding-top: 7rem;
+            text-align: center;
+            position: relative;
+        }
+        .page-header-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+        }
+        .page-header h1 {
+            font-family: var(--font-serif);
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--white) 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .page-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        /* ====== SECTION TABS ====== */
+        .gallery-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .gallery-tab {
+            background: transparent;
+            border: 1px solid rgba(201, 168, 76, 0.2);
+            color: var(--gray);
+            padding: 0.7rem 2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            font-family: var(--font-sans);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .gallery-tab:hover {
+            border-color: var(--gold);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .gallery-tab.active {
+            background: var(--gold);
+            color: var(--black);
+            border-color: var(--gold);
+            box-shadow: 0 8px 25px rgba(201, 168, 76, 0.3);
+        }
+
+        .gallery-tab .tab-count {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0 0.6rem;
+            border-radius: 10px;
+            font-size: 0.65rem;
+            margin-left: 0.2rem;
+        }
+
+        .gallery-tab.active .tab-count {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        /* ====== GALLERY GRID ====== */
+        .gallery-section {
+            padding: 2rem 0 4rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 4/3;
+            background: var(--dark);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+            border: 1px solid rgba(201, 168, 76, 0.05);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            border-color: rgba(201, 168, 76, 0.2);
+        }
+
+        .gallery-item img,
+        .gallery-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover img,
+        .gallery-item:hover video {
+            transform: scale(1.08);
+        }
+
+        .gallery-item .item-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 1.2rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+            color: var(--white);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 2;
+        }
+
+        .gallery-item:hover .item-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item .item-overlay .item-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            font-family: var(--font-serif);
+        }
+
+        .gallery-item .item-overlay .item-subtitle {
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
+
+        .gallery-item .item-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.6rem;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            border: 1px solid rgba(201, 168, 76, 0.15);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 3;
+        }
+
+        .gallery-item .item-badge i {
+            font-size: 0.6rem;
+        }
+
+        .gallery-item .item-badge.photo-badge {
+            background: rgba(100, 181, 246, 0.3);
+            border-color: rgba(100, 181, 246, 0.2);
+        }
+
+        .gallery-item .item-badge.video-badge {
+            background: rgba(255, 107, 53, 0.3);
+            border-color: rgba(255, 107, 53, 0.2);
+        }
+
+        .gallery-item .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.8rem;
+            border: 2px solid rgba(201, 168, 76, 0.3);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            pointer-events: none;
+            box-shadow: 0 0 40px rgba(201, 168, 76, 0.1);
+            z-index: 2;
+        }
+
+        .gallery-item:hover .play-icon {
+            transform: translate(-50%, -50%) scale(1.15);
+            background: var(--gold);
+            color: var(--black);
+            border-color: var(--gold);
+            box-shadow: 0 0 60px rgba(201, 168, 76, 0.3);
+        }
+
+        .gallery-item .item-glow {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(201, 168, 76, 0.05) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .gallery-item:hover .item-glow {
+            opacity: 1;
+        }
+
+        .gallery-section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+        }
+
+        .gallery-section-header h2 {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .gallery-section-header h2 i {
+            color: var(--gold);
+        }
+
+        .gallery-section-header .section-count {
+            color: var(--gray);
+            font-size: 0.85rem;
+            padding: 0.2rem 0.8rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .pagination-container button {
+            background: transparent;
+            border: 1px solid rgba(201, 168, 76, 0.2);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            min-width: 40px;
+            font-family: var(--font-sans);
+        }
+
+        .pagination-container button:hover:not(:disabled) {
+            background: var(--gold);
+            color: var(--black);
+            border-color: var(--gold);
+        }
+
+        .pagination-container button.active {
+            background: var(--gold);
+            color: var(--black);
+            border-color: var(--gold);
+        }
+
+        .pagination-container button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .pagination-container .page-info {
+            color: var(--gray);
+            font-size: 0.9rem;
+            padding: 0 0.5rem;
+        }
+
+        .pagination-container .page-jump {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        .pagination-container .page-jump input {
+            width: 50px;
+            padding: 0.3rem 0.5rem;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 6px;
+            color: var(--white);
+            text-align: center;
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+        }
+
+        .pagination-container .page-jump input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .pagination-container .page-jump button {
+            padding: 0.3rem 0.8rem;
+            font-size: 0.8rem;
+        }
+
+        /* ====== CINEMATIC LIGHTBOX ====== */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.96);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            padding: 2rem;
+        }
+
+        .lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-content-wrapper {
+            position: relative;
+            max-width: 92%;
+            max-height: 92%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .lightbox-slide-container {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            max-height: 85vh;
+            overflow: hidden;
+            border-radius: 16px;
+            background: #0a0a0a;
+            box-shadow: 0 0 80px rgba(0, 0, 0, 0.8);
+        }
+
+        .lightbox-slide {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+            transition: opacity 0.8s ease;
+        }
+
+        .lightbox-slide img,
+        .lightbox-slide video {
+            max-width: 100%;
+            max-height: 85vh;
+            display: block;
+            border-radius: 16px;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            transition: transform 18s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .lightbox-slide video {
+            width: 100%;
+            max-height: 85vh;
+            border-radius: 16px;
+        }
+
+        .lightbox-slide img {
+            transform: scale(1.12);
+            transition: transform 18s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .lightbox-slide img.zoomed-in {
+            transform: scale(1.5);
+        }
+
+        .lightbox-slide img.zoomed-out {
+            transform: scale(1);
+        }
+
+        .lightbox-slide img.zooming {
+            animation: cinematicZoom 18s ease-in-out forwards;
+        }
+
+        @keyframes cinematicZoom {
+            0% { transform: scale(1.12); }
+            100% { transform: scale(1.5); }
+        }
+
+        .lightbox-slide {
+            opacity: 0;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            transform: scale(0.98);
+        }
+
+        .lightbox-slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .lightbox-slide.exit {
+            opacity: 0;
+            transform: scale(1.02);
+        }
+
+        .slideshow-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: var(--gold);
+            z-index: 5;
+            width: 0%;
+            border-radius: 0 0 16px 16px;
+            transition: none;
+            box-shadow: 0 0 20px rgba(201, 168, 76, 0.3);
+        }
+
+        .slideshow-progress.animate {
+            animation: progressFill 5s linear forwards;
+        }
+
+        @keyframes progressFill {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        .zoom-hint {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.4s;
+            z-index: 5;
+        }
+
+        .lightbox-slide-container:hover .zoom-hint {
+            opacity: 1;
+        }
+
+        .lightbox-close {
+            position: fixed;
+            top: 25px;
+            right: 35px;
+            font-size: 2.5rem;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .lightbox-close:hover {
+            color: var(--gold);
+            transform: rotate(90deg) scale(1.1);
+            border-color: var(--gold);
+            background: rgba(201, 168, 76, 0.1);
+        }
+
+        .lightbox-caption {
+            padding: 1.5rem 2rem;
+            text-align: center;
+            color: var(--white);
+            width: 100%;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            border-radius: 0 0 16px 16px;
+            position: absolute;
+            bottom: 80px;
+            left: 0;
+            right: 0;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .lightbox-slide-container:hover .lightbox-caption {
+            opacity: 1;
+        }
+
+        .lightbox-caption .caption-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            font-family: var(--font-serif);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-caption .caption-subtitle {
+            font-size: 0.85rem;
+            color: var(--gray);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-nav {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .lightbox-nav:hover {
+            background: var(--gold);
+            color: var(--black);
+            border-color: var(--gold);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-nav.prev {
+            left: 25px;
+        }
+
+        .lightbox-nav.next {
+            right: 25px;
+        }
+
+        .lightbox-counter {
+            position: fixed;
+            top: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(8px);
+            padding: 0.3rem 1.2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .slideshow-controls {
+            position: fixed;
+            bottom: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(12px);
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .slideshow-controls button {
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            padding: 0.3rem 0.5rem;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .slideshow-controls button:hover {
+            color: var(--gold);
+        }
+
+        .slideshow-controls .control-divider {
+            width: 1px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .slideshow-controls .control-label {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .slideshow-controls .slide-counter {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.75rem;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .scroll-indicator-lightbox {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.15);
+            font-size: 0.6rem;
+            animation: bounce 2s infinite;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            z-index: 5;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(8px);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .scroll-indicator-lightbox i {
+            font-size: 1rem;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-8px); }
+            60% { transform: translateX(-50%) translateY(-4px); }
+        }
+
+        .empty-gallery {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--gray);
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            border: 1px dashed rgba(201, 168, 76, 0.1);
+        }
+
+        .empty-gallery i {
+            font-size: 3rem;
+            color: var(--gold);
+            opacity: 0.3;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .gallery-section-hidden {
+            display: none;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .gallery-item {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .gallery-item:nth-child(1) { animation-delay: 0.05s; }
+        .gallery-item:nth-child(2) { animation-delay: 0.1s; }
+        .gallery-item:nth-child(3) { animation-delay: 0.15s; }
+        .gallery-item:nth-child(4) { animation-delay: 0.2s; }
+        .gallery-item:nth-child(5) { animation-delay: 0.25s; }
+        .gallery-item:nth-child(6) { animation-delay: 0.3s; }
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 1rem;
+            }
+            .gallery-tab {
+                padding: 0.5rem 1.2rem;
+                font-size: 0.85rem;
+            }
+            .gallery-section-header h2 {
+                font-size: 1.5rem;
+            }
+            .lightbox {
+                padding: 0.5rem;
+            }
+            .lightbox-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            .lightbox-nav.prev {
+                left: 10px;
+            }
+            .lightbox-nav.next {
+                right: 10px;
+            }
+            .lightbox-close {
+                width: 40px;
+                height: 40px;
+                font-size: 1.8rem;
+                top: 15px;
+                right: 15px;
+            }
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            .gallery-item .play-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+            .lightbox-caption .caption-title {
+                font-size: 1rem;
+            }
+            .lightbox-caption {
+                bottom: 70px;
+                padding: 1rem 1.2rem;
+            }
+            .lightbox-counter {
+                top: 15px;
+                font-size: 0.6rem;
+                padding: 0.2rem 0.8rem;
+            }
+            .slideshow-controls {
+                bottom: 75px;
+                padding: 0.4rem 1rem;
+                gap: 0.8rem;
+            }
+            .slideshow-controls button {
+                font-size: 0.8rem;
+            }
+            .slideshow-controls .control-label {
+                display: none;
+            }
+            .scroll-indicator-lightbox {
+                bottom: 20px;
+                font-size: 0.5rem;
+                padding: 0.3rem 0.8rem;
+            }
+            .pagination-container .page-jump {
+                display: none;
+            }
+            @keyframes cinematicZoom {
+                0% { transform: scale(1.08); }
+                100% { transform: scale(1.3); }
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 0.8rem;
+            }
+            .gallery-tabs {
+                gap: 0.5rem;
+            }
+            .gallery-tab {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.7rem;
+            }
+            .gallery-tab i {
+                font-size: 0.7rem;
+            }
+            .gallery-section-header h2 {
+                font-size: 1.2rem;
+            }
+            .gallery-item .item-overlay .item-title {
+                font-size: 0.8rem;
+            }
+            .gallery-item .item-overlay .item-subtitle {
+                font-size: 0.65rem;
+            }
+            .lightbox-slide-container {
+                max-height: 80vh;
+            }
+            .lightbox-slide img,
+            .lightbox-slide video {
+                max-height: 80vh;
+            }
+            .lightbox-caption {
+                bottom: 60px;
+                padding: 0.8rem 0.8rem;
+            }
+            .lightbox-caption .caption-title {
+                font-size: 0.85rem;
+            }
+            .lightbox-caption .caption-subtitle {
+                font-size: 0.7rem;
+            }
+            @keyframes cinematicZoom {
+                0% { transform: scale(1.05); }
+                100% { transform: scale(1.2); }
+            }
+        }
+        /* ====== FOOTER ====== */
+        .footer {
+            background: var(--dark);
+            padding: 2.5rem 0;
+            border-top: 1px solid rgba(201, 168, 76, 0.1);
+            margin-top: 2rem;
+        }
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .footer-brand {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .footer-brand .footer-logo {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+        }
+        .footer-sub {
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: 0.2rem;
+        }
+        .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .footer-links a { color: var(--gray); font-size: 0.9rem; }
+        .footer-links a:hover { color: var(--gold); }
+        .footer-copy { font-size: 0.8rem; color: var(--gray); text-align: center; width: 100%; margin-top: 1.5rem; }
+
+        @media (max-width: 768px) {
+            .footer-content { flex-direction: column; text-align: center; }
+            .footer-links { justify-content: center; }
+        }
+
+        @media (max-width: 480px) {
+            .footer-brand { font-size: 1rem; }
+            .footer-brand .footer-logo { width: 28px; height: 28px; }
+        }
+
+    </style>
+</head>
+<body>
+
+       <!-- ====== NAVIGATION ====== -->
+    <nav class="navbar" id="mainNav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <!-- ====== IMAGE NEAR LOGO ====== -->
+                <!-- Replace "your-image-name.jpg" with your actual image filename -->
+                <img src="images/60827b0fa88b45ff8794f38ddfd583ca.png" alt="In Loving Memory" class="nav-logo" />
+                <span class="brand-text">In Loving Memory</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">Life Story</a></li>
+                <li><a href="gallery.html" class="nav-link active">Gallery</a></li>
+                <li><a href="tributes.html" class="nav-link">Tributes</a></li>
+                <li><a href="candles.html" class="nav-link">Candles</a></li>
+                <li><a href="service.html" class="nav-link">Funeral Service</a></li>
+            </ul>
+        </div>
+    </nav>
+
+           <!-- ====== MUSIC PLAYER ====== -->
+    <section id="music-section" class="music-player-bar">
+        <div class="music-container">
+            <div class="music-info">
+                <i class="fas fa-music music-icon" id="musicStatusIcon"></i>
+                <span class="music-title">Memorial Hymn</span>
+                <span class="music-artist">— Eternal Peace</span>
+                <span class="music-status" id="musicStatus">● Playing</span>
+            </div>
+            <div class="music-controls">
+                <button class="music-btn" id="musicPlayBtn" onclick="toggleMusic()">
+                    <i class="fas fa-pause" id="musicPlayIcon"></i>
+                </button>
+                <input type="range" class="music-volume" id="musicVolume" min="0" max="1" step="0.01" value="0.5" oninput="changeVolume(this.value)" />
+                <span class="volume-icon"><i class="fas fa-volume-up"></i></span>
+            </div>
+        </div>
+             <audio id="bgMusic" loop preload="auto">
+                <source src="music/Best Christian Hymns Compilation  Old & Traditional Church Songs.mp3" type="audio/mpeg" />
+            </audio>
+    </section>
+
+    
+
+    <!-- ====== SCRIPTS ====== -->
+    <script src="js/music.js"></script>
+
+    <!-- ====== MAIN CONTENT ====== -->
+    <main>
+        <section class="section page-header-section">
+            <div class="container">
+                <div class="page-header">
+                    <h1>Photo & Video Gallery</h1>
+                    <p>Cherished moments of a beautiful life</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section gallery-section">
+            <div class="container">
+
+                <div class="gallery-tabs" id="galleryTabs">
+                    <button class="gallery-tab active" data-tab="photos">
+                        <i class="fas fa-images"></i> Photos <span class="tab-count" id="photoCount">0</span>
+                    </button>
+                    <button class="gallery-tab" data-tab="videos">
+                        <i class="fas fa-video"></i> Videos <span class="tab-count" id="videoCount">0</span>
+                    </button>
+                    <button class="gallery-tab" data-tab="all">
+                        <i class="fas fa-th"></i> All <span class="tab-count" id="allCount">0</span>
+                    </button>
+                </div>
+
+                <div id="photosSection">
+                    <div class="gallery-section-header">
+                        <h2><i class="fas fa-images"></i> Photos</h2>
+                        <span class="section-count" id="photoSectionCount">0 photos</span>
+                    </div>
+                    <div id="photoGridContainer">
+                        <div class="gallery-grid" id="photoGrid"></div>
+                        <div class="pagination-container" id="photoPagination"></div>
+                    </div>
+                </div>
+
+                <div id="videosSection" class="gallery-section-hidden">
+                    <div class="gallery-section-header">
+                        <h2><i class="fas fa-video"></i> Videos</h2>
+                        <span class="section-count" id="videoSectionCount">0 videos</span>
+                    </div>
+                    <div id="videoGridContainer">
+                        <div class="gallery-grid" id="videoGrid"></div>
+                        <div class="pagination-container" id="videoPagination"></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- ====== LIGHTBOX ====== -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" id="lightboxClose">&times;</span>
+        <span class="lightbox-counter" id="lightboxCounter">1 / 1</span>
+        <button class="lightbox-nav prev" id="lightboxPrev"><i class="fas fa-chevron-left"></i></button>
+        <button class="lightbox-nav next" id="lightboxNext"><i class="fas fa-chevron-right"></i></button>
+
+        <div class="lightbox-content-wrapper">
+            <div class="lightbox-slide-container" id="slideContainer">
+                <div class="lightbox-slide" id="lightboxSlide">
+                    <div class="slideshow-progress" id="slideshowProgress"></div>
+                    <div class="zoom-hint"><i class="fas fa-search-plus"></i> Click to zoom</div>
+                </div>
+                <div class="lightbox-caption" id="lightboxCaption">
+                    <div class="caption-title" id="captionTitle"></div>
+                    <div class="caption-subtitle" id="captionSubtitle"></div>
+                </div>
+            </div>
+            <div class="scroll-indicator-lightbox">
+                <i class="fas fa-chevron-down"></i>
+                <span>Scroll to explore</span>
+            </div>
+        </div>
+
+        <div class="slideshow-controls">
+            <button id="slideshowPrevBtn" title="Previous"><i class="fas fa-chevron-left"></i></button>
+            <span class="control-divider"></span>
+            <button id="slideshowPlayBtn" title="Play/Pause Slideshow">
+                <i class="fas fa-pause" id="slideshowPlayIcon"></i>
+            </button>
+            <span class="control-divider"></span>
+            <button id="slideshowNextBtn" title="Next"><i class="fas fa-chevron-right"></i></button>
+            <span class="control-divider"></span>
+            <span class="slide-counter" id="slideCounter">1 / 8</span>
+            <span class="control-divider"></span>
+            <span class="control-label">Auto-Slideshow</span>
+        </div>
+    </div>
+
+       <!-- ====== FOOTER ====== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="images/60827b0fa88b45ff8794f38ddfd583ca.png" alt="In Loving Memory" class="footer-logo" />
+                    <div>
+                        <span class="brand-gold">✦</span> In Loving Memory
+                        <p class="footer-sub">Carolyne Nzume · 1961 – 2026</p>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">Life Story</a>
+                    <a href="gallery.html">Gallery</a>
+                    <a href="tributes.html">Tributes</a>
+                    <a href="candles.html">Candles</a>
+                    <a href="service.html">Funeral Service</a>
+                </div>
+                <div class="footer-copy">&copy; 2026 · Built with <i class="fas fa-heart" style="color: #c9a84c;"></i> in loving memory</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ====== SIMPLE MUSIC CONTROLS ====== -->
+    <script>
+        // Simple functions for music controls
+        function toggleMusic() {
+            var audio = document.getElementById('bgMusic');
+            var icon = document.getElementById('musicPlayIcon');
+            var status = document.getElementById('musicStatus');
+            
+            if (audio.paused) {
+                audio.play();
+                icon.className = 'fas fa-pause';
+                status.textContent = '● Playing';
+                status.className = 'music-status playing';
+                localStorage.setItem('musicState', 'playing');
+            } else {
+                audio.pause();
+                icon.className = 'fas fa-play';
+                status.textContent = '● Paused';
+                status.className = 'music-status';
+                localStorage.setItem('musicState', 'paused');
+            }
+        }
+
+        function changeVolume(val) {
+            var audio = document.getElementById('bgMusic');
+            audio.volume = parseFloat(val);
+            localStorage.setItem('musicVolume', val);
+            
+            var icon = document.querySelector('.volume-icon i');
+            if (val == 0) {
+                icon.className = 'fas fa-volume-mute';
+            } else if (val < 0.5) {
+                icon.className = 'fas fa-volume-down';
+            } else {
+                icon.className = 'fas fa-volume-up';
+            }
+        }
+
+        function scrollToMusic() {
+            document.getElementById('music-section').scrollIntoView({ behavior: 'smooth' });
+            var audio = document.getElementById('bgMusic');
+            if (audio.paused) {
+                toggleMusic();
+            }
+        }
+
+        // ====== RESTORE MUSIC STATE ON PAGE LOAD ======
+        document.addEventListener('DOMContentLoaded', function() {
+            var audio = document.getElementById('bgMusic');
+            var icon = document.getElementById('musicPlayIcon');
+            var status = document.getElementById('musicStatus');
+            
+            // Restore volume
+            var savedVolume = localStorage.getItem('musicVolume');
+            if (savedVolume !== null) {
+                audio.volume = parseFloat(savedVolume);
+                document.getElementById('musicVolume').value = savedVolume;
+            }
+            
+            // Restore time
+            var savedTime = localStorage.getItem('musicTime');
+            if (savedTime) {
+                audio.currentTime = parseFloat(savedTime);
+            }
+            
+            // Restore play state
+            var savedState = localStorage.getItem('musicState');
+            if (savedState === 'playing') {
+                audio.play().catch(function() {});
+                icon.className = 'fas fa-pause';
+                status.textContent = '● Playing';
+                status.className = 'music-status playing';
+            } else {
+                icon.className = 'fas fa-play';
+                status.textContent = '● Paused';
+                status.className = 'music-status';
+            }
+            
+            // Save time periodically
+            setInterval(function() {
+                if (!audio.paused) {
+                    localStorage.setItem('musicTime', audio.currentTime);
+                }
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
+
+
+    <!-- ====== SCRIPTS ====== -->
+    <script src="js/music.js"></script>
+    <!-- Other scripts -->
+
+    <!-- ====== SCRIPTS ====== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // ====== NAVIGATION - SAME AS OTHER PAGES ======
+            const navToggle = document.getElementById('navToggle');
+            const navMenu = document.getElementById('navMenu');
+
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', function() {
+                    navMenu.classList.toggle('open');
+                });
+
+                navMenu.querySelectorAll('.nav-link').forEach(function(link) {
+                    link.addEventListener('click', function() {
+                        navMenu.classList.remove('open');
+                    });
+                });
+            }
+
+            // ====== MUSIC PLAYER ======
+            const audio = document.getElementById('bgMusic');
+            const playBtn = document.getElementById('musicPlayBtn');
+            const playIcon = document.getElementById('musicPlayIcon');
+            const volumeSlider = document.getElementById('musicVolume');
+
+            if (playBtn) {
+                playBtn.addEventListener('click', function() {
+                    if (audio.paused) {
+                        audio.play().then(function() {
+                            playIcon.className = 'fas fa-pause';
+                        }).catch(function() {});
+                    } else {
+                        audio.pause();
+                        playIcon.className = 'fas fa-play';
+                    }
+                });
+            }
+            if (volumeSlider) {
+                volumeSlider.addEventListener('input', function() {
+                    audio.volume = parseFloat(this.value);
+                });
+            }
+            audio.volume = 0.5;
+            audio.play().then(function() {
+                playIcon.className = 'fas fa-pause';
+            }).catch(function() {});
+
+            // ============================================================
+            //  📸 GALLERY DATA
+            // ============================================================
+
+            const titlePhrases = [
+                'A Life of Grace', 'Cherished Moments', 'Forever in Our Hearts',
+                'A Mother\'s Love', 'A Life Well Lived', 'In Loving Memory',
+                'The Light of Our Lives', 'A Beautiful Journey', 'A Radiant Smile',
+                'A Life of Service', 'A Heart of Gold', 'A Gentle Soul',
+                'A Life of Faith', 'A Woman of Strength', 'A Legacy of Love',
+                'A Life of Joy', 'A Life of Purpose', 'A Life of Hope',
+                'A Life of Kindness', 'A Life of Wisdom', 'A Life of Courage',
+                'A Life of Compassion', 'A Life of Generosity', 'A Life of Peace',
+                'A Life of Dignity', 'A Life of Integrity', 'A Life of Honor',
+                'A Life of Beauty', 'A Life of Passion', 'A Life of Devotion',
+                'A Life of Excellence', 'A Life of Vision', 'A Life of Inspiration',
+                'A Life of Blessings', 'A Life of Gratitude', 'A Life of Celebration',
+                'A Life of Friendship', 'A Life of Family', 'A Life of Community',
+                'A Life of Influence', 'A Life of Impact'
+            ];
+
+            const subtitlePhrases = [
+                'Carolyne spreading joy wherever she went',
+                'A beautiful soul with a warm smile',
+                'Her legacy of love lives on',
+                'She devoted her life to her family',
+                'Her spirit continues to inspire',
+                'Forever missed, never forgotten',
+                'A radiant smile that brightened every room',
+                'A life filled with love and laughter',
+                'She touched hearts everywhere she went',
+                'A woman of grace and dignity',
+                'Her kindness knew no bounds',
+                'She made the world a better place',
+                'A beacon of hope and love',
+                'Her memory is a blessing',
+                'She lived with purpose and passion',
+                'A true example of strength and grace',
+                'She gave so much to so many',
+                'Her love was unconditional',
+                'A life that inspired generations',
+                'She walked in faith and love',
+                'A cherished daughter, mother, and friend',
+                'Her wisdom guided many',
+                'She left footprints on our hearts',
+                'A legacy of faith and family',
+                'She lived her life with purpose',
+                'Her kindness was her superpower',
+                'She made everyone feel special',
+                'A shining example of grace',
+                'Her smile was her signature',
+                'She lived a life of meaning',
+                'A woman of extraordinary faith',
+                'Her love for family was immeasurable',
+                'She inspired all who knew her',
+                'A life of service to others',
+                'She brought light to every room',
+                'Her memory will live forever',
+                'A truly remarkable woman',
+                'She fought with courage and faith',
+                'Her heart was as big as the world',
+                'A beautiful soul who touched many'
+            ];
+
+            // ====== VIDEO TITLE PHRASES ======
+            const videoTitlePhrases = [
+                'Celebration of Life', 'Memorial Service Highlights', 'Family Memories',
+                'A Life of Service', 'Cherished Moments on Film', 'A Beautiful Journey',
+                'In Loving Memory - Video Tribute', 'A Mother\'s Love on Film',
+                'The Light of Our Lives', 'A Radiant Smile - Video', 'A Heart of Gold'
+            ];
+
+            const videoSubtitlePhrases = [
+                'A tribute video in loving memory',
+                'A beautiful service celebrating her life',
+                'Precious moments with loved ones',
+                'Carolyne\'s dedication to her community',
+                'Memories captured on film',
+                'A life filled with love and laughter',
+                'Forever in our hearts',
+                'A celebration of a beautiful life',
+                'Her spirit lives on in these memories',
+                'A tribute to a remarkable woman',
+                'Remembering Carolyne\'s beautiful soul'
+            ];
+
+            // ====== ALL YOUR IMAGE FILENAMES ======
+            const imageFilenames = [
+              
+                'IMG-20260804-WA0077.jpg', 'IMG-20260804-WA0078.jpg', 'IMG-20260804-WA0084.jpg',
+                'IMG-20260804-WA0085.jpg', 'IMG-20260804-WA0086.jpg', 'IMG-20260804-WA0087.jpg',
+                'IMG-20260804-WA0088.jpg', 'IMG-20260804-WA0089.jpg', 'IMG-20260804-WA0091.jpg',
+                'IMG-20260804-WA0092.jpg', 'IMG-20260804-WA0093.jpg', 'IMG-20260804-WA0094.jpg',
+                'IMG-20260804-WA0095.jpg', 'IMG-20260804-WA0096.jpg', 'IMG-20260804-WA0097.jpg',
+                'IMG-20260804-WA0098.jpg', 'IMG-20260804-WA0099.jpg', 'IMG-20260804-WA0100.jpg',
+                'IMG-20260804-WA0101.jpg', 'IMG-20260804-WA0102.jpg', 'IMG-20260804-WA0103.jpg',
+                'IMG-20260804-WA0104.jpg', 'IMG-20260804-WA0105.jpg', 'IMG-20260804-WA0106.jpg',
+                'IMG-20260804-WA0107.jpg', 'IMG-20260804-WA0108.jpg', 'IMG-20260804-WA0109.jpg',
+                'IMG-20260804-WA0110.jpg', 'IMG-20260804-WA0111.jpg', 'IMG-20260804-WA0112.jpg',
+                'IMG-20260804-WA0113.jpg', 'IMG-20260804-WA0114.jpg', 'IMG-20260804-WA0115.jpg',
+                'IMG-20260804-WA0116.jpg', 'IMG-20260804-WA0117.jpg', 'IMG-20260804-WA0118.jpg',
+                'IMG-20260804-WA0119.jpg', 'IMG-20260804-WA0120.jpg', 'IMG-20260804-WA0121.jpg',
+                'IMG-20260804-WA0122.jpg', 'IMG-20260804-WA0123.jpg', 'IMG-20260804-WA0124.jpg',
+                'IMG-20260804-WA0125.jpg', 'IMG-20260804-WA0126.jpg', 'IMG-20260804-WA0131.jpg',
+                'IMG-20260804-WA0132.jpg', 'IMG-20260804-WA0135.jpg', 'IMG-20260804-WA0136.jpg',
+                'IMG-20260804-WA0141.jpg', 'IMG-20260804-WA0142.jpg', 'IMG-20260804-WA0145.jpg',
+                'IMG-20260804-WA0146.jpg', 'IMG-20260804-WA0147.jpg', 'IMG-20260804-WA0148.jpg',
+                'IMG-20260804-WA0149.jpg', 'IMG-20260804-WA0150.jpg', 'IMG-20260804-WA0151.jpg',
+                'IMG-20260804-WA0152.jpg', 'IMG-20260804-WA0154.jpg', 'IMG-20260804-WA0155.jpg',
+                'IMG-20260804-WA0156.jpg', 'IMG-20260804-WA0160.jpg', 'IMG-20260804-WA0163.jpg',
+                'IMG-20260804-WA0167.jpg', 'IMG-20260804-WA0169.jpg', 'IMG-20260804-WA0170.jpg',
+                'IMG-20260804-WA0171.jpg', 'IMG-20260804-WA0172.jpg', 'IMG-20260804-WA0173.jpg',
+                'IMG-20260804-WA0174.jpg', 'IMG-20260804-WA0175.jpg', 'IMG-20260804-WA0180.jpg',
+                'IMG-20260804-WA0181.jpg', 'IMG-20260804-WA0182.jpg', 'IMG-20260804-WA0184.jpg',
+                'IMG-20260804-WA0187.jpg', 'IMG-20260804-WA0188.jpg', 'IMG-20260804-WA0189.jpg',
+                'IMG-20260804-WA0190.jpg', 'IMG-20260804-WA0191.jpg', 'IMG-20260804-WA0192.jpg',
+                'IMG-20260804-WA0193.jpg', 'IMG-20260804-WA0194.jpg', 'IMG-20260804-WA0195.jpg',
+                'IMG-20260804-WA0196.jpg', 'IMG-20260804-WA0197.jpg', 'IMG-20260804-WA0201.jpg',
+                'IMG-20260804-WA0202.jpg', 'IMG-20260804-WA0203.jpg', 'IMG-20260804-WA0204.jpg',
+                'IMG-20260804-WA0205.jpg', 'IMG-20260804-WA0206.jpg', 'IMG-20260804-WA0207.jpg',
+                'IMG-20260804-WA0208.jpg', 'IMG-20260804-WA0209.jpg', 'IMG-20260804-WA0210.jpg',
+                'IMG-20260804-WA0212.jpg', 'IMG-20260804-WA0214.jpg', 'IMG-20260804-WA0215.jpg',
+                'IMG-20260804-WA0216.jpg', 'IMG-20260804-WA0217.jpg', 'IMG-20260804-WA0218.jpg',
+                'IMG-20260804-WA0219.jpg', 'IMG-20260804-WA0220.jpg', 'IMG-20260804-WA0221.jpg',
+                'IMG-20260804-WA0222.jpg', 'IMG-20260804-WA0223.jpg', 'IMG-20260804-WA0224.jpg',
+                'IMG-20260804-WA0225.jpg', 'IMG-20260804-WA0226.jpg', 'IMG-20260804-WA0227.jpg',
+                'IMG-20260804-WA0228.jpg', 'IMG-20260804-WA0229.jpg', 'IMG-20260804-WA0230.jpg',
+                'IMG-20260804-WA0231.jpg', 'IMG-20260804-WA0232.jpg', 'IMG-20260804-WA0233.jpg',
+                'IMG-20260804-WA0234.jpg', 'IMG-20260804-WA0235.jpg', 'IMG-20260804-WA0236.jpg',
+                'IMG-20260804-WA0237.jpg', 'IMG-20260804-WA0242.jpg', 'IMG-20260804-WA0243.jpg',
+                'IMG-20260804-WA0244.jpg', 'IMG-20260804-WA0246.jpg', 'IMG-20260804-WA0250.jpg',
+                'IMG-20260804-WA0251.jpg', 'IMG-20260804-WA0252.jpg', 'IMG-20260804-WA0253.jpg',
+                'IMG-20260804-WA0254.jpg', 'IMG-20260804-WA0255.jpg', 'IMG-20260804-WA0256.jpg',
+                'IMG-20260804-WA0257.jpg', 'IMG-20260804-WA0259.jpg', 'IMG-20260804-WA0262.jpg',
+                'IMG-20260804-WA0263.jpg', 'IMG-20260804-WA0264.jpg', 'IMG-20260804-WA0265.jpg',
+                'IMG-20260804-WA0266.jpg', 'IMG-20260804-WA0268.jpg', 'IMG-20260804-WA0269.jpg',
+                'IMG-20260804-WA0270.jpg', 'IMG-20260804-WA0271.jpg', 'IMG-20260804-WA0272.jpg',
+                'IMG-20260804-WA0274.jpg', 'IMG-20260804-WA0275.jpg', 'IMG-20260804-WA0276.jpg',
+                'IMG-20260804-WA0277.jpg', 'IMG-20260804-WA0278.jpg', 'IMG-20260804-WA0279.jpg',
+                'IMG-20260804-WA0280.jpg', 'IMG-20260804-WA0284.jpg', 'IMG-20260804-WA0285.jpg',
+                'IMG-20260804-WA0286.jpg', 'IMG-20260804-WA0287.jpg', 'IMG-20260804-WA0288.jpg',
+                'IMG-20260804-WA0289.jpg', 'IMG-20260804-WA0291.jpg', 'IMG-20260804-WA0292.jpg',
+                'IMG-20260804-WA0293.jpg', 'IMG-20260804-WA0295.jpg', 'IMG-20260804-WA0296.jpg',
+                'IMG-20260804-WA0298.jpg', 'IMG-20260804-WA0300.jpg', 'IMG-20260804-WA0301.jpg',
+                'IMG-20260804-WA0302.jpg', 'IMG-20260804-WA0303.jpg', 'IMG-20260804-WA0304.jpg',
+                'IMG-20260804-WA0305.jpg', 'IMG-20260804-WA0306.jpg', 'IMG-20260804-WA0307.jpg',
+                'IMG-20260804-WA0308.jpg', 'IMG-20260804-WA0309.jpg',
+                'WhatsApp Image 2026-08-07 at 11.47.25 PM (1).jpeg',
+                'WhatsApp Image 2026-08-07 at 11.47.25 PM (2).jpeg',
+                'WhatsApp Image 2026-08-07 at 11.47.25 PM (3).jpeg',
+                'WhatsApp Image 2026-08-07 at 11.47.25 PM (4).jpeg',
+                'WhatsApp Image 2026-08-07 at 11.47.25 PM (5).jpeg',
+                'WhatsApp Image 2026-08-07 at 11.47.25 PM (6).jpeg',
+                'WhatsApp Image 2026-08-07 at 11.47.25 PM (7).jpeg',
+                'WhatsApp Image 2026-08-07 at 11.49.33 PM.jpeg',
+                'WhatsApp Image 2026-08-07 at 11.49.59 PM.jpeg',
+                'WhatsApp Image 2026-08-08 at 3.58.31 AM.jpeg',
+                'WhatsApp Image 2026-08-08 at 3.58.42 AM.jpeg',
+                'WhatsApp Image 2026-08-08 at 3.58.53 AM.jpeg',
+                'WhatsApp Image 2026-08-08 at 8.52.00 AM.jpeg',
+                'WhatsApp Image 2026-08-08 at 12.05.59 AM (1).jpeg',
+                'WhatsApp Image 2026-08-08 at 12.05.59 AM.jpeg',
+                'WhatsApp Image 2026-08-08 at 12.06.00 AM (1).jpeg',
+                'WhatsApp Image 2026-08-08 at 12.06.00 AM (2).jpeg',
+                'WhatsApp Image 2026-08-08 at 12.06.00 AM (3).jpeg',
+                'WhatsApp Image 2026-08-08 at 12.06.00 AM.jpeg',
+                'WhatsApp Image 2026-08-08 at 12.06.01 AM.jpeg'
+            ];
+
+            // ====== ALL YOUR VIDEO FILENAMES ======
+            const videoFilenames = [
+                'VID-20260804-WA0153.mp4',
+                'VID-20260804-WA0176.mp4',
+                'VID-20260804-WA0183.mp4',
+                'VID-20260804-WA0185.mp4',
+                'VID-20260804-WA0245.mp4',
+                'VID-20260804-WA0267.mp4',
+                'VID-20260804-WA0281.mp4',
+                'VID-20260804-WA0282.mp4',
+                'VID-20260804-WA0283.mp4',
+                'VID-20260804-WA0290.mp4',
+                'VID-20260804-WA0294.mp4'
+            ];
+
+            // ====== GENERATE PHOTOS ======
+            const photos = [];
+            imageFilenames.forEach(function(filename, index) {
+                const title = titlePhrases[index % titlePhrases.length];
+                const subtitle = subtitlePhrases[index % subtitlePhrases.length];
+                photos.push({
+                    src: 'images/' + filename,
+                    title: title,
+                    subtitle: subtitle
+                });
+            });
+
+            // ====== GENERATE VIDEOS ======
+            const videos = [];
+            videoFilenames.forEach(function(filename, index) {
+                const title = videoTitlePhrases[index % videoTitlePhrases.length];
+                const subtitle = videoSubtitlePhrases[index % videoSubtitlePhrases.length];
+                videos.push({
+                    src: 'videos/' + filename,
+                    poster: 'videos/' + filename,
+                    title: title,
+                    subtitle: subtitle
+                });
+            });
+
+            const allItems = [
+                ...photos.map(p => ({ ...p, type: 'photo' })),
+                ...videos.map(v => ({ ...v, type: 'video' }))
+            ];
+
+            // ====== PAGINATION SETTINGS ======
+            const ITEMS_PER_PAGE = 20;
+
+            // ====== DOM REFS ======
+            const photoGrid = document.getElementById('photoGrid');
+            const videoGrid = document.getElementById('videoGrid');
+            const photosSection = document.getElementById('photosSection');
+            const videosSection = document.getElementById('videosSection');
+            const photoCount = document.getElementById('photoCount');
+            const videoCount = document.getElementById('videoCount');
+            const allCount = document.getElementById('allCount');
+            const photoSectionCount = document.getElementById('photoSectionCount');
+            const videoSectionCount = document.getElementById('videoSectionCount');
+            const photoPagination = document.getElementById('photoPagination');
+            const videoPagination = document.getElementById('videoPagination');
+            const tabs = document.querySelectorAll('.gallery-tab');
+
+            // ====== LIGHTBOX ======
+            const lightbox = document.getElementById('lightbox');
+            const lightboxSlide = document.getElementById('lightboxSlide');
+            const lightboxCaption = document.getElementById('lightboxCaption');
+            const captionTitle = document.getElementById('captionTitle');
+            const captionSubtitle = document.getElementById('captionSubtitle');
+            const lightboxClose = document.getElementById('lightboxClose');
+            const lightboxPrev = document.getElementById('lightboxPrev');
+            const lightboxNext = document.getElementById('lightboxNext');
+            const lightboxCounter = document.getElementById('lightboxCounter');
+            const slideshowProgress = document.getElementById('slideshowProgress');
+            const slideshowPlayBtn = document.getElementById('slideshowPlayBtn');
+            const slideshowPlayIcon = document.getElementById('slideshowPlayIcon');
+            const slideshowPrevBtn = document.getElementById('slideshowPrevBtn');
+            const slideshowNextBtn = document.getElementById('slideshowNextBtn');
+            const slideCounter = document.getElementById('slideCounter');
+
+            let currentLightboxItems = [];
+            let currentLightboxIndex = 0;
+            let isLightboxOpen = false;
+            let isZoomed = false;
+            let slideshowInterval = null;
+            let isSlideshowPlaying = true;
+            let isTransitioning = false;
+            const SLIDE_DURATION = 5000;
+
+            let photoCurrentPage = 1;
+            let videoCurrentPage = 1;
+
+            function escapeHtml(text) {
+                if (!text) return '';
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            // ====== GENERATE VIDEO THUMBNAIL ======
+            function generateVideoThumbnail(videoSrc, callback) {
+                const video = document.createElement('video');
+                video.muted = true;
+                video.preload = 'metadata';
+                video.crossOrigin = 'anonymous';
+                video.src = videoSrc;
+                
+                video.addEventListener('loadeddata', function() {
+                    const seekTime = Math.min(1, video.duration * 0.1);
+                    video.currentTime = seekTime;
+                });
+
+                video.addEventListener('seeked', function() {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = video.videoWidth || 640;
+                    canvas.height = video.videoHeight || 480;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                    const thumbnail = canvas.toDataURL('image/jpeg', 0.8);
+                    callback(thumbnail);
+                });
+
+                video.addEventListener('error', function() {
+                    callback(null);
+                });
+
+                video.load();
+            }
+
+            // ====== RENDER VIDEOS ======
+            function renderVideos(page) {
+                const startIndex = (page - 1) * ITEMS_PER_PAGE;
+                const endIndex = Math.min(startIndex + ITEMS_PER_PAGE, videos.length);
+                const pageItems = videos.slice(startIndex, endIndex);
+                const totalPages = Math.ceil(videos.length / ITEMS_PER_PAGE);
+
+                if (videos.length === 0) {
+                    videoGrid.innerHTML = `
+                        <div class="empty-gallery" style="grid-column: 1 / -1;">
+                            <i class="fas fa-video"></i>
+                            <p>No videos yet.</p>
+                        </div>
+                    `;
+                    videoPagination.innerHTML = '';
+                    return;
+                }
+
+                let html = '';
+                pageItems.forEach(function(video, index) {
+                    const globalIndex = startIndex + index;
+                    html += `
+                        <div class="gallery-item" data-type="video" data-index="${globalIndex}">
+                            <div class="item-glow"></div>
+                            <div class="play-icon"><i class="fas fa-play"></i></div>
+                            <video muted playsinline preload="metadata" poster="${video.poster}" style="width:100%; height:100%; object-fit:cover; background:#0a0a0a;">
+                                <source src="${video.src}" type="video/mp4" />
+                            </video>
+                            <div class="item-overlay">
+                                <div class="item-title">${escapeHtml(video.title)}</div>
+                                <div class="item-subtitle">${escapeHtml(video.subtitle)}</div>
+                            </div>
+                            <div class="item-badge video-badge"><i class="fas fa-video"></i> Video</div>
+                        </div>
+                    `;
+                });
+
+                videoGrid.innerHTML = html;
+                videoSectionCount.textContent = videos.length + ' videos';
+                videoCount.textContent = videos.length;
+
+                // Generate thumbnails
+                videoGrid.querySelectorAll('video').forEach(function(videoEl, idx) {
+                    const videoSrc = videoEl.querySelector('source').src;
+                    generateVideoThumbnail(videoSrc, function(thumbnail) {
+                        if (thumbnail) {
+                            const img = new Image();
+                            img.onload = function() {
+                                videoEl.poster = thumbnail;
+                                videoEl.load();
+                            };
+                            img.src = thumbnail;
+                        }
+                    });
+                });
+
+                renderPagination(videoPagination, page, totalPages, 'video');
+            }
+
+            // ====== RENDER PHOTOS ======
+            function renderPhotos(page) {
+                const startIndex = (page - 1) * ITEMS_PER_PAGE;
+                const endIndex = Math.min(startIndex + ITEMS_PER_PAGE, photos.length);
+                const pageItems = photos.slice(startIndex, endIndex);
+                const totalPages = Math.ceil(photos.length / ITEMS_PER_PAGE);
+
+                if (photos.length === 0) {
+                    photoGrid.innerHTML = `
+                        <div class="empty-gallery" style="grid-column: 1 / -1;">
+                            <i class="fas fa-images"></i>
+                            <p>No photos yet.</p>
+                        </div>
+                    `;
+                    photoPagination.innerHTML = '';
+                    return;
+                }
+
+                let html = '';
+                pageItems.forEach(function(photo, index) {
+                    const globalIndex = startIndex + index;
+                    html += `
+                        <div class="gallery-item" data-type="photo" data-index="${globalIndex}">
+                            <div class="item-glow"></div>
+                            <img src="${photo.src}" alt="${escapeHtml(photo.title)}" loading="lazy" />
+                            <div class="item-overlay">
+                                <div class="item-title">${escapeHtml(photo.title)}</div>
+                                <div class="item-subtitle">${escapeHtml(photo.subtitle)}</div>
+                            </div>
+                            <div class="item-badge photo-badge"><i class="fas fa-image"></i> Photo</div>
+                        </div>
+                    `;
+                });
+
+                photoGrid.innerHTML = html;
+                photoSectionCount.textContent = photos.length + ' photos';
+                photoCount.textContent = photos.length;
+
+                renderPagination(photoPagination, page, totalPages, 'photo');
+            }
+
+            function renderPagination(container, currentPage, totalPages, type) {
+                if (totalPages <= 1) {
+                    container.innerHTML = '';
+                    return;
+                }
+
+                let html = `
+                    <button class="page-prev" data-type="${type}" data-page="${currentPage - 1}" ${currentPage <= 1 ? 'disabled' : ''}>
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                `;
+
+                const maxVisible = 5;
+                let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+                let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+
+                if (endPage - startPage < maxVisible - 1) {
+                    startPage = Math.max(1, endPage - maxVisible + 1);
+                }
+
+                if (startPage > 1) {
+                    html += `<button class="page-btn" data-type="${type}" data-page="1">1</button>`;
+                    if (startPage > 2) {
+                        html += `<span class="page-info">...</span>`;
+                    }
+                }
+
+                for (let i = startPage; i <= endPage; i++) {
+                    html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" data-type="${type}" data-page="${i}">${i}</button>`;
+                }
+
+                if (endPage < totalPages) {
+                    if (endPage < totalPages - 1) {
+                        html += `<span class="page-info">...</span>`;
+                    }
+                    html += `<button class="page-btn" data-type="${type}" data-page="${totalPages}">${totalPages}</button>`;
+                }
+
+                html += `
+                    <button class="page-next" data-type="${type}" data-page="${currentPage + 1}" ${currentPage >= totalPages ? 'disabled' : ''}>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="page-jump">
+                        <span>Go to</span>
+                        <input type="number" class="page-input" data-type="${type}" min="1" max="${totalPages}" value="${currentPage}" />
+                        <button class="page-go" data-type="${type}">Go</button>
+                    </div>
+                `;
+
+                container.innerHTML = html;
+
+                container.querySelectorAll('.page-btn, .page-prev, .page-next, .page-go').forEach(function(btn) {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const page = parseInt(this.dataset.page);
+                        const type = this.dataset.type;
+                        if (page && !isNaN(page) && page >= 1 && page <= totalPages) {
+                            goToPage(type, page);
+                        }
+                    });
+                });
+
+                container.querySelectorAll('.page-input').forEach(function(input) {
+                    input.addEventListener('keydown', function(e) {
+                        if (e.key === 'Enter') {
+                            const page = parseInt(this.value);
+                            const type = this.dataset.type;
+                            if (page && !isNaN(page) && page >= 1 && page <= totalPages) {
+                                goToPage(type, page);
+                            }
+                        }
+                    });
+                });
+            }
+
+            function goToPage(type, page) {
+                if (type === 'photo') {
+                    photoCurrentPage = page;
+                    renderPhotos(photoCurrentPage);
+                    document.getElementById('photosSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                } else if (type === 'video') {
+                    videoCurrentPage = page;
+                    renderVideos(videoCurrentPage);
+                    document.getElementById('videosSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+
+            function updateCounts() {
+                allCount.textContent = allItems.length;
+            }
+
+            // ====== LIGHTBOX FUNCTIONS ======
+            function openLightbox(items, index) {
+                currentLightboxItems = items;
+                currentLightboxIndex = index;
+                isLightboxOpen = true;
+                isZoomed = false;
+                isTransitioning = false;
+                lightboxSlide.className = 'lightbox-slide';
+                showLightboxItem(index);
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+
+                setTimeout(function() {
+                    if (isLightboxOpen) {
+                        startSlideshow();
+                    }
+                }, 500);
+            }
+
+            function showLightboxItem(index) {
+                isTransitioning = true;
+                const item = currentLightboxItems[index];
+                if (!item) return;
+
+                lightboxSlide.classList.remove('active');
+                lightboxSlide.classList.add('exit');
+
+                setTimeout(function() {
+                    lightboxSlide.innerHTML = '';
+                    lightboxSlide.className = 'lightbox-slide';
+
+                    if (item.type === 'photo') {
+                        const img = document.createElement('img');
+                        img.src = item.src;
+                        img.alt = item.title || 'Memory';
+                        img.style.maxHeight = '85vh';
+                        img.loading = 'lazy';
+                        img.className = 'zooming';
+                        lightboxSlide.appendChild(img);
+
+                        img.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            toggleZoom();
+                        });
+
+                    } else if (item.type === 'video') {
+                        const video = document.createElement('video');
+                        video.src = item.src;
+                        video.poster = item.poster || '';
+                        video.controls = true;
+                        video.autoplay = true;
+                        video.style.maxWidth = '100%';
+                        video.style.maxHeight = '85vh';
+                        video.style.borderRadius = '16px';
+                        lightboxSlide.appendChild(video);
+                        if (isSlideshowPlaying) {
+                            stopSlideshow();
+                        }
+                    }
+
+                    const hint = document.createElement('div');
+                    hint.className = 'zoom-hint';
+                    hint.innerHTML = '<i class="fas fa-search-plus"></i> Click to zoom';
+                    lightboxSlide.appendChild(hint);
+
+                    const progress = document.createElement('div');
+                    progress.className = 'slideshow-progress';
+                    progress.id = 'slideshowProgress';
+                    lightboxSlide.appendChild(progress);
+
+                    captionTitle.textContent = item.title || '';
+                    captionSubtitle.textContent = item.subtitle || '';
+                    lightboxCounter.textContent = (index + 1) + ' / ' + currentLightboxItems.length;
+                    slideCounter.textContent = (index + 1) + ' / ' + currentLightboxItems.length;
+
+                    setTimeout(function() {
+                        lightboxSlide.classList.add('active');
+                        lightboxSlide.classList.remove('exit');
+                        isTransitioning = false;
+
+                        const newProgress = document.getElementById('slideshowProgress');
+                        if (newProgress && isSlideshowPlaying) {
+                            newProgress.classList.remove('animate');
+                            void newProgress.offsetWidth;
+                            newProgress.classList.add('animate');
+                        }
+
+                        isZoomed = false;
+                        const img = lightboxSlide.querySelector('img');
+                        if (img) {
+                            img.className = 'zooming';
+                        }
+                    }, 300);
+
+                }, 400);
+            }
+
+            function toggleZoom() {
+                const img = lightboxSlide.querySelector('img');
+                if (!img) return;
+
+                isZoomed = !isZoomed;
+                const hint = lightboxSlide.querySelector('.zoom-hint');
+
+                if (isZoomed) {
+                    img.className = 'zoomed-out';
+                    if (hint) {
+                        hint.innerHTML = '<i class="fas fa-search-plus"></i> Click to zoom in';
+                    }
+                } else {
+                    img.className = 'zoomed-in';
+                    if (hint) {
+                        hint.innerHTML = '<i class="fas fa-search-minus"></i> Click to zoom out';
+                    }
+                }
+            }
+
+            function closeLightbox() {
+                stopSlideshow();
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+                isLightboxOpen = false;
+                isZoomed = false;
+                isTransitioning = false;
+                const video = lightboxSlide.querySelector('video');
+                if (video) video.pause();
+                setTimeout(function() {
+                    if (!isLightboxOpen) {
+                        lightboxSlide.innerHTML = '';
+                        lightboxSlide.className = 'lightbox-slide';
+                    }
+                }, 500);
+            }
+
+            function startSlideshow() {
+                if (slideshowInterval) {
+                    clearInterval(slideshowInterval);
+                }
+                isSlideshowPlaying = true;
+                slideshowPlayIcon.className = 'fas fa-pause';
+                showSlideProgress();
+                slideshowInterval = setInterval(function() {
+                    if (!isLightboxOpen || isTransitioning) return;
+                    if (currentLightboxIndex < currentLightboxItems.length - 1) {
+                        currentLightboxIndex++;
+                        showLightboxItem(currentLightboxIndex);
+                    } else {
+                        currentLightboxIndex = 0;
+                        showLightboxItem(currentLightboxIndex);
+                    }
+                }, SLIDE_DURATION);
+            }
+
+            function stopSlideshow() {
+                if (slideshowInterval) {
+                    clearInterval(slideshowInterval);
+                    slideshowInterval = null;
+                }
+                isSlideshowPlaying = false;
+                slideshowPlayIcon.className = 'fas fa-play';
+                hideSlideProgress();
+            }
+
+            function toggleSlideshow() {
+                if (isSlideshowPlaying) {
+                    stopSlideshow();
+                } else {
+                    startSlideshow();
+                }
+            }
+
+            function showSlideProgress() {
+                const progress = document.getElementById('slideshowProgress');
+                if (progress) {
+                    progress.classList.remove('animate');
+                    void progress.offsetWidth;
+                    progress.classList.add('animate');
+                }
+            }
+
+            function hideSlideProgress() {
+                const progress = document.getElementById('slideshowProgress');
+                if (progress) {
+                    progress.classList.remove('animate');
+                    progress.style.width = '0%';
+                }
+            }
+
+            function resetSlideProgress() {
+                const progress = document.getElementById('slideshowProgress');
+                if (progress) {
+                    progress.classList.remove('animate');
+                    progress.style.width = '0%';
+                    if (isSlideshowPlaying) {
+                        void progress.offsetWidth;
+                        progress.classList.add('animate');
+                    }
+                }
+            }
+
+            // ====== LIGHTBOX EVENTS ======
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) closeLightbox();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (!lightbox.classList.contains('active')) return;
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') {
+                    if (currentLightboxIndex > 0) {
+                        currentLightboxIndex--;
+                        showLightboxItem(currentLightboxIndex);
+                        resetSlideProgress();
+                    }
+                }
+                if (e.key === 'ArrowRight') {
+                    if (currentLightboxIndex < currentLightboxItems.length - 1) {
+                        currentLightboxIndex++;
+                        showLightboxItem(currentLightboxIndex);
+                        resetSlideProgress();
+                    }
+                }
+                if (e.key === ' ') { e.preventDefault();
+                    toggleSlideshow(); }
+                if (e.key === 'z' || e.key === 'Z') toggleZoom();
+            });
+
+            slideshowPlayBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                toggleSlideshow();
+            });
+
+            slideshowPrevBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (currentLightboxIndex > 0) {
+                    currentLightboxIndex--;
+                    showLightboxItem(currentLightboxIndex);
+                    resetSlideProgress();
+                }
+            });
+
+            slideshowNextBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (currentLightboxIndex < currentLightboxItems.length - 1) {
+                    currentLightboxIndex++;
+                    showLightboxItem(currentLightboxIndex);
+                    resetSlideProgress();
+                }
+            });
+
+            // ====== GRID CLICK EVENTS ======
+            document.addEventListener('click', function(e) {
+                const item = e.target.closest('.gallery-item');
+                if (!item) return;
+
+                const type = item.dataset.type;
+                const index = parseInt(item.dataset.index);
+
+                if (type === 'photo') {
+                    openLightbox(
+                        photos.map(p => ({ ...p, type: 'photo' })),
+                        index
+                    );
+                } else if (type === 'video') {
+                    if (slideshowInterval) {
+                        clearInterval(slideshowInterval);
+                        slideshowInterval = null;
+                    }
+                    openLightbox(
+                        videos.map(v => ({ ...v, type: 'video' })),
+                        index
+                    );
+                }
+            });
+
+            // ====== TAB SWITCHING ======
+            tabs.forEach(function(tab) {
+                tab.addEventListener('click', function() {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    const target = tab.dataset.tab;
+
+                    if (target === 'photos') {
+                        photosSection.classList.remove('gallery-section-hidden');
+                        videosSection.classList.add('gallery-section-hidden');
+                    } else if (target === 'videos') {
+                        photosSection.classList.add('gallery-section-hidden');
+                        videosSection.classList.remove('gallery-section-hidden');
+                    } else {
+                        photosSection.classList.remove('gallery-section-hidden');
+                        videosSection.classList.remove('gallery-section-hidden');
+                    }
+                });
+            });
+
+            // ====== INITIALIZE ======
+            renderPhotos(1);
+            renderVideos(1);
+            updateCounts();
+
+            console.log('📸 Gallery loaded with ' + photos.length + ' photos and ' + videos.length + ' videos');
+            console.log('📄 Pagination: ' + ITEMS_PER_PAGE + ' items per page');
+            console.log('🎬 Cinematic zoom: 1.12x → 1.5x over 18 seconds');
+            console.log('⏱️  Slide duration: 5 seconds');
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Life Story – In Loving Memory</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        /* ====== RESET & BASE ====== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --gold: #c9a84c;
+            --gold-light: #e8d5a3;
+            --black: #0a0a0a;
+            --dark: #141414;
+            --white: #f5f5f5;
+            --gray: #aaaaaa;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+        }
+        body { font-family: var(--font-sans); background-color: var(--black); color: var(--white); overflow-x: hidden; }
+        a { color: var(--gold); text-decoration: none; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+        .section { padding: 4rem 0; }
+        .gold { color: var(--gold); }
+
+        /* ====== NAVIGATION WITH LOGO ====== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--white);
+            transition: opacity 0.3s ease;
+        }
+        .nav-brand:hover { opacity: 0.8; }
+
+        .nav-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+            display: block;
+            flex-shrink: 0;
+        }
+
+        .brand-text { color: var(--white); }
+        .brand-gold { color: var(--gold); }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 1.8rem;
+        }
+        .nav-link {
+            color: var(--white);
+            font-weight: 400;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 0.4rem 0;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after,
+        .nav-link.active::after { width: 100%; }
+        .nav-link.active { color: var(--gold); }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+        .hamburger-line {
+            width: 28px;
+            height: 2px;
+            background: var(--white);
+            transition: all 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle { display: flex; }
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                gap: 0.5rem;
+                background: var(--dark);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                padding: 1.5rem 2rem;
+                border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+            }
+            .nav-menu.open { display: flex; }
+            .nav-logo { width: 32px; height: 32px; }
+            .brand-text { font-size: 1rem; }
+            .nav-brand { gap: 8px; }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container { padding: 0.6rem 1rem; }
+            .nav-logo { width: 28px; height: 28px; }
+            .brand-text { font-size: 0.85rem; }
+        }
+
+        /* ====== MUSIC PLAYER ====== */
+        .music-player-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(201, 168, 76, 0.2);
+            padding: 0.7rem 1.5rem;
+            z-index: 999;
+        }
+        .music-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        .music-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+        .music-icon { color: var(--gold); font-size: 1.2rem; }
+        .music-title { font-weight: 500; color: var(--white); }
+        .music-artist { color: var(--gray); font-size: 0.8rem; }
+        .music-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .music-btn {
+            background: transparent;
+            border: none;
+            color: var(--white);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .music-btn:hover { color: var(--gold); background: rgba(201, 168, 76, 0.1); }
+        .music-volume {
+            width: 80px;
+            accent-color: var(--gold);
+            cursor: pointer;
+        }
+        .volume-icon { color: var(--gray); font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            .music-container { flex-direction: column; align-items: stretch; gap: 0.5rem; }
+            .music-controls { justify-content: center; }
+            .music-info { justify-content: center; }
+        }
+
+        /* ====== PAGE HEADER ====== */
+        .page-header-section {
+            padding-top: 7rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .page-header-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+        }
+
+        .page-header h1 {
+            font-family: var(--font-serif);
+            font-size: 3.5rem;
+            margin-bottom: 0.3rem;
+            background: linear-gradient(135deg, var(--white) 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+        }
+
+        .page-header .subtitle-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-top: 0.2rem;
+        }
+
+        .page-header .subtitle-wrapper .flower {
+            font-size: 1.2rem;
+            color: var(--gold);
+            opacity: 0.4;
+            line-height: 1;
+        }
+
+        .page-header .subtitle-wrapper .flower:nth-child(1) { animation: gentleSway 3s ease-in-out infinite; }
+        .page-header .subtitle-wrapper .flower:nth-child(3) { animation: gentleSway 3s ease-in-out infinite 1.5s; }
+
+        @keyframes gentleSway {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        .page-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+
+        .page-header .divider-line {
+            width: 60px;
+            height: 2px;
+            background: var(--gold);
+            margin: 0.8rem auto 0;
+            opacity: 0.4;
+        }
+
+        /* ====== INTRO IMAGE ====== */
+        .intro-image-wrapper {
+            max-width: 600px;
+            margin: 1.2rem auto 0;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(201, 168, 76, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .intro-image-wrapper img {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+            max-height: 350px;
+        }
+
+        /* ====== BIOGRAPHY CONTENT ====== */
+        .bio-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .bio-content .bio-quote {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-style: italic;
+            color: var(--gold);
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(201, 168, 76, 0.1);
+            border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+            margin: 2rem 0;
+            line-height: 1.6;
+        }
+
+        .bio-content .bio-quote small {
+            display: block;
+            font-size: 1rem;
+            color: var(--gray);
+            font-style: normal;
+            margin-top: 0.5rem;
+        }
+
+        .bio-text {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: #e0e0e0;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .bio-text strong { color: var(--gold); }
+        .bio-text .highlight { color: var(--gold-light); font-weight: 500; }
+
+        /* ====== SUBTITLES - LEFT ALIGNED ====== */
+        .section-subtitle {
+            font-family: var(--font-serif);
+            color: var(--gold);
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem;
+            text-align: left;
+            position: relative;
+            padding-left: 0;
+        }
+
+        .section-subtitle::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 2px;
+            background: var(--gold);
+            margin: 0.3rem 0 0;
+            opacity: 0.4;
+        }
+
+                 /* ====== BIOGRAPHY IMAGES ====== */
+        .bio-images-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem auto;
+            max-width: 800px;
+        }
+
+        .bio-image-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            background: var(--dark);
+            border: 1px solid rgba(201, 168, 76, 0.1);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .bio-image-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            border-color: rgba(201, 168, 76, 0.3);
+        }
+
+        .bio-image-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;  /* Changed back to cover to fill the area */
+            display: block;
+        }
+
+        .bio-image-item .image-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem 1.2rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: var(--white);
+            font-size: 0.85rem;
+            font-weight: 500;
+            font-family: var(--font-serif);
+        }
+
+                .bio-image-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;  /* Centers the image when cropping */
+            display: block;
+        }
+
+        
+
+        /* ====== QUOTE SECTION ====== */
+        .quote-section {
+            background: rgba(201, 168, 76, 0.03);
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: center;
+            margin: 2rem 0;
+            border: 1px solid rgba(201, 168, 76, 0.08);
+        }
+
+        .quote-section .quote-text {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-style: italic;
+            color: var(--gold-light);
+            line-height: 1.6;
+        }
+
+        .quote-section .quote-author {
+            color: var(--gray);
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        /* ====== ACHIEVEMENTS SECTION ====== */
+        .achievements-section {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin: 2.5rem 0;
+            border: 1px solid rgba(201, 168, 76, 0.08);
+        }
+
+        .achievements-section .section-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .achievements-section .section-header h2 {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            color: var(--gold);
+            margin-bottom: 0.3rem;
+        }
+
+        .achievements-section .section-header .section-divider {
+            width: 60px;
+            height: 2px;
+            background: var(--gold);
+            margin: 0.5rem auto 0;
+            opacity: 0.4;
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .achievement-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 2rem 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(201, 168, 76, 0.05);
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(201, 168, 76, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .achievement-card .icon {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .achievement-card h3 {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            color: var(--white);
+            margin-bottom: 0.3rem;
+        }
+
+        .achievement-card p {
+            font-size: 0.9rem;
+            color: var(--gray);
+            line-height: 1.5;
+        }
+
+        /* ====== TIMELINE / JOURNEY SECTION ====== */
+        .journey-section {
+            margin: 2.5rem 0;
+            padding: 2.5rem 0;
+            border-top: 1px solid rgba(201, 168, 76, 0.08);
+            border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+        }
+
+        .journey-section .section-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .journey-section .section-header h2 {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            color: var(--gold);
+            margin-bottom: 0.3rem;
+        }
+
+        .journey-section .section-header .section-divider {
+            width: 60px;
+            height: 2px;
+            background: var(--gold);
+            margin: 0.5rem auto 0;
+            opacity: 0.4;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2.5rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0.7rem;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: var(--gold);
+            opacity: 0.3;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+            padding-left: 1.5rem;
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.05s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.15s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(5) { animation-delay: 0.25s; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -2.2rem;
+            top: 0.3rem;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--gold);
+            border: 3px solid var(--black);
+            box-shadow: 0 0 20px rgba(201, 168, 76, 0.2);
+        }
+
+        .timeline-content .timeline-year {
+            font-weight: 700;
+            color: var(--gold);
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .timeline-content h3 {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            color: var(--white);
+            margin-bottom: 0.2rem;
+        }
+
+        .timeline-content p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* ====== STYLISH BOTTOM SECTION ====== */
+        .bottom-memorial-section {
+            text-align: center;
+            padding: 2.5rem 1rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(201, 168, 76, 0.08);
+            border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+            position: relative;
+        }
+
+        .bottom-memorial-section .flower-decoration {
+            font-size: 1.5rem;
+            color: var(--gold);
+            opacity: 0.3;
+            letter-spacing: 12px;
+            margin-bottom: 0.8rem;
+        }
+
+        .bottom-memorial-section .memorial-message {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            color: var(--gold-light);
+            margin-bottom: 0.3rem;
+            line-height: 1.4;
+        }
+
+        .bottom-memorial-section .memorial-sub-message {
+            color: var(--gray);
+            font-size: 1rem;
+            margin-bottom: 1.8rem;
+            font-style: italic;
+        }
+
+        .bottom-memorial-section .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .bottom-memorial-section .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .bottom-memorial-section .action-btn.tribute-btn {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        .bottom-memorial-section .action-btn.tribute-btn:hover {
+            background: var(--gold-light);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(201, 168, 76, 0.3);
+        }
+
+        .bottom-memorial-section .action-btn.candle-btn {
+            background: transparent;
+            color: var(--white);
+            border: 1.5px solid var(--gold);
+        }
+
+        .bottom-memorial-section .action-btn.candle-btn:hover {
+            background: var(--gold);
+            color: var(--black);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(201, 168, 76, 0.2);
+        }
+
+        .bottom-memorial-section .action-btn i {
+            font-size: 1rem;
+        }
+
+        /* ====== FULL WIDTH MEMORIAL BANNER ====== */
+        .memorial-banner {
+            margin-top: 2rem;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 16/5;
+            background: var(--dark);
+            border: 1px solid rgba(201, 168, 76, 0.1);
+            position: relative;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .memorial-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .memorial-banner .banner-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            text-align: center;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: var(--white);
+            font-size: 1.2rem;
+            font-family: var(--font-serif);
+        }
+
+/* ====== SUBTITLES - LEFT ALIGNED ====== */
+.section-subtitle {
+    font-family: var(--font-serif);
+    color: var(--gold);
+    font-size: 2.2rem;  /* Increased from 1.8rem */
+    margin: 2rem 0 1rem;
+    text-align: left;
+    position: relative;
+    padding-left: 0;
+}
+
+.section-subtitle::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+    margin: 0.3rem 0 0;
+    opacity: 0.4;
+}
+
+@media (max-width: 768px) {
+    .section-subtitle {
+        font-size: 1.8rem;  /* Increased from 1.5rem */
+    }
+}
+
+@media (max-width: 480px) {
+    .section-subtitle {
+        font-size: 1.5rem;  /* Increased from 1.2rem */
+    }
+}
+
+                /* ====== FOOTER ====== */
+        .footer {
+            background: var(--dark);
+            padding: 2.5rem 0;
+            border-top: 1px solid rgba(201, 168, 76, 0.1);
+            margin-top: 2rem;
+        }
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .footer-brand {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .footer-brand .footer-logo {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+        }
+        .footer-sub {
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: 0.2rem;
+        }
+        .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .footer-links a { color: var(--gray); font-size: 0.9rem; }
+        .footer-links a:hover { color: var(--gold); }
+        .footer-copy { font-size: 0.8rem; color: var(--gray); text-align: center; width: 100%; margin-top: 1.5rem; }
+
+        @media (max-width: 768px) {
+            .footer-content { flex-direction: column; text-align: center; }
+            .footer-links { justify-content: center; }
+        }
+
+        @media (max-width: 480px) {
+            .footer-brand { font-size: 1rem; }
+            .footer-brand .footer-logo { width: 28px; height: 28px; }
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 { font-size: 2.8rem; }
+            .page-header .subtitle-wrapper .flower { font-size: 1rem; }
+            .page-header .subtitle-wrapper { gap: 0.5rem; }
+            .page-header p { font-size: 1rem; }
+            .bio-text { font-size: 0.95rem; }
+            .bio-content .bio-quote { font-size: 1.2rem; }
+            .quote-section .quote-text { font-size: 1.4rem; }
+            .bio-images-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+            .footer-content { flex-direction: column; text-align: center; }
+            .footer-links { justify-content: center; }
+            .bottom-memorial-section .memorial-message { font-size: 1.6rem; }
+            .bottom-memorial-section .action-btn { padding: 0.7rem 1.5rem; font-size: 0.85rem; }
+            .intro-image-wrapper { max-width: 100%; margin: 1rem auto 0; }
+            .intro-image-wrapper img { max-height: 250px; }
+            .memorial-banner .banner-caption { font-size: 1rem; padding: 1rem; }
+            .achievements-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+            .timeline { padding-left: 1.8rem; }
+            .timeline-dot { left: -1.6rem; width: 12px; height: 12px; }
+            .section-subtitle { font-size: 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            .page-header h1 { font-size: 2.2rem; }
+            .page-header p { font-size: 0.9rem; }
+            .page-header .subtitle-wrapper .flower { font-size: 0.9rem; }
+            .bio-images-grid { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+            .quote-section { padding: 1.5rem; }
+            .quote-section .quote-text { font-size: 1.2rem; }
+            .bio-content .bio-quote { font-size: 1rem; padding: 1.5rem 0; }
+            .footer-brand { font-size: 1rem; }
+            .footer-brand .footer-logo { width: 28px; height: 28px; }
+            .bottom-memorial-section .memorial-message { font-size: 1.3rem; }
+            .bottom-memorial-section .action-btn { padding: 0.6rem 1.2rem; font-size: 0.8rem; width: 100%; justify-content: center; }
+            .bottom-memorial-section .action-buttons { flex-direction: column; align-items: center; }
+            .bottom-memorial-section .flower-decoration { font-size: 1.2rem; letter-spacing: 8px; }
+            .intro-image-wrapper img { max-height: 180px; }
+            .memorial-banner .banner-caption { font-size: 0.8rem; padding: 0.8rem; }
+            .section-subtitle { font-size: 1.2rem; }
+            .achievements-section { padding: 1.5rem; }
+            .achievements-grid { grid-template-columns: 1fr; }
+            .journey-section { padding: 1.5rem 0; }
+            .timeline { padding-left: 1.5rem; }
+            .timeline-item { padding-left: 1rem; }
+            .timeline-dot { left: -1.3rem; width: 10px; height: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ====== NAVIGATION ====== -->
+    <nav class="navbar" id="mainNav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <img src="images/60827b0fa88b45ff8794f38ddfd583ca.png" alt="In Loving Memory" class="nav-logo" />
+                <span class="brand-text">In Loving Memory</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link active">Life Story</a></li>
+                <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+                <li><a href="tributes.html" class="nav-link">Tributes</a></li>
+                <li><a href="candles.html" class="nav-link">Candles</a></li>
+                <li><a href="service.html" class="nav-link">Funeral Service</a></li>
+            </ul>
+        </div>
+    </nav>
+
+            <!-- ====== MUSIC PLAYER ====== -->
+    <section id="music-section" class="music-player-bar">
+        <div class="music-container">
+            <div class="music-info">
+                <i class="fas fa-music music-icon" id="musicStatusIcon"></i>
+                <span class="music-title">Memorial Hymn</span>
+                <span class="music-artist">— Eternal Peace</span>
+                <span class="music-status" id="musicStatus">● Playing</span>
+            </div>
+            <div class="music-controls">
+                <button class="music-btn" id="musicPlayBtn" onclick="toggleMusic()">
+                    <i class="fas fa-pause" id="musicPlayIcon"></i>
+                </button>
+                <input type="range" class="music-volume" id="musicVolume" min="0" max="1" step="0.01" value="0.5" oninput="changeVolume(this.value)" />
+                <span class="volume-icon"><i class="fas fa-volume-up"></i></span>
+            </div>
+        </div>
+         <audio id="bgMusic" loop preload="auto">
+                <source src="music/Best Christian Hymns Compilation  Old & Traditional Church Songs.mp3" type="audio/mpeg" />
+            </audio>
+    </section>
+
+    <!-- ====== MAIN CONTENT ====== -->
+    <main>
+        <!-- Page Header -->
+        <section class="section page-header-section">
+            <div class="container">
+                <div class="page-header">
+                    <h1>Life Story</h1>
+                    <div class="subtitle-wrapper">
+                        <span class="flower">🌸</span>
+                        <p>Celebrating the journey of Carolyne Nzume</p>
+                        <span class="flower">🌸</span>
+                    </div>
+                    <div class="divider-line"></div>
+
+                    <!-- Intro Image -->
+                    <div class="intro-image-wrapper">
+                        <img src="images/IMG-20260804-WA0078 - Copy.jpg" alt="Carolyne Nzume - A Life of Grace" />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Biography Content -->
+        <section class="section">
+            <div class="container">
+                <div class="bio-content">
+
+                    <!-- ====== BIOGRAPHY TEXT ====== -->
+                    <p class="bio-text">
+                        <strong>Mrs. Nzume née Carolyne Bessem Lobe</strong>, a beacon of peace, love, kindness, gentleness and compassion. She was born on the <strong>12th April 1961</strong> in Kembong, Manyu Division to <strong>Pa Netongo Lobe</strong> (of blessed memory) and <strong>Ma Esther Lobe nee Ashu Mbu</strong>.
+                    </p>
+
+                    <p class="bio-text">
+                        Mrs. Nzume lived a remarkable life filled with passions and accomplishments.
+                    </p>
+
+                    <!-- ====== IMAGE 1 ====== -->
+                    <div class="bio-images-grid">
+                        <div class="bio-image-item">
+                            <img src="images/IMG-20260804-WA0094.jpg" alt="Carolyne Nzume - Early Life" />
+                            <div class="image-caption">Early Life &amp; Education</div>
+                        </div>
+                        <div class="bio-image-item">
+                            <img src="images/IMG-20260804-WA0271.jpg" alt="Carolyne Nzume - Academic Journey" />
+                            <div class="image-caption">Academic Achievements</div>
+                        </div>
+                    </div>
+
+                    <h2 class="section-subtitle">Academic Life</h2>
+
+                    <p class="bio-text">
+                        With regards to her academic life, she attended several <span class="highlight">Presbyterian, Catholic and Government</span> primary and secondary schools across <span class="highlight">Kumba, Mamfe, Besongabang</span> and obtained the <span class="highlight">GCE A' levels at CCAST Bambili in 1983</span>.
+                    </p>
+
+                    <p class="bio-text">
+                        She proceeded to the <span class="highlight">University of Yaounde</span> for two years and gained admission into <span class="highlight">ENAM</span>, where she trained as a Labour Controller.
+                    </p>
+
+                    <!-- ====== IMAGE 2 ====== -->
+                    <div class="bio-images-grid">
+                        <div class="bio-image-item">
+                            <img src="images/WhatsApp Image 2026-07-29 at 10.15.47 PM.jpeg" alt="Carolyne Nzume - Professional Life" />
+                            <div class="image-caption">Professional Career</div>
+                        </div>
+                        <div class="bio-image-item">
+                            <img src="images/WhatsApp Image 2026-07-28 at 11.11.08 AM.jpeg" alt="Carolyne Nzume - Working Life" />
+                            <div class="image-caption">Service to the Nation</div>
+                        </div>
+                    </div>
+
+                    <h2 class="section-subtitle">Professional Life</h2>
+
+                    <p class="bio-text">
+                        Concerning her professional life, she worked for the <span class="highlight">Ministry of Labour and Social Security</span> in various capacities and regions, serving as <span class="highlight">Service Head for the Regional Delegations</span> in both the <span class="highlight">North (Garoua)</span> and <span class="highlight">South West (Buea)</span> Regions.
+                    </p>
+
+                    <p class="bio-text">
+                        She was also the <span class="highlight">Divisional Delegate for Fako</span> for a few years before returning to Garoua, where she retired as <span class="highlight">Labour Administrator in 2016</span>.
+                    </p>
+
+                    <!-- ====== VIDEO SECTION ====== -->
+                    <div class="bio-video-section">
+                        <video controls preload="metadata" poster="images/IMG-20260804-WA0091.jpg">
+                            <source src="videos/VID-20260804-WA0185.mp4" type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="video-caption">
+                            <i class="fas fa-video"></i> A tribute to Carolyne Nzume – Celebrating a life of service and love
+                        </div>
+                    </div>
+
+                    <h2 class="section-subtitle">Family Life</h2>
+
+                    <p class="bio-text">
+                        As far as family life is concerned, Mrs. Nzume got married to her soul mate and devoted husband, <strong>Colonel Kenneth Akwe Nzume</strong> on the <span class="highlight">26th August 1986</span>. They were blessed with <span class="highlight">both biological and adopted children</span>, most of whom are now successful and responsible adults as a result of the sacrifices and parental guidance.
+                    </p>
+
+                    <p class="bio-text">
+                        She was a devoted wife, mother, grandmother, daughter, sister and friend, whose warmth and generosity touched and transformed the lives of all who crossed her path. Her kindness knew no bounds, and she treated everyone indiscriminately irrespective of class, gender, status or rank. She played an active role in transforming so many lives and made them become a better version of themselves.
+                    </p>
+
+                    <!-- ====== QUOTE ====== -->
+                    <div class="quote-section">
+                        <p class="quote-text">"She treated everyone indiscriminately irrespective of class, gender, status or rank."</p>
+                        <p class="quote-author">— A woman of grace and equality</p>
+                    </div>
+
+                    <!-- ====== IMAGE 3 ====== -->
+                    <div class="bio-images-grid">
+                        <div class="bio-image-item">
+                            <img src="images/IMG-20260804-WA0113.jpg" alt="Carolyne Nzume - Family Life" />
+                            <div class="image-caption">Family &amp; Loved Ones</div>
+                        </div>
+                        <div class="bio-image-item">
+                            <img src="images/IMG-20260804-WA0251.jpg" alt="Carolyne Nzume - Church Life" />
+                            <div class="image-caption">Faith &amp; Church Service</div>
+                        </div>
+                    </div>
+
+                    <h2 class="section-subtitle">Faith &amp; Church Life</h2>
+
+                    <p class="bio-text">
+                        Beyond her family life, she was a God-fearing woman, a fervent and committed Presbyterian; a devoted CWF member and a chorister. She worshipped at <span class="highlight">P.C. Garoua for 32 years</span> where she was an <span class="highlight">elder chorister in the English Choir</span> and <span class="highlight">CWF President</span>. She also worshipped at P.C. Great Soppo Buea and P.C. Bonadikombo. Despite her desire to continue with church activities, ill health restricted her active and total participation.
+                    </p>
+
+                    <!-- ====== IMAGE 4 ====== -->
+                    <div class="bio-images-grid">
+                        <div class="bio-image-item">
+                            <img src="images/IMG-20260804-WA0074.jpg" alt="Carolyne Nzume - Legacy" />
+                            <div class="image-caption">A Life Well Lived</div>
+                        </div>
+                        <div class="bio-image-item">
+                            <img src="images/IMG-20260804-WA0073.jpg" alt="Carolyne Nzume - Carolyne's devotion to faith – A life of worship and service" />
+                            <div class="image-caption">Celebration of Her Life</div>
+                        </div>
+                    </div>
+                    
+
+                    <h2 class="section-subtitle">Travels &amp; Joys</h2>
+
+                    <p class="bio-text">
+                        Outside her church activities, Mrs. Nzume enjoyed spending time and celebrating with family members and friends. She loved travelling and visited several countries worldwide: <span class="highlight">China, USA, France, England, Israel, Dubai</span>, to name just a few. She always encouraged everyone around her not to miss out on any opportunity to enjoy and have fun with the phrases:
+                    </p>
+
+                  <!-- ====== TRAVELS & JOYS QUOTES ====== -->
+<div class="bio-quote" style="background: rgba(201, 168, 76, 0.05); border-radius: 12px; padding: 2rem; border: 1px solid rgba(201, 168, 76, 0.15);">
+    <p style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--gold); text-align: center; line-height: 1.4; letter-spacing: 1px;">
+        "LES BEAU JOURS SONT RARE"
+    </p>
+    <p style="text-align: center; color: var(--gray); font-size: 1.1rem; margin-top: 0.5rem; font-style: italic;">
+        "The beautiful days are rare"
+    </p>
+</div>
+
+<div class="bio-quote" style="background: rgba(201, 168, 76, 0.03); border-radius: 12px; padding: 2rem; border: 1px solid rgba(201, 168, 76, 0.08); margin-top: 1.5rem;">
+    <p style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--gold); text-align: center; line-height: 1.4; letter-spacing: 1px;">
+        "ONE LIFE TO LIVE"
+    </p>
+    <p style="text-align: center; color: var(--gray); font-size: 1.1rem; margin-top: 0.5rem; font-style: italic;">
+        Carolyne's encouragement to seize every moment
+    </p>
+</div>
+
+                    <h2 class="section-subtitle">Final Days &amp; Legacy</h2>
+
+                    <p class="bio-text">
+                        Mrs. Nzume started experiencing health challenges <span class="highlight">8 years ago</span>. However, her strong faith in God, hope and positive outlook on life kept her strong as she repeatedly confessed that <span class="highlight">"I be Jesus ye follow back"</span>!
+                    </p>
+
+                    <p class="bio-text">
+                        Her sporadic periods of ill-health notwithstanding, she kept on loving, caring and being kind to all around her. On the <span class="highlight">5th of July</span>, she experienced some discomfort and was <span class="highlight">hospitalized for close to a week</span> and discharged. At a time when we thought she was regaining her health, she passed away quietly on the <span class="highlight">18th July 2026</span>.
+                    </p>
+
+                    <!-- ====== VIDEO SECTION 2 ====== -->
+                    <div class="bio-video-section">
+                        <video controls preload="metadata" poster="images/IMG-20260804-WA0280.jpg">
+                            <source src="videos/VID-20260804-WA0281.mp4" type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="video-caption">
+                            <i class="fas fa-church"></i> Carolyne Nzume - Celebration of Life
+                        </div>
+                    </div>
+
+                    <p class="bio-text">
+                        She leaves behind her loving husband, children, grandchildren, mother, sisters, brother, in-laws, cousins &amp; nieces, nephews and other family members, neighbours and a host of friends who all adored her.
+                    </p>
+
+                    <p class="bio-text">
+                        She will be remembered for her gentle spirit, unwavering faith and the love she poured in every relationship.
+                    </p>
+
+                    <!-- ====== FINAL QUOTE ====== -->
+                    <!-- ====== FINAL QUOTE ====== -->
+<div class="quote-section" style="background: rgba(201, 168, 76, 0.05); border: 1px solid rgba(201, 168, 76, 0.15);">
+    <p class="quote-text" style="font-size: 2.2rem; color: var(--gold);">
+        May her legacy live on!
+    </p>
+    <p class="quote-text" style="font-size: 1.8rem; color: var(--gold-light);">
+        May her gentle soul rest in perfect peace!
+    </p>
+    <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(201, 168, 76, 0.1);">
+        <p style="font-family: var(--font-serif); font-size: 2.5rem; font-weight: 700; color: var(--gold); text-align: center; line-height: 1.4; letter-spacing: 1px;">
+            "Jesus ye follow back"
+        </p>
+        <p style="text-align: center; color: var(--gray); font-size: 1rem; margin-top: 0.5rem; font-style: italic;">
+            Fare thee well, Carolyne
+        </p>
+    </div>
+</div>
+
+                    <!-- ====== MEMORIAL BANNER ====== -->
+                    <div class="memorial-banner">
+                        <img src="images/banner.jpg" alt="Carolyne Nzume - Memorial" />
+                        <div class="banner-caption">
+                            In Loving Memory of Carolyne Nzume ❤️
+                        </div>
+                    </div>
+
+                    <!-- ====== ACHIEVEMENTS SECTION ====== -->
+<div class="achievements-section">
+    <div class="section-header">
+        <h2>Honors &amp; Achievements</h2>
+        <div class="section-divider"></div>
+        <p style="color: var(--gray); font-size: 0.95rem; margin-top: 0.5rem;">A life of excellence and service</p>
+    </div>
+
+    <div class="achievements-grid">
+        <div class="achievement-card">
+            <span class="icon"><i class="fas fa-landmark"></i></span>
+            <h3>Divisional Delegate for Fako</h3>
+            <p>Appointed as Divisional Delegate for Fako in 2013, demonstrating exceptional leadership in labour administration and public service.</p>
+        </div>
+        <div class="achievement-card">
+            <span class="icon"><i class="fas fa-hand-holding-heart"></i></span>
+            <h3>Community Service Medal</h3>
+            <p>Awarded for her charitable work and dedication to serving her community with love and compassion.</p>
+        </div>
+        <div class="achievement-card">
+            <span class="icon"><i class="fas fa-church"></i></span>
+            <h3>Church Service &amp; Leadership</h3>
+            <p>Devoted 32 years of service at P.C. Garoua as an elder chorister in the English Choir and CWF President, inspiring faith and worship.</p>
+        </div>
+    </div>
+</div>
+
+                   <!-- ====== JOURNEY / TIMELINE SECTION ====== -->
+<div class="journey-section">
+    <div class="section-header">
+        <h2>Her Journey</h2>
+        <div class="section-divider"></div>
+        <p style="color: var(--gray); font-size: 0.95rem; margin-top: 0.5rem;">Milestones of a life well lived</p>
+    </div>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-year">1961</span>
+                <h3>Born in Kembong</h3>
+                <p>Born on 12th April in Kembong, Manyu Division to Pa Netongo Lobe and Ma Esther Lobe.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-year">1983</span>
+                <h3>GCE A' Levels</h3>
+                <p>Obtained her GCE A' levels at CCAST Bambili, marking the start of her academic excellence.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-year">1985</span>
+                <h3>University of Yaounde</h3>
+                <p>Attended the University of Yaounde for two years, pursuing higher education.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-year">1987</span>
+                <h3>ENAM - Labour Controller</h3>
+                <p>Gained admission into ENAM and trained as a Labour Controller, beginning her professional journey.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-year">1986</span>
+                <h3>Married Her Soul Mate</h3>
+                <p>Got married to Colonel Kenneth Akwe Nzume on 26th August, beginning a beautiful journey together.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-year">2013</span>
+                <h3>Divisional Delegate for Fako</h3>
+                <p>Served as the Divisional Delegate for Fako, demonstrating exceptional leadership and dedication.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-year">2016</span>
+                <h3>Retired as Labour Administrator</h3>
+                <p>Retired from the Ministry of Labour and Social Security after years of dedicated service as Labour Administrator.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-year">2026</span>
+                <h3>Rest in Peace</h3>
+                <p>Passed away peacefully on 18th July 2026, leaving behind a legacy of love and faith.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+                    <!-- ====== STYLISH BOTTOM SECTION ====== -->
+                    <div class="bottom-memorial-section">
+                        <div class="flower-decoration">
+                            🌹 🌷 🌹 🌷 🌹
+                        </div>
+
+                        <p class="memorial-message">
+                            "A life beautifully lived, a heart deeply loved."
+                        </p>
+
+                        <p class="memorial-sub-message">
+                            Carolyne's legacy of love, faith, and kindness continues to inspire all who knew her.
+                        </p>
+
+                        <div class="action-buttons">
+                            <a href="tributes.html" class="action-btn tribute-btn">
+                                <i class="fas fa-pen"></i> Share a Tribute
+                            </a>
+                            <a href="candles.html" class="action-btn candle-btn">
+                                <i class="fas fa-fire"></i> Light a Candle
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+       <!-- ====== FOOTER ====== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="images/logo.jpg" alt="In Loving Memory" class="footer-logo" />
+                    <div>
+                        <span class="brand-gold">✦</span> In Loving Memory
+                        <p class="footer-sub">Carolyne Nzume · 1961 – 2026</p>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">Life Story</a>
+                    <a href="gallery.html">Gallery</a>
+                    <a href="tributes.html">Tributes</a>
+                    <a href="candles.html">Candles</a>
+                    <a href="service.html">Service</a>
+                </div>
+                <div class="footer-copy">&copy; 2026 · Built with <i class="fas fa-heart" style="color: #c9a84c;"></i> in loving memory</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ====== MUSIC CONTROLS ====== -->
+    <script>
+        function toggleMusic() {
+            var audio = document.getElementById('bgMusic');
+            var icon = document.getElementById('musicPlayIcon');
+            var status = document.getElementById('musicStatus');
+            
+            if (audio.paused) {
+                audio.play();
+                icon.className = 'fas fa-pause';
+                status.textContent = '● Playing';
+                status.className = 'music-status playing';
+                localStorage.setItem('musicState', 'playing');
+            } else {
+                audio.pause();
+                icon.className = 'fas fa-play';
+                status.textContent = '● Paused';
+                status.className = 'music-status';
+                localStorage.setItem('musicState', 'paused');
+            }
+        }
+
+        function changeVolume(val) {
+            var audio = document.getElementById('bgMusic');
+            audio.volume = parseFloat(val);
+            localStorage.setItem('musicVolume', val);
+            
+            var icon = document.querySelector('.volume-icon i');
+            if (val == 0) {
+                icon.className = 'fas fa-volume-mute';
+            } else if (val < 0.5) {
+                icon.className = 'fas fa-volume-down';
+            } else {
+                icon.className = 'fas fa-volume-up';
+            }
+        }
+
+        function scrollToMusic() {
+            document.getElementById('music-section').scrollIntoView({ behavior: 'smooth' });
+            var audio = document.getElementById('bgMusic');
+            if (audio.paused) {
+                toggleMusic();
+            }
+        }
+    </script>
+</body>
+</html>
+
+    <!-- ====== SCRIPTS ====== -->
+    <script src="js/music.js"></script>
+    <!-- Other scripts -->
+
+    <!-- ====== SCRIPTS ====== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // ====== NAVIGATION ======
+            const navToggle = document.getElementById('navToggle');
+            const navMenu = document.getElementById('navMenu');
+
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', function() {
+                    navMenu.classList.toggle('open');
+                });
+
+                navMenu.querySelectorAll('.nav-link').forEach(function(link) {
+                    link.addEventListener('click', function() {
+                        navMenu.classList.remove('open');
+                    });
+                });
+            }
+
+            // ====== MUSIC PLAYER ======
+            const audio = document.getElementById('bgMusic');
+            const playBtn = document.getElementById('musicPlayBtn');
+            const playIcon = document.getElementById('musicPlayIcon');
+            const volumeSlider = document.getElementById('musicVolume');
+
+            if (playBtn) {
+                playBtn.addEventListener('click', function() {
+                    if (audio.paused) {
+                        audio.play().then(function() {
+                            playIcon.className = 'fas fa-pause';
+                        }).catch(function() {});
+                    } else {
+                        audio.pause();
+                        playIcon.className = 'fas fa-play';
+                    }
+                });
+            }
+            if (volumeSlider) {
+                volumeSlider.addEventListener('input', function() {
+                    audio.volume = parseFloat(this.value);
+                });
+            }
+            audio.volume = 0.5;
+            audio.play().then(function() {
+                playIcon.className = 'fas fa-pause';
+            }).catch(function() {});
+
+            console.log('📖 About page loaded successfully');
+        });
+    </script>
+
+</body>
+</html>

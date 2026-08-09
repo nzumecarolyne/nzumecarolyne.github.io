@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Light a Candle – In Loving Memory</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        /* ====== PAGE HEADER ====== */
+        .page-header-section {
+            padding-top: 7rem;
+            text-align: center;
+        }
+        .page-header h1 {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        .page-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+                /* ====== NAVIGATION WITH LOGO ====== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--white);
+            transition: opacity 0.3s ease;
+        }
+        .nav-brand:hover { opacity: 0.8; }
+
+        .nav-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+            display: block;
+            flex-shrink: 0;
+        }
+
+        .brand-text { color: var(--white); }
+        .brand-gold { color: var(--gold); }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 1.8rem;
+        }
+        .nav-link {
+            color: var(--white);
+            font-weight: 400;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 0.4rem 0;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after,
+        .nav-link.active::after { width: 100%; }
+        .nav-link.active { color: var(--gold); }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+        .hamburger-line {
+            width: 28px;
+            height: 2px;
+            background: var(--white);
+            transition: all 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle { display: flex; }
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                gap: 0.5rem;
+                background: var(--dark);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                padding: 1.5rem 2rem;
+                border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+            }
+            .nav-menu.open { display: flex; }
+            .nav-logo { width: 32px; height: 32px; }
+            .brand-text { font-size: 1rem; }
+            .nav-brand { gap: 8px; }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container { padding: 0.6rem 1rem; }
+            .nav-logo { width: 28px; height: 28px; }
+            .brand-text { font-size: 0.85rem; }
+        }
+
+        /* ====== CANDLE HERO SECTION ====== */
+        .candle-hero {
+            position: relative;
+            padding: 3rem 0;
+            margin: 1rem 0 2rem;
+            border-radius: 20px;
+            overflow: hidden;
+            background: var(--dark);
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .candle-hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .candle-hero-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(10, 10, 10, 0.7) 0%, rgba(10, 10, 10, 0.9) 100%);
+        }
+
+        .candle-hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .candle-hero-content .candle-icon-big {
+            font-size: 5rem;
+            color: #e8d5a3;
+            filter: drop-shadow(0 0 30px rgba(201, 168, 76, 0.3));
+            display: block;
+            margin-bottom: 0.5rem;
+            animation: floatCandle 3s ease-in-out infinite;
+        }
+
+        @keyframes floatCandle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .candle-hero-content .flame-big {
+            font-size: 2.5rem;
+            color: #ff6b00;
+            display: block;
+            animation: bigFlicker 1.5s infinite alternate;
+            text-shadow: 0 0 40px rgba(255, 107, 0, 0.4);
+            margin-top: -0.5rem;
+        }
+
+        @keyframes bigFlicker {
+            0% { opacity: 0.7; transform: scale(0.9) rotate(-2deg); }
+            100% { opacity: 1; transform: scale(1.1) rotate(2deg); }
+        }
+
+        .candle-hero-content .candle-count-number {
+            font-size: 4.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            display: block;
+            font-family: var(--font-serif);
+            margin: 0.5rem 0;
+            text-shadow: 0 0 30px rgba(201, 168, 76, 0.2);
+        }
+
+        .candle-hero-content .candle-count-label {
+            font-size: 1rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .candle-hero-content .candle-quote {
+            font-family: var(--font-serif);
+            font-style: italic;
+            color: var(--gold-light);
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            opacity: 0.8;
+        }
+
+        /* ====== LIGHT CANDLE FORM ====== */
+        .candle-form-wrapper {
+            max-width: 500px;
+            margin: 2rem auto;
+            background: var(--dark);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(201, 168, 76, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .candle-form-wrapper .form-title {
+            text-align: center;
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .candle-form-wrapper .form-title i {
+            margin-right: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-weight: 500;
+            color: var(--white);
+            font-size: 0.9rem;
+        }
+        .form-group label .required {
+            color: var(--gold);
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: var(--white);
+            font-family: var(--font-sans);
+            transition: border 0.3s, box-shadow 0.3s;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 20px rgba(201, 168, 76, 0.1);
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        .form-group select option {
+            background: var(--dark);
+        }
+
+        .btn-candle {
+            background: var(--gold);
+            color: var(--black);
+            padding: 0.8rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            justify-content: center;
+        }
+        .btn-candle:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(201, 168, 76, 0.4);
+        }
+        .btn-candle:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ====== CANDLE LIGHTERS LIST ====== */
+        .candle-lighters-section {
+            margin-top: 3rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(201, 168, 76, 0.05);
+        }
+
+        .candle-lighters-section h3 {
+            font-family: var(--font-serif);
+            text-align: center;
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .candle-lighters-section h3 i {
+            margin-right: 0.5rem;
+        }
+
+        .candle-lighters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.2rem;
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 0.5rem;
+        }
+
+        .candle-lighters-grid::-webkit-scrollbar {
+            width: 4px;
+        }
+        .candle-lighters-grid::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+        .candle-lighters-grid::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 4px;
+        }
+
+        .candle-lighter-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1.2rem 1.2rem 1.2rem 1.5rem;
+            border-radius: 12px;
+            border-left: 3px solid var(--gold);
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .candle-lighter-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateX(5px);
+        }
+
+        .candle-lighter-item .lighter-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            width: 100%;
+        }
+
+        .candle-lighter-item .lighter-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(201, 168, 76, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--gold);
+            flex-shrink: 0;
+            font-weight: 600;
+        }
+
+        .candle-lighter-item .lighter-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .candle-lighter-item .lighter-name {
+            font-weight: 600;
+            color: var(--white);
+            font-size: 0.95rem;
+        }
+
+        .candle-lighter-item .lighter-relationship {
+            display: inline-block;
+            background: rgba(201, 168, 76, 0.1);
+            color: var(--gold);
+            font-size: 0.6rem;
+            padding: 0.1rem 0.6rem;
+            border-radius: 10px;
+            margin-left: 0.3rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .candle-lighter-item .lighter-location {
+            color: var(--gray);
+            font-size: 0.75rem;
+            display: block;
+        }
+
+        .candle-lighter-item .lighter-location i {
+            font-size: 0.6rem;
+            margin-right: 0.2rem;
+        }
+
+        .candle-lighter-item .lighter-message {
+            color: var(--gray);
+            font-size: 0.9rem;
+            font-style: italic;
+            margin-top: 0.3rem;
+            padding: 0.5rem 0.8rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 6px;
+            border-left: 2px solid rgba(201, 168, 76, 0.1);
+            line-height: 1.5;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            max-height: none;
+            overflow: visible;
+            display: block;
+        }
+
+        .candle-lighter-item .lighter-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.3rem;
+        }
+
+        .candle-lighter-item .lighter-flame {
+            font-size: 1.2rem;
+            animation: flicker 1.5s infinite alternate;
+            flex-shrink: 0;
+        }
+
+        .candle-lighter-item .lighter-time {
+            color: var(--gray);
+            font-size: 0.6rem;
+            flex-shrink: 0;
+        }
+
+        /* ====== EMPTY STATE ====== */
+        .empty-lighters {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--gray);
+        }
+        .empty-lighters i {
+            font-size: 3rem;
+            color: var(--gold);
+            opacity: 0.3;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        /* ====== TOAST ====== */
+        .candle-toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(201, 168, 76, 0.3);
+            color: var(--white);
+            font-size: 0.95rem;
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.5s ease;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .candle-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .candle-toast i {
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+
+        /* ====== ANIMATION ====== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .candle-lighter-item {
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        .candle-lighter-item:nth-child(1) { animation-delay: 0.05s; }
+        .candle-lighter-item:nth-child(2) { animation-delay: 0.1s; }
+        .candle-lighter-item:nth-child(3) { animation-delay: 0.15s; }
+
+        /* ====== RESPONSIVE ====== */
+        @media (max-width: 768px) {
+            .candle-hero {
+                min-height: 200px;
+                padding: 2rem 0;
+                margin: 0 0 1rem;
+                border-radius: 12px;
+            }
+            .candle-hero-content .candle-icon-big {
+                font-size: 3.5rem;
+            }
+            .candle-hero-content .flame-big {
+                font-size: 1.8rem;
+            }
+            .candle-hero-content .candle-count-number {
+                font-size: 3rem;
+            }
+            .candle-hero-content .candle-quote {
+                font-size: 1rem;
+            }
+            .candle-form-wrapper {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+            .candle-lighters-grid {
+                grid-template-columns: 1fr;
+                max-height: 400px;
+            }
+            .candle-lighters-section {
+                padding: 1rem;
+            }
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            .candle-toast {
+                width: 90%;
+                font-size: 0.85rem;
+                padding: 0.8rem 1.2rem;
+                bottom: 80px;
+            }
+            .candle-lighter-item .lighter-message {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .candle-hero-content .candle-icon-big {
+                font-size: 2.8rem;
+            }
+            .candle-hero-content .flame-big {
+                font-size: 1.5rem;
+            }
+            .candle-hero-content .candle-count-number {
+                font-size: 2.5rem;
+            }
+            .candle-lighter-item {
+                padding: 0.8rem 0.8rem 0.8rem 1rem;
+            }
+            .candle-lighter-item .lighter-avatar {
+                width: 34px;
+                height: 34px;
+                font-size: 1rem;
+            }
+            .candle-lighter-item .lighter-name {
+                font-size: 0.85rem;
+            }
+        }
+
+           /* ====== HERO BACKGROUND - MORE VISIBLE ====== */
+        .tributes-hero .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.75;  /* Increased visibility */
+            z-index: 0;
+        }
+        
+        .tributes-hero .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.35);  /* Lighter overlay */
+            z-index: 1;
+        }
+
+        /* ====== FOOTER ====== */
+        .footer {
+            background: var(--dark);
+            padding: 2.5rem 0;
+            border-top: 1px solid rgba(201, 168, 76, 0.1);
+            margin-top: 2rem;
+        }
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .footer-brand {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .footer-brand .footer-logo {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+        }
+        .footer-sub {
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: 0.2rem;
+        }
+        .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .footer-links a { color: var(--gray); font-size: 0.9rem; }
+        .footer-links a:hover { color: var(--gold); }
+        .footer-copy { font-size: 0.8rem; color: var(--gray); text-align: center; width: 100%; margin-top: 1.5rem; }
+
+        @media (max-width: 768px) {
+            .footer-content { flex-direction: column; text-align: center; }
+            .footer-links { justify-content: center; }
+        }
+
+        @media (max-width: 480px) {
+            .footer-brand { font-size: 1rem; }
+            .footer-brand .footer-logo { width: 28px; height: 28px; }
+        }
+
+    </style>
+</head>
+<body>
+
+       <!-- ====== NAVIGATION ====== -->
+    <nav class="navbar" id="mainNav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <img src="images/60827b0fa88b45ff8794f38ddfd583ca.png" alt="In Loving Memory" class="nav-logo" />
+                <span class="brand-text">In Loving Memory</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">Life Story</a></li>
+                <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+                <li><a href="tributes.html" class="nav-link">Tributes</a></li>
+                <li><a href="candles.html" class="nav-link">Candles</a></li>
+                <li><a href="service.html" class="nav-link">Funeral Service</a></li>
+            </ul>
+        </div>
+    </nav>
+
+            <!-- ====== MUSIC PLAYER ====== -->
+    <section id="music-section" class="music-player-bar">
+        <div class="music-container">
+            <div class="music-info">
+                <i class="fas fa-music music-icon" id="musicStatusIcon"></i>
+                <span class="music-title">Memorial Hymn</span>
+                <span class="music-artist">— Eternal Peace</span>
+                <span class="music-status" id="musicStatus">● Playing</span>
+            </div>
+            <div class="music-controls">
+                <button class="music-btn" id="musicPlayBtn" onclick="toggleMusic()">
+                    <i class="fas fa-pause" id="musicPlayIcon"></i>
+                </button>
+                <input type="range" class="music-volume" id="musicVolume" min="0" max="1" step="0.01" value="0.5" oninput="changeVolume(this.value)" />
+                <span class="volume-icon"><i class="fas fa-volume-up"></i></span>
+            </div>
+        </div>
+         <audio id="bgMusic" loop preload="auto">
+                <source src="music/Best Christian Hymns Compilation  Old & Traditional Church Songs.mp3" type="audio/mpeg" />
+            </audio>
+    </section>
+
+    <!-- ====== MAIN CONTENT ====== -->
+    <main>
+        <!-- Page Header -->
+        <section class="section page-header-section">
+            <div class="container">
+                <div class="page-header">
+                    <h1>Light a Virtual Candle</h1>
+                    <p>Each candle represents a prayer, a thought, or a loving memory</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Candle Hero Section -->
+        <section class="section candles-section">
+            <div class="container">
+
+                <!-- Candle Hero with Background Image -->
+                <div class="candle-hero">
+<div class="hero-bg" style="background-image: url('images/IMG-20260804-WA0103 - Copy.jpg'); opacity: 0.2;"></div>
+                    <div class="candle-hero-content">
+                        <span class="candle-icon-big">🕯️</span>
+                        <span class="flame-big">🔥</span>
+                        <span class="candle-count-number" id="candleCount">0</span>
+                        <span class="candle-count-label">Candles Lit in Memory</span>
+                        <p class="candle-quote">"May their light forever shine in our hearts"</p>
+                    </div>
+                </div>
+
+                <!-- Light Candle Form -->
+                <div class="candle-form-wrapper">
+                    <div class="form-title">
+                        <i class="fas fa-fire"></i> Light a Candle
+                    </div>
+
+                    <form id="candleForm">
+                        <div class="form-group">
+                            <label for="candleName">Your Name <span class="required">*</span></label>
+                            <input type="text" id="candleName" placeholder="e.g. Jane Doe" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="candleLocation">Your Location</label>
+                            <input type="text" id="candleLocation" placeholder="e.g. Buea, Cameroon" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="candleRelationship">Relationship</label>
+                            <select id="candleRelationship">
+                                <option value="">Select relationship...</option>
+                                <option value="Family">Family</option>
+                                <option value="Friend">Friend</option>
+                                <option value="Colleague">Colleague</option>
+                                <option value="Community Member">Community Member</option>
+                                <option value="Student">Student</option>
+                                <option value="Church Member">Church Member</option>
+                                <option value="Neighbor">Neighbor</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="candleMessage">A short prayer / message</label>
+                            <textarea id="candleMessage" rows="3" placeholder="Share a prayer or message..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-candle" id="lightCandleBtn">
+                            <i class="fas fa-fire"></i> Light a Candle
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Recent Lighters -->
+                <div class="candle-lighters-section">
+                    <h3><i class="fas fa-users"></i> Recent Lighters</h3>
+
+                    <div id="candleLightersList" class="candle-lighters-grid">
+                        <!-- Dynamically populated -->
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- ====== TOAST NOTIFICATION ====== -->
+    <div class="candle-toast" id="candleToast">
+        <i class="fas fa-fire"></i>
+        <span id="toastMessage">Candle lit successfully!</span>
+    </div>
+
+           <!-- ====== MUSIC PLAYER ====== -->
+    <section id="music-section" class="music-player-bar">
+        <div class="music-container">
+            <div class="music-info">
+                <i class="fas fa-music music-icon" id="musicStatusIcon"></i>
+                <span class="music-title">Memorial Hymn</span>
+                <span class="music-artist">— Eternal Peace</span>
+                <span class="music-status" id="musicStatus">● Playing</span>
+            </div>
+            <div class="music-controls">
+                <button class="music-btn" id="musicPlayBtn" onclick="toggleMusic()">
+                    <i class="fas fa-pause" id="musicPlayIcon"></i>
+                </button>
+                <input type="range" class="music-volume" id="musicVolume" min="0" max="1" step="0.01" value="0.5" oninput="changeVolume(this.value)" />
+                <span class="volume-icon"><i class="fas fa-volume-up"></i></span>
+            </div>
+        </div>
+        <audio id="bgMusic" loop preload="auto">
+                <source src="music/Best Christian Hymns Compilation  Old & Traditional Church Songs.mp3" type="audio/mpeg" />
+            </audio>
+    </section>
+
+        <!-- ====== FOOTER ====== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="images/60827b0fa88b45ff8794f38ddfd583ca.png" alt="In Loving Memory" class="footer-logo" />
+                    <div>
+                        <span class="brand-gold">✦</span> In Loving Memory
+                        <p class="footer-sub">Carolyne Nzume · 1961 – 2026</p>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">Life Story</a>
+                    <a href="gallery.html">Gallery</a>
+                    <a href="tributes.html">Tributes</a>
+                    <a href="candles.html">Candles</a>
+                    <a href="service.html">Funeral Service</a>
+                </div>
+                <div class="footer-copy">&copy; 2026 · Built with <i class="fas fa-heart" style="color: #c9a84c;"></i> in loving memory</div>
+            </div>
+        </div>
+    </footer>
+
+        <!-- ====== MUSIC CONTROLS ====== -->
+    <script>
+        function toggleMusic() {
+            var audio = document.getElementById('bgMusic');
+            var icon = document.getElementById('musicPlayIcon');
+            var status = document.getElementById('musicStatus');
+            
+            if (audio.paused) {
+                audio.play();
+                icon.className = 'fas fa-pause';
+                status.textContent = '● Playing';
+                status.className = 'music-status playing';
+                localStorage.setItem('musicState', 'playing');
+            } else {
+                audio.pause();
+                icon.className = 'fas fa-play';
+                status.textContent = '● Paused';
+                status.className = 'music-status';
+                localStorage.setItem('musicState', 'paused');
+            }
+        }
+
+        function changeVolume(val) {
+            var audio = document.getElementById('bgMusic');
+            audio.volume = parseFloat(val);
+            localStorage.setItem('musicVolume', val);
+            
+            var icon = document.querySelector('.volume-icon i');
+            if (val == 0) {
+                icon.className = 'fas fa-volume-mute';
+            } else if (val < 0.5) {
+                icon.className = 'fas fa-volume-down';
+            } else {
+                icon.className = 'fas fa-volume-up';
+            }
+        }
+
+        function scrollToMusic() {
+            document.getElementById('music-section').scrollIntoView({ behavior: 'smooth' });
+            var audio = document.getElementById('bgMusic');
+            if (audio.paused) {
+                toggleMusic();
+            }
+        }
+    </script>
+    <!-- ====== SIMPLE MUSIC CONTROLS ====== -->
+    <script>
+        // Simple functions for music controls
+        function toggleMusic() {
+            var audio = document.getElementById('bgMusic');
+            var icon = document.getElementById('musicPlayIcon');
+            var status = document.getElementById('musicStatus');
+            
+            if (audio.paused) {
+                audio.play();
+                icon.className = 'fas fa-pause';
+                status.textContent = '● Playing';
+                status.className = 'music-status playing';
+                localStorage.setItem('musicState', 'playing');
+            } else {
+                audio.pause();
+                icon.className = 'fas fa-play';
+                status.textContent = '● Paused';
+                status.className = 'music-status';
+                localStorage.setItem('musicState', 'paused');
+            }
+        }
+
+        function changeVolume(val) {
+            var audio = document.getElementById('bgMusic');
+            audio.volume = parseFloat(val);
+            localStorage.setItem('musicVolume', val);
+            
+            var icon = document.querySelector('.volume-icon i');
+            if (val == 0) {
+                icon.className = 'fas fa-volume-mute';
+            } else if (val < 0.5) {
+                icon.className = 'fas fa-volume-down';
+            } else {
+                icon.className = 'fas fa-volume-up';
+            }
+        }
+
+        function scrollToMusic() {
+            document.getElementById('music-section').scrollIntoView({ behavior: 'smooth' });
+            var audio = document.getElementById('bgMusic');
+            if (audio.paused) {
+                toggleMusic();
+            }
+        }
+
+        // ====== RESTORE MUSIC STATE ON PAGE LOAD ======
+        document.addEventListener('DOMContentLoaded', function() {
+            var audio = document.getElementById('bgMusic');
+            var icon = document.getElementById('musicPlayIcon');
+            var status = document.getElementById('musicStatus');
+            
+            // Restore volume
+            var savedVolume = localStorage.getItem('musicVolume');
+            if (savedVolume !== null) {
+                audio.volume = parseFloat(savedVolume);
+                document.getElementById('musicVolume').value = savedVolume;
+            }
+            
+            // Restore time
+            var savedTime = localStorage.getItem('musicTime');
+            if (savedTime) {
+                audio.currentTime = parseFloat(savedTime);
+            }
+            
+            // Restore play state
+            var savedState = localStorage.getItem('musicState');
+            if (savedState === 'playing') {
+                audio.play().catch(function() {});
+                icon.className = 'fas fa-pause';
+                status.textContent = '● Playing';
+                status.className = 'music-status playing';
+            } else {
+                icon.className = 'fas fa-play';
+                status.textContent = '● Paused';
+                status.className = 'music-status';
+            }
+            
+            // Save time periodically
+            setInterval(function() {
+                if (!audio.paused) {
+                    localStorage.setItem('musicTime', audio.currentTime);
+                }
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
+
+
+    <!-- ====== SCRIPTS ====== -->
+    <script src="js/music.js"></script>
+    <!-- Other scripts -->
+
+    <!-- ====== FIREBASE ====== -->
+    <script type="module" src="js/firebase.js"></script>
+
+    <!-- ====== CANDLES SCRIPT ====== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+                      // ====== NAVIGATION ======
+            const navToggle = document.getElementById('navToggle');
+            const navMenu = document.getElementById('navMenu');
+
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', function() {
+                    navMenu.classList.toggle('open');
+                });
+
+                navMenu.querySelectorAll('.nav-link').forEach(function(link) {
+                    link.addEventListener('click', function() {
+                        navMenu.classList.remove('open');
+                    });
+                });
+            }
+
+            // ====== MUSIC PLAYER ======
+            const audio = document.getElementById('bgMusic');
+            const playBtn = document.getElementById('musicPlayBtn');
+            const playIcon = document.getElementById('musicPlayIcon');
+            const volumeSlider = document.getElementById('musicVolume');
+
+            if (playBtn) {
+                playBtn.addEventListener('click', function() {
+                    if (audio.paused) {
+                        audio.play().then(function() {
+                            playIcon.className = 'fas fa-pause';
+                        }).catch(function() {});
+                    } else {
+                        audio.pause();
+                        playIcon.className = 'fas fa-play';
+                    }
+                });
+            }
+            if (volumeSlider) {
+                volumeSlider.addEventListener('input', function() {
+                    audio.volume = parseFloat(this.value);
+                });
+            }
+            audio.volume = 0.5;
+            audio.play().then(function() {
+                playIcon.className = 'fas fa-pause';
+            }).catch(function() {});
+
+            // ============================================================
+            //  🕯️ CANDLES LOGIC
+            // ============================================================
+
+            const STORAGE_KEY = 'memorial_candles';
+            const FIREBASE_KEY = 'candles';
+
+            // ====== DOM REFS ======
+            const candleCountEl = document.getElementById('candleCount');
+            const candleListEl = document.getElementById('candleLightersList');
+            const form = document.getElementById('candleForm');
+            const lightBtn = document.getElementById('lightCandleBtn');
+            const toast = document.getElementById('candleToast');
+            const toastMessage = document.getElementById('toastMessage');
+
+            // ====== STATE ======
+            let candleData = {
+                count: 0,
+                lighters: []
+            };
+            let isSubmitting = false;
+
+            // ====== HELPERS ======
+            function escapeHtml(text) {
+                if (!text) return '';
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            function formatDate(timestamp) {
+                try {
+                    const date = new Date(timestamp);
+                    return date.toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                } catch {
+                    return 'Just now';
+                }
+            }
+
+            function getInitials(name) {
+                if (!name) return '?';
+                const parts = name.trim().split(' ');
+                if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
+                return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
+            }
+
+            function showToast(message, isSuccess = true) {
+                toastMessage.textContent = message;
+                toast.className = 'candle-toast show';
+                if (isSuccess) {
+                    toast.style.borderColor = 'rgba(201, 168, 76, 0.3)';
+                    toast.querySelector('i').style.color = 'var(--gold)';
+                } else {
+                    toast.style.borderColor = 'rgba(255, 107, 107, 0.3)';
+                    toast.querySelector('i').style.color = '#ff6b6b';
+                }
+                clearTimeout(toast._timeout);
+                toast._timeout = setTimeout(function() {
+                    toast.className = 'candle-toast';
+                }, 4000);
+            }
+
+            // ====== RENDER ======
+            function renderCandles() {
+                // Update count
+                if (candleCountEl) {
+                    candleCountEl.textContent = candleData.count || 0;
+                }
+
+                // Update list
+                if (candleListEl) {
+                    const lighters = candleData.lighters || [];
+
+                    if (lighters.length === 0) {
+                        candleListEl.innerHTML = `
+                            <div class="empty-lighters">
+                                <i class="fas fa-candle-holder"></i>
+                                <p>No candles lit yet. Be the first to light a candle in loving memory.</p>
+                            </div>
+                        `;
+                        return;
+                    }
+
+                    // Show latest first
+                    const sorted = [...lighters].reverse();
+
+                    let html = '';
+                    sorted.forEach(function(lighter) {
+                        const name = lighter.name || 'Anonymous';
+                        const location = lighter.location || '';
+                        const relationship = lighter.relationship || '';
+                        const message = lighter.message || '';
+                        const timestamp = lighter.timestamp || Date.now();
+                        const dateStr = formatDate(timestamp);
+                        const initials = getInitials(name);
+
+                        const relationshipBadge = relationship ? 
+                            `<span class="lighter-relationship">${escapeHtml(relationship)}</span>` : '';
+
+                        // Full message displayed with proper formatting
+                        const messageHtml = message ? 
+                            `<div class="lighter-message">"${escapeHtml(message)}"</div>` : '';
+
+                        html += `
+                            <div class="candle-lighter-item">
+                                <div class="lighter-header">
+                                    <div class="lighter-avatar">${escapeHtml(initials)}</div>
+                                    <div class="lighter-info">
+                                        <span class="lighter-name">${escapeHtml(name)} ${relationshipBadge}</span>
+                                        ${location ? `<span class="lighter-location"><i class="fas fa-map-pin"></i> ${escapeHtml(location)}</span>` : ''}
+                                    </div>
+                                    <span class="lighter-flame">🔥</span>
+                                </div>
+                                ${messageHtml}
+                                <div class="lighter-footer">
+                                    <span class="lighter-time">${dateStr}</span>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    candleListEl.innerHTML = html;
+                }
+            }
+
+            // ====== SAVE TO LOCALSTORAGE ======
+            function saveToLocalStorage() {
+                try {
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(candleData));
+                } catch (e) {
+                    console.log('Error saving to localStorage:', e);
+                }
+            }
+
+            // ====== LOAD FROM LOCALSTORAGE ======
+            function loadFromLocalStorage() {
+                try {
+                    const saved = localStorage.getItem(STORAGE_KEY);
+                    if (saved) {
+                        const parsed = JSON.parse(saved);
+                        if (parsed && typeof parsed.count === 'number') {
+                            candleData = parsed;
+                            console.log('📂 Loaded ' + candleData.count + ' candles from localStorage');
+                            return true;
+                        }
+                    }
+                } catch (e) {
+                    console.log('Error loading from localStorage:', e);
+                }
+                return false;
+            }
+
+            // ====== LOAD FROM FIREBASE ======
+            function loadFromFirebase() {
+                if (typeof window.db !== 'undefined' && window.onValue) {
+                    try {
+                        const candleRef = window.ref(window.db, FIREBASE_KEY);
+
+                        window.onValue(candleRef, function(snapshot) {
+                            const data = snapshot.val();
+                            if (data) {
+                                const count = data.count || 0;
+                                const lighters = data.lighters || [];
+                                
+                                // Only update if data is different (avoid loops)
+                                if (count !== candleData.count || lighters.length !== (candleData.lighters || []).length) {
+                                    candleData = {
+                                        count: count,
+                                        lighters: lighters
+                                    };
+                                    saveToLocalStorage();
+                                    renderCandles();
+                                    console.log('☁️ Synced ' + count + ' candles from cloud');
+                                }
+                            }
+                        });
+
+                        console.log('🔥 Firebase candle listener active');
+                    } catch (err) {
+                        console.log('Firebase candle error:', err);
+                    }
+                }
+            }
+
+            // ====== SAVE TO FIREBASE ======
+            function saveToFirebase() {
+                if (typeof window.db !== 'undefined' && window.set) {
+                    try {
+                        const candleRef = window.ref(window.db, FIREBASE_KEY);
+                        window.set(candleRef, candleData);
+                        console.log('☁️ Saved candles to Firebase');
+                        return true;
+                    } catch (err) {
+                        console.log('Firebase save error:', err);
+                        return false;
+                    }
+                }
+                return false;
+            }
+
+            // ====== LIGHT A CANDLE ======
+            function lightCandle(name, location, relationship, message) {
+                if (isSubmitting) return;
+                isSubmitting = true;
+                lightBtn.disabled = true;
+                lightBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Lighting...';
+
+                const newLighter = {
+                    name: name || 'Anonymous',
+                    location: location || '',
+                    relationship: relationship || '',
+                    message: message || '',
+                    timestamp: Date.now()
+                };
+
+                // Update local data
+                candleData.count = (candleData.count || 0) + 1;
+                if (!candleData.lighters) candleData.lighters = [];
+                candleData.lighters.push(newLighter);
+
+                // Save to localStorage
+                saveToLocalStorage();
+
+                // Save to Firebase
+                const savedToCloud = saveToFirebase();
+
+                // Update UI
+                renderCandles();
+
+                // Reset form
+                form.reset();
+                lightBtn.disabled = false;
+                lightBtn.innerHTML = '<i class="fas fa-fire"></i> Light a Candle';
+                isSubmitting = false;
+
+                // Show toast
+                if (savedToCloud) {
+                    showToast('🕯️ Candle lit in loving memory!');
+                } else {
+                    showToast('🕯️ Candle lit! (Offline - will sync later)', true);
+                }
+            }
+
+            // ====== FORM SUBMISSION ======
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    const nameInput = document.getElementById('candleName');
+                    const locationInput = document.getElementById('candleLocation');
+                    const relationshipInput = document.getElementById('candleRelationship');
+                    const messageInput = document.getElementById('candleMessage');
+
+                    const name = nameInput.value.trim();
+                    if (!name) {
+                        showToast('Please enter your name.', false);
+                        nameInput.focus();
+                        return;
+                    }
+
+                    const location = locationInput.value.trim() || '';
+                    const relationship = relationshipInput.value || '';
+                    const message = messageInput.value.trim() || '';
+
+                    lightCandle(name, location, relationship, message);
+                });
+            }
+
+            // ====== INITIALIZE ======
+            // Load from localStorage first
+            if (!loadFromLocalStorage()) {
+                // If nothing in localStorage, initialize with defaults
+                candleData = { count: 0, lighters: [] };
+                saveToLocalStorage();
+                console.log('📝 Initialized new candle data');
+            }
+
+            // Render
+            renderCandles();
+
+            // Try to load from Firebase
+            let attempts = 0;
+            const maxAttempts = 15;
+            const checkFirebase = setInterval(function() {
+                attempts++;
+                if (typeof window.db !== 'undefined') {
+                    clearInterval(checkFirebase);
+                    console.log('🔥 Firebase detected, loading candle data...');
+                    loadFromFirebase();
+                } else if (attempts >= maxAttempts) {
+                    clearInterval(checkFirebase);
+                    console.log('⚠️ Firebase not detected, using localStorage only');
+                }
+            }, 500);
+
+            console.log('🕯️ Candles page ready');
+        });
+    </script>
+
+</body>
+</html>
