@@ -31,7 +31,6 @@
             border: 1px solid rgba(201, 168, 76, 0.1);
         }
 
-        /* ====== NAVIGATION WITH LOGO ====== */
         .navbar {
             position: fixed;
             top: 0;
@@ -50,7 +49,6 @@
             max-width: 1400px;
             margin: 0 auto;
         }
-
         .nav-brand {
             display: flex;
             align-items: center;
@@ -63,7 +61,6 @@
             transition: opacity 0.3s ease;
         }
         .nav-brand:hover { opacity: 0.8; }
-
         .nav-logo {
             width: 40px;
             height: 40px;
@@ -73,10 +70,8 @@
             display: block;
             flex-shrink: 0;
         }
-
         .brand-text { color: var(--white); }
         .brand-gold { color: var(--gold); }
-
         .nav-menu {
             display: flex;
             list-style: none;
@@ -103,7 +98,6 @@
         .nav-link:hover::after,
         .nav-link.active::after { width: 100%; }
         .nav-link.active { color: var(--gold); }
-
         .nav-toggle {
             display: none;
             flex-direction: column;
@@ -191,6 +185,7 @@
             border-radius: 8px;
             border-left: 3px solid var(--gold);
             transition: transform 0.3s;
+            position: relative;
         }
         .tribute-item:hover {
             transform: translateX(5px);
@@ -210,7 +205,14 @@
         }
         .tribute-item .tribute-message {
             margin: 0.5rem 0;
-            line-height: 1.6;
+            line-height: 1.8;
+        }
+        .tribute-item .tribute-message p {
+            margin-bottom: 0.8rem;
+            line-height: 1.8;
+        }
+        .tribute-item .tribute-message p:last-child {
+            margin-bottom: 0;
         }
         .tribute-item .tribute-time {
             color: var(--gray);
@@ -230,6 +232,92 @@
         .tribute-item .firebase-badge {
             background: rgba(255, 107, 53, 0.15);
             color: #ff6b35;
+        }
+
+        .tribute-actions {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .tribute-actions button {
+            background: transparent;
+            border: none;
+            color: var(--gray);
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: color 0.3s;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .tribute-actions button:hover {
+            color: var(--gold);
+        }
+        .tribute-actions .edit-btn:hover {
+            color: #64b5f6;
+        }
+        .tribute-actions .delete-btn:hover {
+            color: #ff6b6b;
+        }
+
+        .tribute-item .edit-textarea {
+            display: none;
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: #1a1a1a;
+            border: 1px solid #64b5f6;
+            border-radius: 6px;
+            color: var(--white);
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            resize: vertical;
+            min-height: 120px;
+            margin: 0.5rem 0;
+        }
+        .tribute-item .edit-textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        .tribute-item .edit-actions {
+            display: none;
+            gap: 0.8rem;
+            margin-top: 0.5rem;
+        }
+        .tribute-item .edit-actions button {
+            padding: 0.4rem 1.2rem;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .tribute-item .edit-actions .save-edit {
+            background: var(--gold);
+            color: var(--black);
+        }
+        .tribute-item .edit-actions .save-edit:hover {
+            background: var(--gold-light);
+        }
+        .tribute-item .edit-actions .cancel-edit {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+        }
+        .tribute-item .edit-actions .cancel-edit:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .tribute-item.editing .tribute-message {
+            display: none;
+        }
+        .tribute-item.editing .edit-textarea {
+            display: block;
+        }
+        .tribute-item.editing .edit-actions {
+            display: flex;
         }
 
         .pagination {
@@ -429,7 +517,6 @@
             box-shadow: 0 8px 25px rgba(201, 168, 76, 0.4);
         }
 
-                /* ====== FOOTER ====== */
         .footer {
             background: var(--dark);
             padding: 2.5rem 0;
@@ -502,12 +589,15 @@
             .sync-status .divider {
                 display: none;
             }
+            .tribute-actions {
+                justify-content: flex-start;
+            }
         }
     </style>
 </head>
 <body>
 
-        <!-- ====== NAVIGATION ====== -->
+    <!-- ====== NAVIGATION ====== -->
     <nav class="navbar" id="mainNav">
         <div class="nav-container">
             <a href="index.html" class="nav-brand">
@@ -523,14 +613,12 @@
                 <li><a href="index.html" class="nav-link">Home</a></li>
                 <li><a href="about.html" class="nav-link">Life Story</a></li>
                 <li><a href="gallery.html" class="nav-link">Gallery</a></li>
-                <li><a href="tributes.html" class="nav-link">Tributes</a></li>
+                <li><a href="tributes.html" class="nav-link active">Tributes</a></li>
                 <li><a href="candles.html" class="nav-link">Candles</a></li>
                 <li><a href="service.html" class="nav-link">Funeral Service</a></li>
             </ul>
         </div>
     </nav>
-
-    
 
     <main>
         <section class="section page-header-section">
@@ -606,29 +694,29 @@
         </section>
     </main>
 
-             <!-- ====== MUSIC PLAYER ====== -->
-<section id="music-section" class="music-player-bar">
-    <div class="music-container">
-        <div class="music-info">
-            <i class="fas fa-music music-icon" id="musicStatusIcon"></i>
-            <span class="music-title">Memorial Hymn</span>
-            <span class="music-artist">— Eternal Peace</span>
-            <span class="music-status" id="musicStatus">● Playing</span>
+    <!-- ====== MUSIC PLAYER ====== -->
+    <section id="music-section" class="music-player-bar">
+        <div class="music-container">
+            <div class="music-info">
+                <i class="fas fa-music music-icon" id="musicStatusIcon"></i>
+                <span class="music-title">Memorial Hymn</span>
+                <span class="music-artist">— Eternal Peace</span>
+                <span class="music-status" id="musicStatus">● Playing</span>
+            </div>
+            <div class="music-controls">
+                <button class="music-btn" id="musicPlayBtn">
+                    <i class="fas fa-play" id="musicPlayIcon"></i>
+                </button>
+                <input type="range" class="music-volume" id="musicVolume" min="0" max="1" step="0.01" value="0.5" />
+                <span class="volume-icon"><i class="fas fa-volume-up"></i></span>
+            </div>
         </div>
-        <div class="music-controls">
-            <button class="music-btn" id="musicPlayBtn">
-                <i class="fas fa-play" id="musicPlayIcon"></i>
-            </button>
-            <input type="range" class="music-volume" id="musicVolume" min="0" max="1" step="0.01" value="0.5" />
-            <span class="volume-icon"><i class="fas fa-volume-up"></i></span>
-        </div>
-    </div>
-    <audio id="bgMusic" loop preload="auto">
-                <source src="music/Best Christian Hymns Compilation  Old & Traditional Church Songs.mp3" type="audio/mpeg" />
-            </audio>
-</section>
+        <audio id="bgMusic" loop preload="auto">
+            <source src="music/Best Christian Hymns Compilation  Old & Traditional Church Songs.mp3" type="audio/mpeg" />
+        </audio>
+    </section>
 
-       <!-- ====== FOOTER ====== -->
+    <!-- ====== FOOTER ====== -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -652,9 +740,7 @@
         </div>
     </footer>
 
-
-    
-        <!-- ====== MUSIC CONTROLS ====== -->
+    <!-- ====== MUSIC CONTROLS ====== -->
     <script>
         function toggleMusic() {
             var audio = document.getElementById('bgMusic');
@@ -699,30 +785,21 @@
             }
         }
     </script>
-</body>
-</html>
-
-    
-
 
     <!-- ====== SCRIPTS ====== -->
     <script src="js/music.js"></script>
-    <!-- Other scripts -->
-
     <script type="module" src="js/firebase.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
 
-                       // ====== NAVIGATION ======
+            // ====== NAVIGATION ======
             const navToggle = document.getElementById('navToggle');
             const navMenu = document.getElementById('navMenu');
-
             if (navToggle && navMenu) {
                 navToggle.addEventListener('click', function() {
                     navMenu.classList.toggle('open');
                 });
-
                 navMenu.querySelectorAll('.nav-link').forEach(function(link) {
                     link.addEventListener('click', function() {
                         navMenu.classList.remove('open');
@@ -735,7 +812,6 @@
             const playBtn = document.getElementById('musicPlayBtn');
             const playIcon = document.getElementById('musicPlayIcon');
             const volumeSlider = document.getElementById('musicVolume');
-
             if (playBtn) {
                 playBtn.addEventListener('click', function() {
                     if (audio.paused) {
@@ -762,130 +838,125 @@
             //  📝 YOUR MANUAL TRIBUTES
             // ============================================================
 
-            const DATA_VERSION = '4.0';
+            const DATA_VERSION = '5.0';
 
             const defaultTributes = [
-               
-            {
+                {
                     name: "Your Beloved Husband, Kenneth",
                     location: "Limbe, Cameroon",
-                    message: "Lyne,I love you. My love for you is everlasting. ",
+                    message: "Lyne,\n\nI love you. My love for you is everlasting.",
                     timestamp: "2026-08-01T09:30:00",
                     source: 'manual'
                 },
                 {
                     name: "Your Mom",
                     location: "Kumba, Cameroon",
-                    message: "My darling daughter, your departure is a great blow in my life. I thought you will be the one to bury me as you did your father. Little did I know that what I desired will not be granted by the Lord. You were a mother to your children, sisters and brother, as well as your husband, but death has decided to separate us and take you away from us. Look at my age, how long am l going to live to take care of them? l leave everything in the hands of the Lord. He the supreme judge. I thank God that you have gone home to your maker. Rest in perfect peace mummy.",
+                    message: "My darling daughter,\n\nYour departure is a great blow in my life. I thought you will be the one to bury me as you did your father. Little did I know that what I desired will not be granted by the Lord.\n\nYou were a mother to your children, sisters and brother, as well as your husband, but death has decided to separate us and take you away from us.\n\nLook at my age, how long am l going to live to take care of them? l leave everything in the hands of the Lord. He the supreme judge.\n\nI thank God that you have gone home to your maker. Rest in perfect peace mummy.",
                     timestamp: "2026-08-01T10:30:00",
                     source: 'manual'
                 },
                 {
                     name: "Daughter, Yvette & the Tambe Family",
                     location: "Kumba, Cameroon",
-                    message: "My super woman. The strongest woman I know yet the most gentle, caring, selfless, empathetic and generous. A woman of faith who defeated cancer, who sailed through turbulent seasons of various illnesses but still with a positive attitude. You were my friend, confidant, adviser, fashionista, life coach and many more. Always ready to listen and give advice with your soft voice without judging. A mother of nations par excellence. You will be greatly missed. We love you.",
+                    message: "My super woman. The strongest woman I know yet the most gentle, caring, selfless, empathetic and generous.\n\nA woman of faith who defeated cancer, who sailed through turbulent seasons of various illnesses but still with a positive attitude.\n\nYou were my friend, confidant, adviser, fashionista, life coach and many more. Always ready to listen and give advice with your soft voice without judging.\n\nA mother of nations par excellence. You will be greatly missed. We love you.",
                     timestamp: "2026-08-01T09:15:00",
                     source: 'manual'
                 },
                 {
                     name: "Son, Terence Nzume & Family",
                     location: "Doha, Qatar",
-                    message: "Mommy, everything I am today is a testament to your love, sacrifices, and unwavering support. You carried our family with quiet strength, giving endlessly without ever asking for anything in return. Your gentle heart, deep faith, and constant reminder to take our prayer life seriously will remain with us forever. We still hear your reassuring words, “I be Jesus Christ he follow back,” a beautiful reflection of your unwavering trust in God. We thank God that you lived to see even your grandchildren. Little Myla remembers your warmth and affection. Though our hearts are broken, we find comfort knowing you are resting with the Lord. We will honor your legacy by loving and caring for Dad, just as you would have wanted. Rest well mommy, until we meet again.",
+                    message: "Mommy,\n\nEverything I am today is a testament to your love, sacrifices, and unwavering support. You carried our family with quiet strength, giving endlessly without ever asking for anything in return.\n\nYour gentle heart, deep faith, and constant reminder to take our prayer life seriously will remain with us forever. We still hear your reassuring words, \"I be Jesus Christ he follow back,\" a beautiful reflection of your unwavering trust in God.\n\nWe thank God that you lived to see even your grandchildren. Little Myla remembers your warmth and affection.\n\nThough our hearts are broken, we find comfort knowing you are resting with the Lord. We will honor your legacy by loving and caring for Dad, just as you would have wanted.\n\nRest well mommy, until we meet again.",
                     timestamp: "2026-07-31T18:45:00",
                     source: 'manual'
                 },
                 {
                     name: "Daughter, Annie & the Tangang Family",
                     location: "USA",
-                    message: "Mummy, saying goodbye feels impossible. Even now, as we prepare to lay you to rest, your presence fills every corner of my heart. I rejoice knowing you’ve gone to be with your loving big brother, Jesus. I will forever remember your love, gentleness, kindness, strength, and peace. Thank you for every sacrifice, lesson, piece of advice, and moment of warmth you gave me. Though you are no longer here, your spirit and love will guide me always. Rest peacefully; your legacy of love lives on in us all. I love you with all my heart.",
+                    message: "Mummy,\n\nSaying goodbye feels impossible. Even now, as we prepare to lay you to rest, your presence fills every corner of my heart.\n\nI rejoice knowing you've gone to be with your loving big brother, Jesus. I will forever remember your love, gentleness, kindness, strength, and peace.\n\nThank you for every sacrifice, lesson, piece of advice, and moment of warmth you gave me. Though you are no longer here, your spirit and love will guide me always.\n\nRest peacefully; your legacy of love lives on in us all. I love you with all my heart.",
                     timestamp: "2026-07-31T14:20:00",
                     source: 'manual'
                 },
                 {
                     name: "Son, Micheal Che",
                     location: "Bamenda, Cameroon",
-                    message: "Mummy I am penning this tribute with a heavy heart. Your sudden death came as a shock to me as we were least prepared for this. Your love, kindness, strength, and gentle heart will forever guide me. Thank you for every sacrifice, every hug, and every lesson you gave. Your memory will be my comfort, and your love will be my light. Rest peacefully, Mom—you will be loved, missed, and remembered forever.",
+                    message: "Mummy,\n\nI am penning this tribute with a heavy heart. Your sudden death came as a shock to me as we were least prepared for this.\n\nYour love, kindness, strength, and gentle heart will forever guide me. Thank you for every sacrifice, every hug, and every lesson you gave.\n\nYour memory will be my comfort, and your love will be my light. Rest peacefully, Mom—you will be loved, missed, and remembered forever.",
                     timestamp: "2026-07-30T11:00:00",
                     source: 'manual'
                 },
                 {
                     name: "Son, Leonard Mendi",
                     location: "London, United Kingdom",
-                    message: "It’s with a heavy heart that I pen down this tribute to a woman who made the world brighter, softer, and infinitely more beautiful just by being in it. Mum, you gave us everything. You poured your whole soul into loving us, and that love has shaped who I am today. Though our hearts are heavy with your absence, we find peace knowing that a love so beautiful never truly ends. I wish you would have seen me walk down the aisle, but I know you will be there with me throughout that beautiful journey. Go well mum, I love you.",
+                    message: "It's with a heavy heart that I pen down this tribute to a woman who made the world brighter, softer, and infinitely more beautiful just by being in it.\n\nMum, you gave us everything. You poured your whole soul into loving us, and that love has shaped who I am today.\n\nThough our hearts are heavy with your absence, we find peace knowing that a love so beautiful never truly ends.\n\nI wish you would have seen me walk down the aisle, but I know you will be there with me throughout that beautiful journey.\n\nGo well mum, I love you.",
                     timestamp: "2026-07-30T08:30:00",
                     source: 'manual'
                 },
                 {
                     name: "Your Son, Nzume Jr",
                     location: "Doha, Qatar",
-                    message: "My sweetest of hearts, I'm writing this with a heavy heart. You were always such a gentle and graceful mother, someone who truly understood me and supported me with joy, even when I doubted myself. You embodied love and brought so much goodness into my life. There are no words to fully express what you mean to me or how deeply I miss you. I always felt protected by your endless prayers, and your boundless love and virtues shaped who I am today. We trust in God's plan, believing He knows best, and I find comfort in knowing you are now at eternal rest with Him. You will live on forever in my heart, memories, thoughts, and accomplishments. I love you so much, Mommy.",
+                    message: "My sweetest of hearts,\n\nI'm writing this with a heavy heart. You were always such a gentle and graceful mother, someone who truly understood me and supported me with joy, even when I doubted myself.\n\nYou embodied love and brought so much goodness into my life. There are no words to fully express what you mean to me or how deeply I miss you.\n\nI always felt protected by your endless prayers, and your boundless love and virtues shaped who I am today.\n\nWe trust in God's plan, believing He knows best, and I find comfort in knowing you are now at eternal rest with Him.\n\nYou will live on forever in my heart, memories, thoughts, and accomplishments. I love you so much, Mommy.",
                     timestamp: "2026-07-29T16:10:00",
                     source: 'manual'
                 },
                 {
                     name: "Son, Boldwin Motove",
                     location: "Manama, Bahrain",
-                    message: "A special bond that lasts a lifetime, through laughter, smiles and tears. Your time, care and love have made me the person I am today. I am truly grateful to have you in my life.  There are simply not enough words to say how much I love you",
+                    message: "A special bond that lasts a lifetime, through laughter, smiles and tears.\n\nYour time, care and love have made me the person I am today.\n\nI am truly grateful to have you in my life. There are simply not enough words to say how much I love you.",
                     timestamp: "2026-07-29T12:45:00",
                     source: 'manual'
                 },
                 {
                     name: "Daughter, Estherine Nzume",
                     location: "Douala, Cameroon",
-                    message: "My Angel, The gentle voice that steadied my storms. You were an embodiment of peace, positivity, softness and light. There are no words for your exceptionality. Your values and lessons have moulded every aspect of my life and made me who I am. This one hit harder than anything I’ve ever felt, I don’t think I can ever fill this void. My only consolation is that I believe Jesus has called his « follow back » to rest with him eternally and you are finally with the Lord. You always prayed fervently and encouraged us to be steadfast. You will live on in my heart, my achievements, my reflection, and our memories. I love you forever.",
+                    message: "My Angel,\n\nThe gentle voice that steadied my storms. You were an embodiment of peace, positivity, softness and light.\n\nThere are no words for your exceptionality. Your values and lessons have moulded every aspect of my life and made me who I am.\n\nThis one hit harder than anything I've ever felt, I don't think I can ever fill this void. My only consolation is that I believe Jesus has called his \"follow back\" to rest with him eternally and you are finally with the Lord.\n\nYou always prayed fervently and encouraged us to be steadfast. You will live on in my heart, my achievements, my reflection, and our memories.\n\nI love you forever.",
                     timestamp: "2026-07-28T20:00:00",
                     source: 'manual'
                 },
                 {
                     name: "Siblings (Violet, Vivian, Bume, Ceci and Victor)",
                     location: "France, USA, Douala, Limbe",
-                    message: "Dear Ma Nzums, It is with deep sorrow that we write this tribute, never imagining we would be saying goodbye so soon. You always said, you were 'Jesus ei follow back', and today, you have truly followed Him, leaving us with memories we will cherish forever. As our eldest sister, you were our guide, our encourager, and our example. You lived a life of love, kindness, humility, and unwavering faith. You carried our burdens, celebrated our joys, and always believed there was *something good in every person* and every situation. Your strength gave us courage, and your gentle spirit made everyone feel loved. The emptiness your passing has left, can never be filled, but we are grateful to God for the gift of your beautiful life. We pray He comforts Ken, Mum, your children, our family, and all who loved you. Rest peacefully, our beloved sister. Reunited with Dad and Sister Catherine, you are finally home with the Lord. Until we meet again, your love and your legacy will live in our hearts forever. With all our love,",
+                    message: "Dear Ma Nzums,\n\nIt is with deep sorrow that we write this tribute, never imagining we would be saying goodbye so soon. You always said, you were 'Jesus ei follow back', and today, you have truly followed Him, leaving us with memories we will cherish forever.\n\nAs our eldest sister, you were our guide, our encourager, and our example. You lived a life of love, kindness, humility, and unwavering faith.\n\nYou carried our burdens, celebrated our joys, and always believed there was something good in every person and every situation. Your strength gave us courage, and your gentle spirit made everyone feel loved.\n\nThe emptiness your passing has left can never be filled, but we are grateful to God for the gift of your beautiful life.\n\nWe pray He comforts Ken, Mum, your children, our family, and all who loved you.\n\nRest peacefully, our beloved sister. Reunited with Dad and Sister Catherine, you are finally home with the Lord. Until we meet again, your love and your legacy will live in our hearts forever.\n\nWith all our love.",
                     timestamp: "2026-07-28T15:30:00",
                     source: 'manual'
                 },
                 {
                     name: "Mommy Anna Nzume",
                     location: "London, United Kingdom",
-                    message: "Today, we honor the life of a woman who was truly amazing and the kindest and most loving person in the world. I can honestly say she was my best friend and my junior sister. To try and do justice right here in these few words is impossible. She dedicated her life to family and making sure we were supported in everything, and at all times, this took her all around the globe, notably Europe USA China Dubai and Africa. I fondly called her 'pepe.' 'My Boh'. She was slow to judge and quick to forgive. Nothing seemed to rattle her feathers as she always said 'Ane Ha' meaning any how there will be a solution. I loved her more than words could possibly say and she will live on in my heart forever more. Farewell is the hardest word to say but rest peacefully I will love you forever ❤.",
+                    message: "Today, we honor the life of a woman who was truly amazing and the kindest and most loving person in the world.\n\nI can honestly say she was my best friend and my junior sister. To try and do justice right here in these few words is impossible.\n\nShe dedicated her life to family and making sure we were supported in everything, and at all times, this took her all around the globe, notably Europe, USA, China, Dubai and Africa.\n\nI fondly called her 'pepe.' 'My Boh'. She was slow to judge and quick to forgive. Nothing seemed to rattle her feathers as she always said 'Ane Ha' meaning any how there will be a solution.\n\nI loved her more than words could possibly say and she will live on in my heart forever more.\n\nFarewell is the hardest word to say but rest peacefully I will love you forever ❤.",
                     timestamp: "2026-07-27T10:00:00",
                     source: 'manual'
                 },
                 {
                     name: "Manyi (on behalf of Nephews, Nieces and In-laws)",
                     location: "USA, Dubai, Cameroon",
-                    message: "Our beloved Aunt, 'Mummy' to many, was a mother to us all. Your passing leaves a void no one can fill. Gentle, kind, and humble, you welcomed everyone with love, compassion, and without judgment. Your listening ear, warm heart, and boundless affection made you deeply cherished. Even in life's darkest moments, your unwavering faith in Christ remained your greatest strength. Proudly calling yourself 'Jesus e Follow Back', you inspired hope and peace wherever you went. Though we grieve your loss, we find comfort knowing you rest with the Lord. Rest peacefully, Mummy Caro. You are forever loved and never forgotten.",
+                    message: "Our beloved Aunt, 'Mummy' to many, was a mother to us all.\n\nYour passing leaves a void no one can fill. Gentle, kind, and humble, you welcomed everyone with love, compassion, and without judgment.\n\nYour listening ear, warm heart, and boundless affection made you deeply cherished. Even in life's darkest moments, your unwavering faith in Christ remained your greatest strength.\n\nProudly calling yourself 'Jesus e Follow Back', you inspired hope and peace wherever you went.\n\nThough we grieve your loss, we find comfort knowing you rest with the Lord.\n\nRest peacefully, Mummy Caro. You are forever loved and never forgotten.",
                     timestamp: "2026-07-27T07:30:00",
                     source: 'manual'
                 },
                 {
                     name: "With all our love from Sidonie, Yaya, Yinka, Jane, Opey, and grandchildren in the UK",
                     location: "London, United Kingdom",
-                    message: "Jesus Christ E Follow Back, Mummy, Big Mami! We are grateful for your life and for joy and laughter we shared with you. Distance never made a difference—you were always close and in our lives. Thank you for your selfless love, wise advice, patience, gentle spirit, kindness and deep appreciation for life. We are comforted knowing you are reunited with your Big Brother, Jesus, and our Heavenly Father. We miss you but hold to the hope that we will meet again, n'est-ce pas?! We will spoke, spack, speck... ",
+                    message: "Jesus Christ E Follow Back, Mummy, Big Mami!\n\nWe are grateful for your life and for joy and laughter we shared with you. Distance never made a difference—you were always close and in our lives.\n\nThank you for your selfless love, wise advice, patience, gentle spirit, kindness and deep appreciation for life.\n\nWe are comforted knowing you are reunited with your Big Brother, Jesus, and our Heavenly Father.\n\nWe miss you but hold to the hope that we will meet again, n'est-ce pas?! We will spoke, spack, speck...",
                     timestamp: "2026-07-27T07:15:00",
                     source: 'manual'
-                }
-                ,
+                },
                 {
                     name: "Tambi Sons and Daughters",
                     location: "Buea, Cameroon",
-                    message: "Dear Aunty Caro, rest peacefully. Your love, light and gentle strength is what surrounds us. You were a true mentor. Family events will never be the same without your bright smile and laughter, but your memory stays with us always. You will be greatly missed. We love you. ",
+                    message: "Dear Aunty Caro,\n\nRest peacefully. Your love, light and gentle strength is what surrounds us.\n\nYou were a true mentor. Family events will never be the same without your bright smile and laughter, but your memory stays with us always.\n\nYou will be greatly missed. We love you.",
                     timestamp: "2026-07-27T07:18:23",
                     source: 'manual'
-                }
-                ,
-                
+                },
                 {
                     name: "Namondo & Siblings",
                     location: "Buea, Cameroon",
-                    message: "Mummy, You brought so much warmth and grace into the family. You loved daddy with this deep, steady devotion which inspires us all. You had this smile and kind soft words u tell everyone when we feel down. You will always say, 'Nam, don't worry everything will be fine'.Mummy, though you are gone which is really hard to accept; we will always love you and know you are in our hearts forever. ",
+                    message: "Mummy,\n\nYou brought so much warmth and grace into the family. You loved daddy with this deep, steady devotion which inspires us all.\n\nYou had this smile and kind soft words you tell everyone when we feel down. You will always say, 'Nam, don't worry everything will be fine'.\n\nMummy, though you are gone which is really hard to accept; we will always love you and know you are in our hearts forever.",
                     timestamp: "2026-07-27T07:19:11",
                     source: 'manual'
                 },
-                
                 {
                     name: "Family friend, Dr. John Palle",
                     location: "Buea, Cameroon",
-                    message: "Kenneth Nzume and Caroline Lobe; John Palle and Dorothy Ekuri. These children paired up in this order about half a century ago. It all started behind their parents' backs. They were then in secondary school, then high school and then university. Their parents became suspicious, then aware, and then, much, much later....blessed them. Weddings were conducted. Caro was the mother of the group, gathering and protecting us like a hen does to her chicks. She had a pet name for each of us. Mine was Banso and mine for her was Lyne. Lyne found small knitches for us where we did our own things and showed love to each other....Sacred Heart college house, minicite' room in Yaounde. When Kenneth went abroad to study, the three stayed behind and waited; Lyne waited. As he returned our lives went from school to homes. Lyne seamlessly blended her civil service work and her duties as a wife and mother. She instilled Christian believes and practices in a military man's home. Love, kindness, affection and understand of and for each other were the pillars of her home, gathering her family in a knitch filled with love and faith. Lyne was my sister, my mother, my confidant. She was the only woman who understood me, even in my faults. When others scolded me, and even Kenneth was asking me to 'climb table for six lashes', Lyne would step in calmly and say to me 'Banso I understand you'. I was the oldest in the group. Believing I would go first, I indicated to her where I would like to be buried. But God decided otherwise...my eyes are blinded with tears. Please Lord grant her peace in your Kingdom. Lyne, we are coming.",
+                    message: "Kenneth Nzume and Caroline Lobe; John Palle and Dorothy Ekuri. These children paired up in this order about half a century ago. It all started behind their parents' backs.\n\nThey were then in secondary school, then high school and then university. Their parents became suspicious, then aware, and then, much, much later....blessed them. Weddings were conducted.\n\nCaro was the mother of the group, gathering and protecting us like a hen does to her chicks. She had a pet name for each of us. Mine was Banso and mine for her was Lyne.\n\nLyne found small knitches for us where we did our own things and showed love to each other....Sacred Heart college house, minicite' room in Yaounde.\n\nWhen Kenneth went abroad to study, the three stayed behind and waited; Lyne waited. As he returned our lives went from school to homes.\n\nLyne seamlessly blended her civil service work and her duties as a wife and mother. She instilled Christian believes and practices in a military man's home.\n\nLove, kindness, affection and understand of and for each other were the pillars of her home, gathering her family in a knitch filled with love and faith.\n\nLyne was my sister, my mother, my confidant. She was the only woman who understood me, even in my faults.\n\nWhen others scolded me, and even Kenneth was asking me to 'climb table for six lashes', Lyne would step in calmly and say to me 'Banso I understand you'.\n\nI was the oldest in the group. Believing I would go first, I indicated to her where I would like to be buried. But God decided otherwise...my eyes are blinded with tears.\n\nPlease Lord grant her peace in your Kingdom. Lyne, we are coming.",
                     timestamp: "2026-07-27T07:19:40",
                     source: 'manual'
                 }
@@ -896,7 +967,6 @@
             let currentPage = 1;
             const itemsPerPage = 5;
             let firebaseKeyMap = {};
-            let initialLoadDone = false;
 
             // ====== DOM REFS ======
             const tributeList = document.getElementById('tributeList');
@@ -934,8 +1004,32 @@
                 }
             }
 
-            function getTributeKey(tribute) {
-                return tribute.name + '|' + tribute.message + '|' + tribute.timestamp;
+            function generateId() {
+                return 'tribute-' + Date.now().toString(36) + '-' + Math.random().toString(36).substr(2, 5);
+            }
+
+            // ====== FORMAT MESSAGE WITH PARAGRAPHS - FIXED ======
+            function formatMessage(message) {
+                if (!message) return '';
+                
+                // First, escape HTML to prevent XSS
+                let safeMessage = escapeHtml(message);
+                
+                // Split by \n\n to create paragraphs
+                const paragraphs = safeMessage.split('\n\n');
+                
+                // If there's only one paragraph and no \n\n, handle single lines
+                if (paragraphs.length === 1 && !message.includes('\n\n')) {
+                    // Just return as a single paragraph
+                    return '<p>' + safeMessage.replace(/\n/g, '<br>') + '</p>';
+                }
+                
+                // Convert each paragraph, handling \n within paragraphs
+                return paragraphs.map(function(paragraph) {
+                    // Convert single \n to <br> within paragraphs
+                    const formattedParagraph = paragraph.replace(/\n/g, '<br>');
+                    return '<p>' + formattedParagraph + '</p>';
+                }).join('');
             }
 
             function updateStatusBar() {
@@ -990,18 +1084,31 @@
                     const message = tribute.message || '';
                     const dateStr = formatDate(tribute.timestamp);
                     const source = tribute.source || 'manual';
+                    const tributeId = tribute._id || generateId();
 
                     const badge = source === 'firebase' ? 
                         '<span class="tribute-badge firebase-badge">☁️ Cloud</span>' : 
                         '<span class="tribute-badge">📁 Local</span>';
 
+                    // Format message with proper paragraphs
+                    const messageHtml = formatMessage(message);
+
                     html += `
-                        <div class="tribute-item">
+                        <div class="tribute-item" data-id="${tributeId}">
                             ${badge}
                             <strong>${escapeHtml(name)}</strong>
                             ${location ? `<span class="tribute-location"><i class="fas fa-map-pin"></i> ${escapeHtml(location)}</span>` : ''}
-                            <p class="tribute-message">${escapeHtml(message)}</p>
+                            <div class="tribute-message">${messageHtml}</div>
+                            <textarea class="edit-textarea" id="editArea-${tributeId}">${escapeHtml(message)}</textarea>
+                            <div class="edit-actions">
+                                <button class="save-edit" data-id="${tributeId}"><i class="fas fa-save"></i> Save</button>
+                                <button class="cancel-edit" data-id="${tributeId}"><i class="fas fa-times"></i> Cancel</button>
+                            </div>
                             <span class="tribute-time">${dateStr}</span>
+                            <div class="tribute-actions">
+                                <button class="edit-btn" data-id="${tributeId}"><i class="fas fa-edit"></i> Edit</button>
+                                <button class="delete-btn" data-id="${tributeId}"><i class="fas fa-trash-alt"></i> Delete</button>
+                            </div>
                         </div>
                     `;
                 });
@@ -1009,8 +1116,140 @@
                 tributeList.innerHTML = html;
                 updatePagination();
                 updateStatusBar();
+
+                // ====== ATTACH EVENT LISTENERS ======
+                document.querySelectorAll('.edit-btn').forEach(function(btn) {
+                    btn.addEventListener('click', function(e) {
+                        const id = this.dataset.id;
+                        startEdit(id);
+                    });
+                });
+
+                document.querySelectorAll('.delete-btn').forEach(function(btn) {
+                    btn.addEventListener('click', function(e) {
+                        const id = this.dataset.id;
+                        deleteTribute(id);
+                    });
+                });
+
+                document.querySelectorAll('.save-edit').forEach(function(btn) {
+                    btn.addEventListener('click', function(e) {
+                        const id = this.dataset.id;
+                        saveEdit(id);
+                    });
+                });
+
+                document.querySelectorAll('.cancel-edit').forEach(function(btn) {
+                    btn.addEventListener('click', function(e) {
+                        const id = this.dataset.id;
+                        cancelEdit(id);
+                    });
+                });
             }
 
+            // ====== EDIT FUNCTIONS ======
+            function startEdit(tributeId) {
+                // Close any other open edit
+                document.querySelectorAll('.tribute-item.editing').forEach(function(item) {
+                    item.classList.remove('editing');
+                });
+
+                const item = document.querySelector(`.tribute-item[data-id="${tributeId}"]`);
+                if (!item) return;
+                item.classList.add('editing');
+
+                const tribute = allTributes.find(function(t) {
+                    return t._id === tributeId;
+                });
+                if (tribute) {
+                    const textarea = item.querySelector('.edit-textarea');
+                    if (textarea) {
+                        textarea.value = tribute.message;
+                    }
+                }
+            }
+
+            function saveEdit(tributeId) {
+                const item = document.querySelector(`.tribute-item[data-id="${tributeId}"]`);
+                if (!item) return;
+
+                const textarea = item.querySelector('.edit-textarea');
+                if (!textarea) return;
+
+                const newMessage = textarea.value.trim();
+                if (!newMessage) {
+                    alert('Message cannot be empty.');
+                    return;
+                }
+
+                const tributeIndex = allTributes.findIndex(function(t) {
+                    return t._id === tributeId;
+                });
+
+                if (tributeIndex === -1) {
+                    alert('Tribute not found.');
+                    return;
+                }
+
+                allTributes[tributeIndex].message = newMessage;
+                saveToLocalStorage();
+
+                if (typeof window.db !== 'undefined' && window.update) {
+                    try {
+                        const tribute = allTributes[tributeIndex];
+                        if (tribute._firebaseKey) {
+                            const updateRef = window.ref(window.db, 'tributes/' + tribute._firebaseKey);
+                            window.update(updateRef, { message: newMessage });
+                            console.log('☁️ Updated tribute in Firebase');
+                        }
+                    } catch (err) {
+                        console.log('Firebase update error:', err);
+                    }
+                }
+
+                renderTributes(currentPage);
+            }
+
+            function cancelEdit(tributeId) {
+                const item = document.querySelector(`.tribute-item[data-id="${tributeId}"]`);
+                if (item) {
+                    item.classList.remove('editing');
+                }
+            }
+
+            function deleteTribute(tributeId) {
+                if (!confirm('Are you sure you want to delete this tribute?')) return;
+
+                const tributeIndex = allTributes.findIndex(function(t) {
+                    return t._id === tributeId;
+                });
+
+                if (tributeIndex === -1) {
+                    alert('Tribute not found.');
+                    return;
+                }
+
+                const tribute = allTributes[tributeIndex];
+                allTributes.splice(tributeIndex, 1);
+                saveToLocalStorage();
+
+                if (typeof window.db !== 'undefined' && window.remove && tribute._firebaseKey) {
+                    try {
+                        const removeRef = window.ref(window.db, 'tributes/' + tribute._firebaseKey);
+                        window.remove(removeRef);
+                        console.log('☁️ Deleted tribute from Firebase');
+                    } catch (err) {
+                        console.log('Firebase delete error:', err);
+                    }
+                }
+
+                const totalPages = Math.ceil(allTributes.length / itemsPerPage) || 1;
+                if (currentPage > totalPages) currentPage = totalPages;
+                renderTributes(currentPage);
+                updateStatusBar();
+            }
+
+            // ====== PAGINATION ======
             function updatePagination() {
                 const totalPages = Math.ceil(allTributes.length / itemsPerPage) || 1;
                 pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
@@ -1069,6 +1308,9 @@
                 }
                 
                 const manualTributes = JSON.parse(JSON.stringify(defaultTributes));
+                manualTributes.forEach(function(t) {
+                    t._id = generateId();
+                });
                 
                 if (keepCloud) {
                     allTributes = [...manualTributes, ...cloudTributes];
@@ -1091,15 +1333,12 @@
                 try {
                     const tributeRef = window.ref(window.db, 'tributes');
 
-                    // Get all existing tributes first
                     window.get(tributeRef).then(function(snapshot) {
                         const data = snapshot.val();
                         if (data) {
-                            // Add all cloud tributes with their keys
                             Object.keys(data).forEach(function(key) {
                                 const item = data[key];
                                 if (item && item.message) {
-                                    // Check if this tribute already exists in our list
                                     const exists = allTributes.some(function(t) {
                                         return t.message === item.message && 
                                                t.name === item.name && 
@@ -1108,19 +1347,8 @@
                                     if (!exists) {
                                         item.source = 'firebase';
                                         item._firebaseKey = key;
+                                        item._id = item._id || generateId();
                                         allTributes.push(item);
-                                        firebaseKeyMap[getTributeKey(item)] = key;
-                                    } else {
-                                        // Update the key mapping
-                                        const existing = allTributes.find(function(t) {
-                                            return t.message === item.message && 
-                                                   t.name === item.name && 
-                                                   t.source === 'firebase';
-                                        });
-                                        if (existing) {
-                                            existing._firebaseKey = key;
-                                            firebaseKeyMap[getTributeKey(existing)] = key;
-                                        }
                                     }
                                 }
                             });
@@ -1134,7 +1362,6 @@
                         setConnectionStatus('offline', '⚠️ Could not connect');
                     });
 
-                    // Listen for new tributes
                     window.onChildAdded(tributeRef, function(snapshot) {
                         const data = snapshot.val();
                         const key = snapshot.key;
@@ -1148,8 +1375,8 @@
                             if (!exists) {
                                 data.source = 'firebase';
                                 data._firebaseKey = key;
+                                data._id = data._id || generateId();
                                 allTributes.unshift(data);
-                                firebaseKeyMap[getTributeKey(data)] = key;
                                 saveToLocalStorage();
                                 if (currentPage === 1) {
                                     renderTributes(currentPage);
@@ -1160,36 +1387,19 @@
                         }
                     });
 
-                    // Listen for removed tributes
                     window.onChildRemoved(tributeRef, function(snapshot) {
                         const key = snapshot.key;
                         console.log('🗑️ Firebase tribute removed: ' + key);
                         
-                        // Find and remove the tribute with this key
                         const removedIndex = allTributes.findIndex(function(t) {
                             return t._firebaseKey === key && t.source === 'firebase';
                         });
                         
                         if (removedIndex !== -1) {
-                            const removed = allTributes[removedIndex];
                             allTributes.splice(removedIndex, 1);
-                            // Remove from key map
-                            const tributeKey = getTributeKey(removed);
-                            delete firebaseKeyMap[tributeKey];
                             saveToLocalStorage();
                             renderTributes(currentPage);
-                            console.log('✅ Removed deleted tribute: ' + removed.name);
-                        } else {
-                            // Try to find by matching content
-                            const index = allTributes.findIndex(function(t) {
-                                return t.source === 'firebase' && t._firebaseKey === undefined;
-                            });
-                            if (index !== -1) {
-                                allTributes.splice(index, 1);
-                                saveToLocalStorage();
-                                renderTributes(currentPage);
-                                console.log('✅ Removed orphaned tribute');
-                            }
+                            console.log('✅ Removed deleted tribute');
                         }
                     });
 
@@ -1205,22 +1415,19 @@
             function forceSync() {
                 console.log('🔄 Forcing sync with cloud...');
                 setConnectionStatus('connecting', 'Syncing with cloud...');
-                
-                // Remove all cloud tributes from current list (keep only manual)
                 allTributes = allTributes.filter(t => t.source !== 'firebase');
                 firebaseKeyMap = {};
                 saveToLocalStorage();
-                
-                // Reload from Firebase
                 loadFromFirebase();
             }
 
-            // ====== FORCE RELOAD ======
             function forceReload() {
                 console.log('🔄 Reloading manual tributes...');
-                // Keep cloud tributes, reload manual ones
                 const cloudTributes = allTributes.filter(t => t.source === 'firebase');
                 const manualTributes = JSON.parse(JSON.stringify(defaultTributes));
+                manualTributes.forEach(function(t) {
+                    t._id = generateId();
+                });
                 allTributes = [...manualTributes, ...cloudTributes];
                 saveToLocalStorage();
                 renderTributes(1);
@@ -1258,13 +1465,13 @@
                         location: location,
                         message: message,
                         timestamp: new Date().toISOString(),
-                        source: 'manual'
+                        source: 'manual',
+                        _id: generateId()
                     };
 
                     allTributes.unshift(newTribute);
                     saveToLocalStorage();
 
-                    // Save to Firebase
                     if (typeof window.db !== 'undefined' && window.push) {
                         try {
                             const tributeRef = window.ref(window.db, 'tributes');
@@ -1296,7 +1503,6 @@
 
             renderTributes(1);
 
-            // Check for Firebase
             let attempts = 0;
             const maxAttempts = 15;
             const checkFirebase = setInterval(function() {
